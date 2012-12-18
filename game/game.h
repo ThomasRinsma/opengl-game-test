@@ -5,8 +5,13 @@
 #include <SFML/Graphics.hpp> // for sf::Image
 #include <glm/glm.hpp> // for glm::mat4
 
+#include "../input/input.h"
+
 class Game
 {
+    // Keyboard input class
+    Input d_input;
+
     // Flags
     bool d_running = false;
     bool d_initialized = false;

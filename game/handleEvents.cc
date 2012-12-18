@@ -16,10 +16,11 @@ void Game::handleEvents()
 				break;
 
 			case Event::KeyPressed:
-				if (event.Key.Code == Key::Escape)
-					d_win->Close();
-					d_running = false;
+				d_input.keyPressed(event.Key.Code);
 				break;
+
+			case Event::KeyReleased:
+				d_input.keyReleased(event.Key.Code);
 
 			default:
 				break;
