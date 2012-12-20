@@ -8,10 +8,10 @@ class Input
 	typedef sf::Key::Code KeyCode_t;
 
 	// These contain the state of input
-	bool d_moveForward;
-	bool d_moveBack;
-	bool d_moveLeft;
-	bool d_moveRight;
+	bool d_moveForward = false;
+	bool d_moveBack = false;
+	bool d_moveLeft = false;
+	bool d_moveRight = false;
 
 	// These contain the key mappings
 	KeyCode_t d_keyForward;

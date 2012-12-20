@@ -6,10 +6,14 @@
 #include <glm/glm.hpp> // for glm::mat4
 
 #include "../input/input.h"
+#include "../player/player.h"
 
 class Game
 {
-    // Keyboard input class
+    // Player object
+    Player d_player;
+
+    // Keyboard input object
     Input d_input;
 
     // Flags
@@ -27,7 +31,6 @@ class Game
     glm::mat4 d_modelMat, d_viewMat, d_projMat;
 
     public:
-        Game() = default;
         ~Game();
 
         void initWindow(size_t width, size_t height);

@@ -43,7 +43,7 @@ void Game::initGraphics()
 	glGenBuffers(1, &vbo); // Generate 1 buffer
 
 	// Cube vertices:   X, Y, Z,   U, V
-float vertices[] = {
+	float vertices[] = {
 		-0.5f, -0.5f, -0.5f,   0.0f, 0.0f,
 		 0.5f, -0.5f, -0.5f,   1.0f, 0.0f,
 		 0.5f,  0.5f, -0.5f,   1.0f, 1.0f,
