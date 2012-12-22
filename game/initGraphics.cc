@@ -19,17 +19,11 @@ void Game::initGraphics()
 	d_viewMatRef = glGetUniformLocation(d_shaderProgram, "view");
 	d_projMatRef = glGetUniformLocation(d_shaderProgram, "proj");
 
-	d_viewMat = lookAt(
-		vec3(0.0f, 1.0f, 5.0f), // Look from y+, z+
-		vec3(0.0f, 0.0f, 0.0f), // Look down at (0,0,0)
-		vec3(0.0f, 1.0f, 0.0f)  // y+ is up
-	);
-
 	d_projMat = perspective(
 		45.0f,	// 45 degree FOV
 		static_cast<float>(d_win->GetWidth()) /
 		static_cast<float>(d_win->GetHeight()),  // Ratio
-		1.0f, 10.0f // near/far
+		0.1f, 100.0f // near/far
 	);
 
 

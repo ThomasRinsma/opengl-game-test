@@ -15,13 +15,6 @@ void Game::handleEvents()
 				d_running = false;
 				break;
 
-			case Event::KeyPressed:
-				d_input.keyPressed(event.Key.Code);
-				break;
-
-			case Event::KeyReleased:
-				d_input.keyReleased(event.Key.Code);
-
 			default:
 				break;
 		}
