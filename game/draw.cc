@@ -15,7 +15,7 @@ void Game::draw()
 	//d_modelMat = rotate(ident, d_clock.GetElapsedTime() * 45.0f,
 	//	vec3(1.0f, 1.0f, 1.0f));
 
-	d_viewMat = d_player.viewMatrix() * lookAt(vec3(0.0f, 1.0f, 5.0f), vec3(0.0f, 0.0f, 0.0f), vec3(0.0f, 1.0f, 0.0f));
+	d_viewMat = d_player.viewMatrix();
 	
 	// Update uniforms
 	glUniformMatrix4fv(d_modelMatRef, 1, GL_FALSE, value_ptr(d_modelMat));

@@ -5,7 +5,7 @@
 #include <SFML/Graphics.hpp> // for sf::Image
 #include <glm/glm.hpp> // for glm::mat4
 
-#include "../input/input.h"
+#include "../controller/controller.h"
 #include "../player/player.h"
 
 class Game
@@ -13,8 +13,8 @@ class Game
     // Player object
     Player d_player;
 
-    // Keyboard input object
-    Input d_input;
+    // Controller object
+    Controller *d_controller;
 
     // Flags
     bool d_running = false;
