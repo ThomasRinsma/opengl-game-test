@@ -2,14 +2,9 @@
 
 void Player::setRelativeVelocity(glm::vec3 relVelocity)
 {
-	// Use yaw and relative velocity to calculate absolute velocity
-	// x = lateral, y = vertical, z = longitudinal
+	glm::vec3 normVel = glm::length(relVelocity) > 0 ? glm::normalize(relVelocity) : relVelocity;
 	
-	glm::vec3 normVelocity = glm::length(relVelocity) > 0 ? glm::normalize(relVelocity) : relVelocity;
-
-	d_velocity.x = normVelocity.z * cos(M_PI/2.0f - d_yaw);
-	d_velocity.z = normVelocity.z * cos(d_yaw);
-
-	d_velocity.x += -normVelocity.x * sin(M_PI/2.0f - d_yaw);
-	d_velocity.z += normVelocity.x * sin(d_yaw);
+	d_velocity.x = normVel.z * sin(d_yaw) * cos(d_pitch) - normVel.x * cos(d_yaw);
+	d_velocity.z = normVel.z * cos(d_yaw) * cos(d_pitch) + normVel.x * sin(d_yaw);
+	d_velocity.y = normVel.z * sin(d_pitch) + normVel.y;
 }

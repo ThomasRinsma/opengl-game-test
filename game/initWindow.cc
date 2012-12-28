@@ -8,7 +8,7 @@ void Game::initWindow(size_t width, size_t height)
 	d_win = new Window(VideoMode(width, height), windowTitle, Style::Close, WindowSettings(24, 8, 2));
 
 	// Make Controller object
-	d_controller = new Controller(&d_win->GetInput());
+	d_controller = new Controller(d_win);
 
 	// Set glew to use modern OpenGL
 	glewExperimental = GL_TRUE;
