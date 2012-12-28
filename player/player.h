@@ -7,8 +7,8 @@ class Player
 {
 	glm::vec3 d_position;
 	glm::vec3 d_velocity; // absolute
-	float d_pitch; // up and down
-	float d_yaw; // left and right
+	float d_pitch = 0; // up and down
+	float d_yaw = 0; // left and right
 
     public:
         glm::vec3 const &position() const;
