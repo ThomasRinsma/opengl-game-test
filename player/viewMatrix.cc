@@ -1,14 +1,20 @@
 #include "player.ih"
 
-#define degrees(X)	static_cast<float>((X) / M_PI * 180.0f)
-
-mat4 const Player::viewMatrix() const
+glm::mat4 const Player::viewMatrix() const
 {
-	vec3 direction(
-		cos(degrees(d_pitch)) * sin(degrees(d_yaw)),
-		sin(degrees(d_pitch)),
-		cos(degrees(d_pitch)) * cos(degrees(d_yaw))
+	glm::vec3 direction(
+		cos(d_pitch) * sin(d_yaw),
+		sin(d_pitch),
+		cos(d_pitch) * cos(d_yaw)
 	);
 
-	return lookAt(d_position, d_position + direction, vec3(0.0f, 1.0f, 0.0f));
+	glm::vec3 right(
+		sin(d_yaw - M_PI/2.0f),
+		0,
+		cos(d_yaw - M_PI/2.0f)
+	);
+
+	glm::vec3 up = glm::cross(right, direction);
+
+	return glm::lookAt(d_position, d_position + direction, up);
 }

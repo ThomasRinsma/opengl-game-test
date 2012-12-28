@@ -16,8 +16,14 @@ void Game::initWindow(size_t width, size_t height)
 	// Initialize glew
 	glewInit();
 
-	// Disable VSync
+	// Set VSync
 	d_win->UseVerticalSync(false);
+
+	// Hide mouse cursor
+	d_win->ShowMouseCursor(false);
+
+	// Reset cursor to center
+	d_win->SetCursorPosition(width / 2, height / 2);
 
 	// We're done initializing
 	d_initialized = true;
