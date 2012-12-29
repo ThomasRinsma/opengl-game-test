@@ -1,6 +1,6 @@
 #include "cube.ih"
 
-void Cube::drawImpl(glm::mat4 viewProjMat)
+void Cube::drawImpl(glm::mat4 &viewProjMat)
 {
 	// Update uniform
 	glm::mat4 mvpMat = viewProjMat * glm::mat4(1.0f); // TODO: modelMat
