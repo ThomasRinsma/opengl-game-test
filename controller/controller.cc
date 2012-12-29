@@ -10,4 +10,10 @@ Controller::Controller(sf::Window *win, KeyCode_t keyForward, KeyCode_t keyBack,
 	d_keyRight(keyRight),
 	d_keyUp(keyUp),
 	d_keyDown(keyDown)
-{}
+{
+	// Hide mouse cursor
+	d_win->ShowMouseCursor(false);
+
+	// Reset cursor to center
+	d_win->SetCursorPosition(d_win->GetWidth() / 2, d_win->GetHeight() / 2);
+}

@@ -1,6 +1,6 @@
-#include "game.ih"
+#include "shaderprogram.ih"
 
-bool Game::loadShaders(string vertPath, string fragPath)
+bool ShaderProgram::loadShaders(string vertPath, string fragPath)
 {
 	// Load the files into ifstreams
 	ifstream vertexFile(vertPath);
@@ -52,14 +52,9 @@ bool Game::loadShaders(string vertPath, string fragPath)
 
 	// Create the shader program
 	d_shaderProgram = glCreateProgram();
+	
 	glAttachShader(d_shaderProgram, d_vertexShader);
 	glAttachShader(d_shaderProgram, d_fragmentShader);
-
-	glBindFragDataLocation(d_shaderProgram, 0, "outColor");
-
-	// Link and use the shader program
-	glLinkProgram(d_shaderProgram);
-	glUseProgram(d_shaderProgram);
 
 	return true;
 }

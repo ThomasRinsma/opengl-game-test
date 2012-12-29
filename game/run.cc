@@ -8,11 +8,11 @@ void Game::run()
 
 	d_running = true;
 
-	// Initialize game logic
-	initGame();
-
 	// Initialize graphics
 	initGraphics();
+
+	// Initialize game logic
+	initGame();
 
 	// The run-loop
 	while (d_running)
