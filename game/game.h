@@ -4,33 +4,39 @@
 #include <SFML/Window.hpp> // for sf::Window
 #include <SFML/Graphics.hpp> // for sf::Image
 #include <glm/glm.hpp> // for glm::mat4
+#include <vector> // for vector, doh
 
 #include "../controller/controller.h"
 #include "../player/player.h"
+#include "../drawable/drawable.h"
 
 class Game
 {
-    // Player object
+    // Player object (camera)
     Player d_player;
 
-    // Controller object
+    // Controller (keyboard + mouse)
     Controller *d_controller;
+
+    // Drawable objects
+    std::vector<Drawable*> d_drawables;
+
+    // SFML stuff
+    sf::Window *d_win;
+
+    // Temporary spot, we've only got one shaderprogram now
+    ShaderProgram *d_shaderProgram;
+
+    // OpenGL stuff
+    GLuint d_mvpMatRef;
+    glm::mat4 d_modelMat, d_viewMat, d_projMat, d_mvpMat;
 
     // Flags
     bool d_running = false;
     bool d_initialized = false;
 
-    // SFML stuff
-    sf::Window *d_win;
-    sf::Clock d_clock;
-
-    // OpenGL stuff
-    GLuint d_vertexShader, d_fragmentShader;
-    GLuint d_shaderProgram;
-    GLuint d_modelMatRef, d_viewMatRef, d_projMatRef;
-    glm::mat4 d_modelMat, d_viewMat, d_projMat;
-
     public:
+        Game();
         ~Game();
 
         void initWindow(size_t width, size_t height);
@@ -44,8 +50,6 @@ class Game
         virtual void stepGame();        // step game logic
         virtual void draw();            // draw opengl stuff
 
-        // Helper functions
-        bool loadShaders(std::string vertPath, std::string fragPath);
 };
         
 #endif

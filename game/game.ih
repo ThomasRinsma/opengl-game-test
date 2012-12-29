@@ -1,7 +1,5 @@
 
 #include <iostream>
-#include <fstream>
-#include <sstream>
 
 #include <GL/glew.h>
 
@@ -9,8 +7,8 @@
 #include <glm/gtc/matrix_transform.hpp>
 #include <glm/gtc/type_ptr.hpp>
 
+#include "../drawable/cube/cube.h"
+
 #include "game.h"
 
 using namespace std;
-using namespace sf;
-using namespace glm;

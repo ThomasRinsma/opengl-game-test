@@ -5,12 +5,10 @@ in vec2 texcoord;
 
 out vec2 texCoord;
 
-uniform mat4 model;
-uniform mat4 view;
-uniform mat4 proj;
+uniform mat4 mvp;
 
 void main()
 {
 	texCoord = texcoord;
-	gl_Position = proj * view * model * vec4(position, 1.0);
+	gl_Position = mvp * vec4(position, 1.0);
 }

@@ -9,21 +9,12 @@ void Game::draw()
 	glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
-
-	// Rotate model matrix around Y axis
-	//mat4 ident;
-	//d_modelMat = rotate(ident, d_clock.GetElapsedTime() * 45.0f,
-	//	vec3(1.0f, 1.0f, 1.0f));
-
-	d_viewMat = d_player.viewMatrix();
-	
-	// Update uniforms
-	glUniformMatrix4fv(d_modelMatRef, 1, GL_FALSE, value_ptr(d_modelMat));
-	glUniformMatrix4fv(d_viewMatRef, 1, GL_FALSE, value_ptr(d_viewMat));
-	glUniformMatrix4fv(d_projMatRef, 1, GL_FALSE, value_ptr(d_projMat));
-
-	// Draw triangle
-	glDrawArrays(GL_TRIANGLES, 0, 36);
+	// Draw everything
+	glm::mat4 viewProjMat = d_projMat * d_player.viewMatrix();
+	for (Drawable *drawable : d_drawables)
+	{
+		drawable->draw(viewProjMat);
+	}
 
 	// Flip buffer
 	d_win->Display();

@@ -5,12 +5,12 @@ void Game::handleEvents()
 	if (not d_running)
 		return;
 
-	Event event;
+	sf::Event event;
 	while (d_win->GetEvent(event))
 	{
 		switch (event.Type)
 		{
-			case Event::Closed:
+			case sf::Event::Closed:
 				d_win->Close();
 				d_running = false;
 				break;
