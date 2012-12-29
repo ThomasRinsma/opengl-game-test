@@ -12,7 +12,7 @@ class Cube : public Drawable
         Cube(glm::vec3 position, ShaderProgram *shaderProgram);
 
     private:
-    	virtual void drawImpl(glm::mat4 viewProjMat);
+    	virtual void drawImpl(glm::mat4 &viewProjMat);
 };
         
 #endif

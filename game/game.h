@@ -27,9 +27,8 @@ class Game
     // Temporary spot, we've only got one shaderprogram now
     ShaderProgram *d_shaderProgram;
 
-    // OpenGL stuff
-    GLuint d_mvpMatRef;
-    glm::mat4 d_modelMat, d_viewMat, d_projMat, d_mvpMat;
+    // Projection matrix
+    glm::mat4 d_projMat;
 
     // Flags
     bool d_running = false;
