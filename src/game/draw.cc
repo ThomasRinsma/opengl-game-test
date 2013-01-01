@@ -11,13 +11,10 @@ void Game::draw()
 
 	// Draw everything
 	glm::mat4 viewProjMat = d_projMat * d_player.viewMatrix();
-	//for (Drawable *drawable : d_drawables)
-	//{
-	//	drawable->draw(viewProjMat);
-	//}
-
-	d_drawables[0]->draw(viewProjMat);	
-	d_drawables[1]->draw(viewProjMat);	
+	for (Drawable *drawable : d_drawables)
+	{
+		drawable->draw(viewProjMat);
+	}
 
 	// Flip buffer
 	d_win->Display();

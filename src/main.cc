@@ -4,6 +4,6 @@ int main()
 {
 	Game game;
 
-	game.initWindow(800, 600);
+	game.initWindow(1024, 768);
 	game.run();
 }
