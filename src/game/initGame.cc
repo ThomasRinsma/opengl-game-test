@@ -5,10 +5,10 @@ void Game::initGame()
 	Grid* grid = new Grid(glm::vec3(0.0f), d_shaderPrograms[0]);
 
 	Cube* cube1 = new Cube(glm::vec3(0.0f), d_shaderPrograms[1]);
-	cube1->setPosition(glm::vec3(2.0f, 0.0f, 0.0f));
+	cube1->setPosition(glm::vec3(2.0f, 0.5f, 0.0f));
 
 	Cube* cube2 = new Cube(glm::vec3(0.0f), d_shaderPrograms[1]);
-	cube2->setPosition(glm::vec3(-2.0f, 3.0f, 0.0f));
+	cube2->setPosition(glm::vec3(-2.0f, 0.5f, 0.0f));
 
 	d_drawables.push_back(grid);
 	d_drawables.push_back(cube1);

@@ -16,7 +16,7 @@ class Grid : public Drawable
         Grid(glm::vec3 position, ShaderProgram *shaderProgram);
 
     private:
-    	virtual void drawImpl(glm::mat4 &viewProjMat);
+    	virtual void drawImpl(glm::mat4 &viewMat, glm::mat4 &projMat);
 };
         
 #endif
