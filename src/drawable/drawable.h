@@ -14,12 +14,12 @@ class Drawable
     	virtual ~Drawable();
     	Drawable(glm::vec3 &position, ShaderProgram *shaderProgram);
 
-    	void draw(glm::mat4 &viewProjMat);
+    	void draw(glm::mat4 viewMat, glm::mat4 projMat);
     	void setPosition(glm::vec3 position);
     	glm::vec3 &position();
 
     private:
-    	virtual void drawImpl(glm::mat4 &viewProjMat) = 0;
+    	virtual void drawImpl(glm::mat4 &viewMat, glm::mat4 &projMat) = 0;
 };
         
 #endif

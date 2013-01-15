@@ -10,11 +10,10 @@ void Game::draw()
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
 	// Draw everything
-	glm::mat4 viewProjMat = d_projMat * d_player.viewMatrix();
+	glm::mat4 viewMat = d_player.viewMatrix();
+
 	for (Drawable *drawable : d_drawables)
-	{
-		drawable->draw(viewProjMat);
-	}
+		drawable->draw(viewMat, d_projMat);
 
 	// Flip buffer
 	d_win->Display();
