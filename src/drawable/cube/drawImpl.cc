@@ -6,7 +6,7 @@ void Cube::drawImpl(glm::mat4 &viewMat, glm::mat4 &projMat)
 	
 	// Update uniform
 	glm::mat4 modelMat = glm::translate(glm::mat4(1.0f), d_position); // TODO: store modelmat instead of position
-	glm::mat3 normalMat = glm::transpose(glm::inverse(glm::mat3(viewMat * modelMat)));
+	glm::mat3 normalMat = glm::transpose(glm::inverse(glm::mat3(modelMat)));
 	
 	glUniformMatrix4fv(d_shaderProgram->uniforms["m"], 1, GL_FALSE, glm::value_ptr(modelMat));
 	glUniformMatrix4fv(d_shaderProgram->uniforms["v"], 1, GL_FALSE, glm::value_ptr(viewMat));
