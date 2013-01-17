@@ -40,19 +40,20 @@ struct lightData
 };
 
 lightData light = lightData(
-	vec3(0.0f, 5.0f, 0.0f),
+	vec3(0.0f, 0.0f, 0.0f),
 	vec3(1.0f, 1.0f, 1.0f),
 	vec3(1.0f, 1.0f, 1.0f),
 	0.0f,
 	1.0f,
 	0.0f,
 	vec3(0.0f, 0.0f, 0.0f),
-	180.0f,
+	130.0f,
 	0.0f);
 
 
 void main()
 {
+	
 	vec3 texColor = vec3(texture(tex, var_texcoord));
 
 

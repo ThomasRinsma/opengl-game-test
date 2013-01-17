@@ -9,6 +9,7 @@
 
 #include "../drawable/cube/cube.h"
 #include "../drawable/grid/grid.h"
+#include "../drawable/model/model.h"
 
 #include "game.h"
 

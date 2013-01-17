@@ -1,8 +1,9 @@
 #include "cube.ih"
 
-const string texPath = "textures/texture.png";
+string const texPrefix  = "textures/";
+string const texPostfix = ".png";
 
-Cube::Cube(glm::vec3 position, ShaderProgram *shaderProgram)
+Cube::Cube(glm::vec3 position, ShaderProgram *shaderProgram, string const &texName)
 :
 	Drawable(position, shaderProgram)
 {
@@ -82,7 +83,7 @@ Cube::Cube(glm::vec3 position, ShaderProgram *shaderProgram)
 	glBindTexture(GL_TEXTURE_2D, d_tex);
 
 	sf::Image texImage;
-	if (not texImage.LoadFromFile(texPath))
+	if (not texImage.LoadFromFile(texPrefix + texName + texPostfix))
 	{
 		cerr << "Error loading texture from file\n";
 		return;
