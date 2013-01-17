@@ -13,15 +13,17 @@ CONTROLLER_FILES=$(wildcard src/controller/*.cc) src/controller/controller.ih sr
 DRAWABLE_FILES=$(wildcard src/drawable/*.cc) src/drawable/drawable.ih src/drawable/drawable.h
 CUBE_FILES=$(wildcard src/drawable/cube/*.cc) src/drawable/cube/cube.ih src/drawable/cube/cube.h
 GRID_FILES=$(wildcard src/drawable/grid/*.cc) src/drawable/grid/grid.ih src/drawable/grid/grid.h
+MODEL_FILES=$(wildcard src/drawable/model/*.cc) src/drawable/model/model.ih src/drawable/model/model.h
 
 
-GAME_DEPS=$(CONTROLLER_FILES) $(PLAYER_FILES) $(DRAWABLE_FILES) $(CUBE_FILES) $(GRID_FILES)
+GAME_DEPS=$(CONTROLLER_FILES) $(PLAYER_FILES) $(DRAWABLE_FILES) $(CUBE_FILES) $(GRID_FILES) $(MODEL_FILES)
 PLAYER_DEPS=$(CONTROLLER_FILES)
 SHADERPROGRAM_DEPS=
 CONTROLLER_DEPS=
 DRAWABLE_DEPS=$(SHADERPROGRAM_FILES)
 CUBE_DEPS=$(SHADERPROGRAM_FILES) $(DRAWABLE_FILES)
 GRID_DEPS=$(SHADERPROGRAM_FILES) $(DRAWABLE_FILES)
+MODEL_DEPS=$(SHADERPROGRAM_FILES) $(DRAWABLE_FILES)
 
 
 all: $(OBJ_FILES)
@@ -49,6 +51,9 @@ build/drawable/cube/%.o: src/drawable/cube/%.cc src/drawable/cube/cube.ih src/dr
 	$(CXX) -c $(CPPFLAGS) $< -o $@
 
 build/drawable/grid/%.o: src/drawable/grid/%.cc src/drawable/grid/grid.ih src/drawable/grid/grid.h $(GRID_DEPS)
+	$(CXX) -c $(CPPFLAGS) $< -o $@
+
+build/drawable/model/%.o: src/drawable/model/%.cc src/drawable/model/model.ih src/drawable/model/model.h $(MODEL_DEPS)
 	$(CXX) -c $(CPPFLAGS) $< -o $@
 
 

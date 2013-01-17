@@ -13,7 +13,7 @@ class Cube : public Drawable
 	GLuint d_tex;
 
     public:
-        Cube(glm::vec3 position, ShaderProgram *shaderProgram);
+        Cube(glm::vec3 position, ShaderProgram *shaderProgram, std::string const &texName);
 
     private:
     	virtual void drawImpl(glm::mat4 &viewMat, glm::mat4 &projMat);
