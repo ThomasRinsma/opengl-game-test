@@ -3,16 +3,17 @@
 string const texPrefix  = "textures/";
 string const texPostfix = ".png";
 
-Cube::Cube(glm::vec3 position, ShaderProgram *shaderProgram, string const &texName)
+Cube::Cube(ShaderProgram *shaderProgram, string const &texName)
 :
-	Drawable(position, shaderProgram)
+	Drawable(shaderProgram)
 {
 	// Create a VAO
 	glGenVertexArrays(1, &d_vao);
 	glBindVertexArray(d_vao);
 
 	// Create a VBO
-	glGenBuffers(1, &d_vbo); // Generate 1 buffer
+	GLuint vbo;
+	glGenBuffers(1, &vbo); // Generate 1 buffer for everything
 
 	// Cube vertices:   X, Y, Z,   X, Y, Z,    U, V
 	float vertices[] = {
@@ -60,7 +61,7 @@ Cube::Cube(glm::vec3 position, ShaderProgram *shaderProgram, string const &texNa
 	};
 
 	// Copy vertex data into VBO
-	glBindBuffer(GL_ARRAY_BUFFER, d_vbo);
+	glBindBuffer(GL_ARRAY_BUFFER, vbo);
 	glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices, GL_STATIC_DRAW);
 	
 
@@ -99,5 +100,5 @@ Cube::Cube(glm::vec3 position, ShaderProgram *shaderProgram, string const &texNa
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
 
 
-	glEnable(GL_DEPTH_TEST);
+	
 }

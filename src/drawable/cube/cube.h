@@ -9,14 +9,13 @@
 class Cube : public Drawable
 {
 	GLuint d_vao;
-	GLuint d_vbo;
 	GLuint d_tex;
 
     public:
-        Cube(glm::vec3 position, ShaderProgram *shaderProgram, std::string const &texName);
+        Cube(ShaderProgram *shaderProgram, std::string const &texName);
 
     private:
-    	virtual void drawImpl(glm::mat4 &viewMat, glm::mat4 &projMat);
+    	virtual void drawImpl(glm::mat4 const &viewMat, glm::mat4 const &projMat);
 };
         
 #endif

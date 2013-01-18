@@ -1,26 +1,19 @@
 #include "grid.ih"
 
-Grid::Grid(glm::vec3 position, ShaderProgram *shaderProgram)
+Grid::Grid(ShaderProgram *shaderProgram)
 :
-	Drawable(position, shaderProgram)
+	Drawable(shaderProgram)
 {
 	// Create a VAO
 	glGenVertexArrays(1, &d_vao);
 	glBindVertexArray(d_vao);
 
 	// Create a VBO
-	glGenBuffers(1, &d_vbo); // Generate 1 buffer
+	GLuint vbo;
+	glGenBuffers(1, &vbo); // Generate 1 buffer
 
-/*
-	// Grid vertices:   X, Y, Z,   R, G, B
-	float vertices[] = {
-		-10.0f, 0.0f, 0.0f,    1.0f, 0.0f, 0.0f,
-		 10.0f, 0.0f, 0.0f,    1.0f, 0.0f, 0.0f,
-		  0.0f, 0.0f, -10.0f,  1.0f, 0.0f, 0.0f,
-		  0.0f, 0.0f,  10.0f,  1.0f, 0.0f, 0.0f,
-		// TODO actual grid
-	};
-*/
+	// TODO: color
+
 	vector<float> vertVec;
 	for (int x = -10; x <= 10; ++x)
 	{
@@ -36,7 +29,7 @@ Grid::Grid(glm::vec3 position, ShaderProgram *shaderProgram)
 
 
 	// Copy vertex data into VBO
-	glBindBuffer(GL_ARRAY_BUFFER, d_vbo);
+	glBindBuffer(GL_ARRAY_BUFFER, vbo);
 	glBufferData(GL_ARRAY_BUFFER, vertVec.size() * sizeof(float), vertVec.data(), GL_STATIC_DRAW);
 	
 
@@ -49,6 +42,4 @@ Grid::Grid(glm::vec3 position, ShaderProgram *shaderProgram)
 	GLint colAttrib = d_shaderProgram->attribLocation("color");
 	glEnableVertexAttribArray(colAttrib);
 	glVertexAttribPointer(colAttrib, 3, GL_FLOAT, GL_FALSE, 6 * sizeof(float), (void *)(3 * sizeof(float)));
-
-	//glEnable(GL_DEPTH_TEST);
 }

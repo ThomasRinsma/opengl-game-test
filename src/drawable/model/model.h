@@ -9,16 +9,16 @@
 class Model : public Drawable
 {
 	GLuint d_vao;
-	GLuint d_vbo;
 	GLuint d_tex;
+	
 	std::vector<float> d_verts;
 	size_t d_numVerts;
 
     public:
-        Model(glm::vec3 position, ShaderProgram *shaderProgram, std::string const &texName, std::string const &modelName);
+        Model(ShaderProgram *shaderProgram, std::string const &texName, std::string const &modelName);
 
     private:
-    	virtual void drawImpl(glm::mat4 &viewMat, glm::mat4 &projMat);
+    	virtual void drawImpl(glm::mat4 const &viewMat, glm::mat4 const &projMat);
     	void loadModel(std::string const &modelPath);
 };
         

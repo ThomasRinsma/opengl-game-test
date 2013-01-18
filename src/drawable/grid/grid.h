@@ -10,13 +10,12 @@
 class Grid : public Drawable
 {
 	GLuint d_vao;
-	GLuint d_vbo;
 
     public:
-        Grid(glm::vec3 position, ShaderProgram *shaderProgram);
+        Grid(ShaderProgram *shaderProgram); // TODO: color
 
     private:
-    	virtual void drawImpl(glm::mat4 &viewMat, glm::mat4 &projMat);
+    	virtual void drawImpl(glm::mat4 const &viewMat, glm::mat4 const &projMat);
 };
         
 #endif
