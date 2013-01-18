@@ -6,9 +6,9 @@ string const texPrefix   = "textures/";
 string const modelPostfix = ".obj";
 string const texPostfix   = ".png";
 
-Model::Model(glm::vec3 position, ShaderProgram *shaderProgram, string const &texName, string const &modelName)
+Model::Model(ShaderProgram *shaderProgram, string const &texName, string const &modelName)
 :
-	Drawable(position, shaderProgram)
+	Drawable(shaderProgram)
 {
 	loadModel(modelPrefix + modelName + modelPostfix);
 
@@ -17,10 +17,11 @@ Model::Model(glm::vec3 position, ShaderProgram *shaderProgram, string const &tex
 	glBindVertexArray(d_vao);
 
 	// Create a VBO
-	glGenBuffers(1, &d_vbo); // Generate 1 buffer
+	GLuint vbo;
+	glGenBuffers(1, &vbo); // Generate 1 buffer
 
 	// Copy vertex data into VBO
-	glBindBuffer(GL_ARRAY_BUFFER, d_vbo);
+	glBindBuffer(GL_ARRAY_BUFFER, vbo);
 	glBufferData(GL_ARRAY_BUFFER, d_verts.size() * sizeof(float), d_verts.data(), GL_STATIC_DRAW);
 	
 
@@ -57,7 +58,4 @@ Model::Model(glm::vec3 position, ShaderProgram *shaderProgram, string const &tex
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
-
-
-	glEnable(GL_DEPTH_TEST);
 }

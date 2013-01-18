@@ -7,19 +7,32 @@
 class Drawable
 {
 	protected:
-		glm::vec3 d_position;
+        glm::mat4 d_modelMat;
+        glm::mat3 d_normalMat;
+
+        glm::vec3 d_position;
+        glm::vec3 d_rotation;
+        glm::vec3 d_scale;
+
 		ShaderProgram *d_shaderProgram;
 
     public:
     	virtual ~Drawable();
-    	Drawable(glm::vec3 &position, ShaderProgram *shaderProgram);
+    	Drawable(ShaderProgram *shaderProgram);
 
-    	void draw(glm::mat4 viewMat, glm::mat4 projMat);
-    	void setPosition(glm::vec3 position);
-    	glm::vec3 &position();
+    	void draw(glm::mat4 const &viewMat, glm::mat4 const &projMat);
+
+    	void setPosition(glm::vec3 const &position);
+        void setRotation(glm::vec3 const &rotation);
+        void setScale(glm::vec3 const &scale);
+
+    	glm::vec3 const &position() const;
+        glm::vec3 const &rotation() const;
+        glm::vec3 const &scale() const;
 
     private:
-    	virtual void drawImpl(glm::mat4 &viewMat, glm::mat4 &projMat) = 0;
+        void updateModelMat();
+    	virtual void drawImpl(glm::mat4 const &viewMat, glm::mat4 const &projMat) = 0;
 };
         
 #endif

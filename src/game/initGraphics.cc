@@ -11,4 +11,6 @@ void Game::initGraphics()
 		static_cast<float>(d_win->GetHeight()),  // Ratio
 		0.1f, 100.0f // near/far
 	);
+
+	glEnable(GL_DEPTH_TEST);
 }

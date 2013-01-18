@@ -11,23 +11,18 @@ class Player
 
 	glm::vec3 d_position;
 	glm::vec3 d_velocity; // absolute
-	float d_pitch = 0; // up and down
-	float d_yaw = 0; // left and right
+	float d_pitch = 0.0f; // up and down
+	float d_yaw = 0.0f; // left and right
 
     public:
+        void update(float deltaTime, Controller *controller);
+
         glm::vec3 const &position() const;
         glm::vec3 const &velocity() const;
 
-        //float pitch() const;
-        //float yaw() const;
-
-        //void setPitch(float pitch);
-        //void setYaw(float yaw);
-        
-
-        void update(float deltaTime, Controller *controller);
-        
-        
+        void setPosition(glm::vec3 const &position);
+        void setPitch(float pitch);
+        void setYaw(float yaw);
 
         glm::mat4 const viewMatrix() const;
 
@@ -45,15 +40,10 @@ inline glm::vec3 const &Player::velocity() const
 {
     return d_velocity;
 }
-/*
-inline float Player::pitch() const
-{
-    return d_pitch;
-}
 
-inline float Player::yaw() const
+inline void Player::setPosition(glm::vec3 const &position)
 {
-    return d_yaw;
+    d_position = position;
 }
 
 inline void Player::setPitch(float pitch)
@@ -65,6 +55,6 @@ inline void Player::setYaw(float yaw)
 {
     d_yaw = yaw;
 }
-*/
+
         
 #endif

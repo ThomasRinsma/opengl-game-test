@@ -8,4 +8,5 @@ void Game::stepGame()
 	float deltaTime = d_win->GetFrameTime();
 
 	d_player.update(deltaTime, d_controller);
+
 }
