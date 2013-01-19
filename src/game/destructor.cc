@@ -9,6 +9,4 @@ Game::~Game()
 
 	for (Drawable* drawable : d_drawables)
 		delete drawable;
-
-	// TODO: clean up opengl stuff
 }

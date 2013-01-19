@@ -12,8 +12,7 @@ Cube::Cube(ShaderProgram *shaderProgram, string const &texName)
 	glBindVertexArray(d_vao);
 
 	// Create a VBO
-	GLuint vbo;
-	glGenBuffers(1, &vbo); // Generate 1 buffer for everything
+	glGenBuffers(1, &d_vbo); // Generate 1 buffer for everything
 
 	// Cube vertices:   X, Y, Z,   X, Y, Z,    U, V
 	float vertices[] = {
@@ -61,7 +60,7 @@ Cube::Cube(ShaderProgram *shaderProgram, string const &texName)
 	};
 
 	// Copy vertex data into VBO
-	glBindBuffer(GL_ARRAY_BUFFER, vbo);
+	glBindBuffer(GL_ARRAY_BUFFER, d_vbo);
 	glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices, GL_STATIC_DRAW);
 	
 

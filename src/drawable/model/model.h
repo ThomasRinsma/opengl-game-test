@@ -8,6 +8,7 @@
 
 class Model : public Drawable
 {
+	GLuint d_vbo;
 	GLuint d_vao;
 	GLuint d_tex;
 	
@@ -16,6 +17,7 @@ class Model : public Drawable
 
     public:
         Model(ShaderProgram *shaderProgram, std::string const &texName, std::string const &modelName);
+        ~Model();
 
     private:
     	virtual void drawImpl(glm::mat4 const &viewMat, glm::mat4 const &projMat);

@@ -40,7 +40,7 @@ class Game
 
 
     public:
-        Game();                              // full screen
+        Game();                              // full screen max res
         Game(size_t width, size_t height);   // windowed
         ~Game();
 

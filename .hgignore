@@ -1,3 +1,5 @@
 syntax: glob
+
+build/*.o
 build/*/*.o
 build/*/*/*.o

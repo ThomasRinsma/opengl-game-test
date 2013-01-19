@@ -9,8 +9,7 @@ Grid::Grid(ShaderProgram *shaderProgram)
 	glBindVertexArray(d_vao);
 
 	// Create a VBO
-	GLuint vbo;
-	glGenBuffers(1, &vbo); // Generate 1 buffer
+	glGenBuffers(1, &d_vbo); // Generate 1 buffer
 
 	// TODO: color
 
@@ -29,7 +28,7 @@ Grid::Grid(ShaderProgram *shaderProgram)
 
 
 	// Copy vertex data into VBO
-	glBindBuffer(GL_ARRAY_BUFFER, vbo);
+	glBindBuffer(GL_ARRAY_BUFFER, d_vbo);
 	glBufferData(GL_ARRAY_BUFFER, vertVec.size() * sizeof(float), vertVec.data(), GL_STATIC_DRAW);
 	
 

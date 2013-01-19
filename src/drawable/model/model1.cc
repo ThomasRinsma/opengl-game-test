@@ -17,11 +17,10 @@ Model::Model(ShaderProgram *shaderProgram, string const &texName, string const &
 	glBindVertexArray(d_vao);
 
 	// Create a VBO
-	GLuint vbo;
-	glGenBuffers(1, &vbo); // Generate 1 buffer
+	glGenBuffers(1, &d_vbo); // Generate 1 buffer
 
 	// Copy vertex data into VBO
-	glBindBuffer(GL_ARRAY_BUFFER, vbo);
+	glBindBuffer(GL_ARRAY_BUFFER, d_vbo);
 	glBufferData(GL_ARRAY_BUFFER, d_verts.size() * sizeof(float), d_verts.data(), GL_STATIC_DRAW);
 	
 

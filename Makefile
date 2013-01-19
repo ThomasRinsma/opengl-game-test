@@ -26,8 +26,14 @@ GRID_DEPS=$(SHADERPROGRAM_FILES) $(DRAWABLE_FILES)
 MODEL_DEPS=$(SHADERPROGRAM_FILES) $(DRAWABLE_FILES)
 
 
-all: $(OBJ_FILES)
+all: prep_out_dirs make_objs
+
+make_objs: $(OBJ_FILES)
 	$(CXX) $^ -o openglgame $(LDLIBS)
+
+prep_out_dirs:
+	mkdir -p build/game build/player build/shaderprogram build/controller
+	mkdir -p build/drawable/cube build/drawable/grid build/drawable/model
 
 build/main.o: src/main.cc
 	$(CXX) -c $(CPPFLAGS) $< -o $@

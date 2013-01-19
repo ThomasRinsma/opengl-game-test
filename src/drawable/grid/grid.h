@@ -9,10 +9,12 @@
 
 class Grid : public Drawable
 {
+	GLuint d_vbo;
 	GLuint d_vao;
 
     public:
         Grid(ShaderProgram *shaderProgram); // TODO: color
+        ~Grid();
 
     private:
     	virtual void drawImpl(glm::mat4 const &viewMat, glm::mat4 const &projMat);
