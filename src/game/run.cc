@@ -7,8 +7,13 @@ void Game::run()
 	// The run-loop
 	while (d_running)
 	{
+		// TODO: replace ifs with exceptions
 		handleEvents();
-		stepGame();
-		draw();
+
+		if (d_running)
+			stepGame();
+
+		if (d_running)
+			draw();
 	}
 }
