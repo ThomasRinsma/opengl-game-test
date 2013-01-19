@@ -65,5 +65,6 @@ build/drawable/model/%.o: src/drawable/model/%.cc src/drawable/model/model.ih sr
 
 clean:
 	rm build/*.o build/*/*.o build/*/*/*.o
+	rm -r build
 
 
