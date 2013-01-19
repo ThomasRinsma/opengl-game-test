@@ -2,9 +2,6 @@
 
 Game::~Game()
 {
-	delete d_controller;
-	delete d_win;
-
 	for (ShaderProgram* sp : d_shaderPrograms)
 		delete sp;
 

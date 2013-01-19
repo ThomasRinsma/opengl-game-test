@@ -1,6 +1,6 @@
 #include "player.ih"
 
-void Player::setRelativeVelocity(glm::vec3 relVelocity)
+void Player::setRelativeVelocity(glm::vec3 const &relVelocity)
 {
 	glm::vec3 normVel = glm::length(relVelocity) > 0 ? glm::normalize(relVelocity) : relVelocity;
 	
