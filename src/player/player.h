@@ -9,13 +9,17 @@ class Player
     static constexpr float s_mouseSpeed = 0.001f * M_PI; // radians per pixel
     static constexpr float s_moveSpeed = 2.0f; // units per second
 
+    Controller &d_controller;
+
 	glm::vec3 d_position;
 	glm::vec3 d_velocity; // absolute
 	float d_pitch = 0.0f; // up and down
 	float d_yaw = 0.0f; // left and right
 
     public:
-        void update(float deltaTime, Controller *controller);
+        Player(Controller &controller);
+
+        void update(float deltaTime);
 
         glm::vec3 const &position() const;
         glm::vec3 const &velocity() const;
@@ -28,7 +32,7 @@ class Player
 
     private:
         void integratePosition(float deltaTime);
-        void setRelativeVelocity(glm::vec3 velocity);
+        void setRelativeVelocity(glm::vec3 const &velocity);
 };
 
 inline glm::vec3 const &Player::position() const

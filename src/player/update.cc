@@ -1,13 +1,13 @@
 #include "player.ih"
 
-void Player::update(float deltaTime, Controller *controller)
+void Player::update(float deltaTime)
 {
-	float latMovement = controller->moveRight() * 1.0f - controller->moveLeft() * 1.0f;
-	float longMovement = controller->moveForward() * 1.0f - controller->moveBack() * 1.0f;
-	float verticalMovement = controller->moveUp() * 1.0f - controller->moveDown() * 1.0f;
+	float latMovement = d_controller.moveRight() * 1.0f - d_controller.moveLeft() * 1.0f;
+	float longMovement = d_controller.moveForward() * 1.0f - d_controller.moveBack() * 1.0f;
+	float verticalMovement = d_controller.moveUp() * 1.0f - d_controller.moveDown() * 1.0f;
 
 	// Mouse stuff
-	glm::vec2 mousePosDelta = controller->mouseOffset();
+	glm::vec2 mousePosDelta = d_controller.mouseOffset();
 	d_yaw -= mousePosDelta.x * s_mouseSpeed;
 	d_pitch -= mousePosDelta.y * s_mouseSpeed;
 

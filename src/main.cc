@@ -2,8 +2,6 @@
 
 int main()
 {
-	Game game;
-
-	game.initWindow(1024, 768);
+	Game game(1024, 768);
 	game.run();
 }

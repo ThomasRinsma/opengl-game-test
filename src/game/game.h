@@ -12,17 +12,21 @@
 
 class Game
 {
+    // Window stuff, TODO: move to seperate class?
+    size_t d_winWidth;
+    size_t d_winHeight;
+
+    // SFML window
+    sf::Window d_win;
+
+    // Controller (keyboard + mouse)
+    Controller d_controller;
+
     // Player object (camera)
     Player d_player;
 
-    // Controller (keyboard + mouse)
-    Controller *d_controller;
-
     // Drawable objects
     std::vector<Drawable*> d_drawables;
-
-    // SFML stuff
-    sf::Window *d_win;
 
     // Vector of shader program pointers
     std::vector<ShaderProgram *> d_shaderPrograms;
@@ -33,21 +37,25 @@ class Game
     // Flags
     bool d_running = false;
     bool d_initialized = false;
+    bool d_fullscreen = false;
+
 
     public:
-        Game();
+        Game();                              // full screen
+        Game(size_t width, size_t height);   // windowed
         ~Game();
 
-        void initWindow(size_t width, size_t height);
         void run();
 
     private:
+        void initWindow();
+        void initGame();        // initializes game logic
+        void initGraphics();    // initializes opengl stuff
+        
         // These are directly called from run()
-        virtual void initGame();        // initializes game logic
-        virtual void initGraphics();    // initializes opengl stuff
-        virtual void handleEvents();    // handles events, doh
-        virtual void stepGame();        // step game logic
-        virtual void draw();            // draw opengl stuff
+        void handleEvents();    // handles events, doh
+        void stepGame();        // step game logic
+        void draw();            // draw opengl stuff
 
 };
         

@@ -16,5 +16,5 @@ void Game::draw()
 		drawable->draw(viewMat, d_projMat);
 
 	// Flip buffer
-	d_win->Display();
+	d_win.Display();
 }
