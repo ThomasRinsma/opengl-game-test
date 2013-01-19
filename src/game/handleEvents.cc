@@ -12,14 +12,15 @@ void Game::handleEvents()
 		{
 			case sf::Event::Closed:
 				d_win.Close();
-				d_running = false; // TODO: exit cleanly
+				d_running = false; // TODO: replace with exception
 				break;
 
 			case sf::Event::KeyPressed:
 				switch (event.Key.Code)
 				{
 					case sf::Key::Escape:
-						// TODO: exit cleanly
+						d_win.Close();
+						d_running = false; // TODO: replace with exception
 						break;
 
 					default:

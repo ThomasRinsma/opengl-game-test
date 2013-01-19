@@ -36,7 +36,6 @@ class Game
 
     // Flags
     bool d_running = false;
-    bool d_initialized = false;
     bool d_fullscreen = false;
 
 
@@ -51,12 +50,11 @@ class Game
         void initWindow();
         void initGame();        // initializes game logic
         void initGraphics();    // initializes opengl stuff
-        
+
         // These are directly called from run()
         void handleEvents();    // handles events, doh
         void stepGame();        // step game logic
         void draw();            // draw opengl stuff
-
 };
         
 #endif
