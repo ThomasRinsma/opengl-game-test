@@ -14,9 +14,10 @@ DRAWABLE_FILES=$(wildcard src/drawable/*.cc) src/drawable/drawable.ih src/drawab
 CUBE_FILES=$(wildcard src/drawable/cube/*.cc) src/drawable/cube/cube.ih src/drawable/cube/cube.h
 GRID_FILES=$(wildcard src/drawable/grid/*.cc) src/drawable/grid/grid.ih src/drawable/grid/grid.h
 MODEL_FILES=$(wildcard src/drawable/model/*.cc) src/drawable/model/model.ih src/drawable/model/model.h
+TEXT_FILES=$(wildcard src/drawable/text/*.cc) src/drawable/text/text.ih src/drawable/text/text.h
 
 
-GAME_DEPS=$(CONTROLLER_FILES) $(PLAYER_FILES) $(DRAWABLE_FILES) $(CUBE_FILES) $(GRID_FILES) $(MODEL_FILES)
+GAME_DEPS=$(CONTROLLER_FILES) $(PLAYER_FILES) $(DRAWABLE_FILES) $(CUBE_FILES) $(GRID_FILES) $(MODEL_FILES) $(TEXT_FILES)
 PLAYER_DEPS=$(CONTROLLER_FILES)
 SHADERPROGRAM_DEPS=
 CONTROLLER_DEPS=
@@ -24,6 +25,7 @@ DRAWABLE_DEPS=$(SHADERPROGRAM_FILES)
 CUBE_DEPS=$(SHADERPROGRAM_FILES) $(DRAWABLE_FILES)
 GRID_DEPS=$(SHADERPROGRAM_FILES) $(DRAWABLE_FILES)
 MODEL_DEPS=$(SHADERPROGRAM_FILES) $(DRAWABLE_FILES)
+TEXT_DEPS=$(SHADERPROGRAM_FILES) $(DRAWABLE_FILES)
 
 
 all: prep_out_dirs make_objs
@@ -33,7 +35,7 @@ make_objs: $(OBJ_FILES)
 
 prep_out_dirs:
 	mkdir -p build/game build/player build/shaderprogram build/controller
-	mkdir -p build/drawable/cube build/drawable/grid build/drawable/model
+	mkdir -p build/drawable/cube build/drawable/grid build/drawable/model build/drawable/text
 
 build/main.o: src/main.cc
 	$(CXX) -c $(CPPFLAGS) $< -o $@
@@ -60,6 +62,9 @@ build/drawable/grid/%.o: src/drawable/grid/%.cc src/drawable/grid/grid.ih src/dr
 	$(CXX) -c $(CPPFLAGS) $< -o $@
 
 build/drawable/model/%.o: src/drawable/model/%.cc src/drawable/model/model.ih src/drawable/model/model.h $(MODEL_DEPS)
+	$(CXX) -c $(CPPFLAGS) $< -o $@
+
+build/drawable/text/%.o: src/drawable/text/%.cc src/drawable/text/text.ih src/drawable/text/text.h $(TEXT_DEPS)
 	$(CXX) -c $(CPPFLAGS) $< -o $@
 
 

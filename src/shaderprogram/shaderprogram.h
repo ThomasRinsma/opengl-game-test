@@ -17,14 +17,14 @@ struct ShaderProgram
 	    bool d_error = false;
 
     public:
-        ShaderProgram(std::string shaderName, std::vector<std::string> uniformNames);
+        ShaderProgram(std::string const &shaderName, std::vector<std::string> const &uniformNames);
 
-        GLuint attribLocation(std::string const &attrName);
-        void use();
+        GLuint attribLocation(std::string const &attrName) const;
+        void use() const;
 
     private:
-    	bool loadShaders(std::string vertPath, std::string fragPath);
-    	void linkShaders(std::vector<std::string> &uniformNames);
+    	bool loadShaders(std::string const &vertPath, std::string const &fragPath);
+    	void linkShaders(std::vector<std::string> const &uniformNames);
 };
         
 #endif

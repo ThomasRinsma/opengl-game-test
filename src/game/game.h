@@ -4,7 +4,7 @@
 #include <SFML/Window.hpp> // for sf::Window
 #include <SFML/Graphics.hpp> // for sf::Image
 #include <glm/glm.hpp> // for glm::mat4
-#include <vector> // for vector, doh
+#include <vector> // for vector
 
 #include "../controller/controller.h"
 #include "../player/player.h"
@@ -12,9 +12,13 @@
 
 class Game
 {
-    // Window stuff, TODO: move to seperate class?
+    // Window stuff
     size_t d_winWidth;
     size_t d_winHeight;
+
+    // Flags
+    bool d_running = false;
+    bool d_fullscreen = false;
 
     // SFML window
     sf::Window d_win;
@@ -26,17 +30,13 @@ class Game
     Player d_player;
 
     // Drawable objects
-    std::vector<Drawable*> d_drawables;
+    std::vector<Drawable *> d_drawables;
 
     // Vector of shader program pointers
     std::vector<ShaderProgram *> d_shaderPrograms;
 
     // Projection matrix
     glm::mat4 d_projMat;
-
-    // Flags
-    bool d_running = false;
-    bool d_fullscreen = false;
 
 
     public:
