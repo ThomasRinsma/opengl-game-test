@@ -23,6 +23,11 @@ void Game::handleEvents()
 						d_running = false; // TODO: replace with exception
 						break;
 
+					case sf::Key::F1:
+						d_vsync = not d_vsync;
+						d_win.UseVerticalSync(d_vsync);
+						break;
+
 					default:
 						break;
 				}

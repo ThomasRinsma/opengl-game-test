@@ -9,5 +9,5 @@ void Game::initWindow()
 	glewInit();
 
 	// Set VSync
-	d_win.UseVerticalSync(false);
+	d_win.UseVerticalSync(d_vsync);
 }

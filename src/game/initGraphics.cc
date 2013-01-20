@@ -4,7 +4,7 @@ void Game::initGraphics()
 {
 	d_shaderPrograms.push_back(new ShaderProgram("simpleColor", {"mvp"}));
 	d_shaderPrograms.push_back(new ShaderProgram("simpleTexture", {"m", "v", "p", "n"}));
-	d_shaderPrograms.push_back(new ShaderProgram("simpleText", {"mvp", "u", "v", "w", "h"}));
+	d_shaderPrograms.push_back(new ShaderProgram("simpleText", {"mvp", "c"}));
 	
 	d_projMat = glm::perspective(
 		45.0f,	// 45 degree FOV

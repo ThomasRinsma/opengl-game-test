@@ -19,10 +19,15 @@ class Text : public Drawable
         Text(ShaderProgram *shaderProgram, std::string const &text); // TODO: color
         ~Text();
 
-        // TODO: setText()
+        void setText(std::string const &text);
 
     private:
     	virtual void drawImpl(glm::mat4 const &viewMat, glm::mat4 const &projMat);
 };
+
+inline void Text::setText(std::string const &text)
+{
+    d_text = text;
+}
         
 #endif

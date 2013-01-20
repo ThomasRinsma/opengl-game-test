@@ -9,6 +9,7 @@
 #include "../controller/controller.h"
 #include "../player/player.h"
 #include "../drawable/drawable.h"
+#include "../drawable/text/text.h"
 
 class Game
 {
@@ -19,6 +20,7 @@ class Game
     // Flags
     bool d_running = false;
     bool d_fullscreen = false;
+    bool d_vsync = false;
 
     // SFML window
     sf::Window d_win;
@@ -37,6 +39,10 @@ class Game
 
     // Projection matrix
     glm::mat4 d_projMat;
+
+    // Current fps
+    float d_fps;
+    Text *d_fpsText;
 
 
     public:

@@ -9,4 +9,7 @@ void Game::stepGame()
 
 	d_player.update(deltaTime);
 
+	ostringstream oss;
+	oss << "FPS: " << d_fps;
+	d_fpsText->setText(oss.str());
 }
