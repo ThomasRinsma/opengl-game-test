@@ -40,6 +40,8 @@ class Game
     // Projection matrix
     glm::mat4 d_projMat;
 
+    float d_fov = 45.0f;
+
     // Current fps
     float d_fps;
     Text *d_fpsText;
@@ -56,6 +58,8 @@ class Game
         void initWindow();
         void initGame();        // initializes game logic
         void initGraphics();    // initializes opengl stuff
+
+        void setProjMat(float fov, float near, float far);
 
         // These are directly called from run()
         void handleEvents();    // handles events, doh

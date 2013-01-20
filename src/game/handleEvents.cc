@@ -31,6 +31,14 @@ void Game::handleEvents()
 					default:
 						break;
 				}
+				break;
+
+			case sf::Event::MouseWheelMoved:
+				d_fov -= event.MouseWheel.Delta * 5.0f;
+				if (d_fov > 175) d_fov = 175;
+				if (d_fov < 5) d_fov = 5;
+				setProjMat(d_fov, 0.1f, 100.0f);
+				break;
 
 			default:
 				break;
