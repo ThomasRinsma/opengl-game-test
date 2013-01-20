@@ -2,7 +2,7 @@
 
 std::string const fragDataName = "outColor";
 
-void ShaderProgram::linkShaders(vector<std::string> &uniformNames)
+void ShaderProgram::linkShaders(vector<std::string> const &uniformNames)
 {
 	glBindFragDataLocation(d_shaderProgram, 0, fragDataName.c_str());
 

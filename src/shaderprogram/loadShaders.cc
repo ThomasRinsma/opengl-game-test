@@ -1,6 +1,6 @@
 #include "shaderprogram.ih"
 
-bool ShaderProgram::loadShaders(string vertPath, string fragPath)
+bool ShaderProgram::loadShaders(string const &vertPath, string const &fragPath)
 {
 	// Load the files into ifstreams
 	ifstream vertexFile(vertPath);
