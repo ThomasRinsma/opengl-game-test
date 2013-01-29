@@ -15,7 +15,7 @@ void Player::updateImpl(float deltaTime)
 	if(yaw() < -M_PI) setYaw(yaw() + 2.0f * M_PI);
 
 	if(pitch() > M_PI/2.0f) setPitch(M_PI/2.0f);
-	if(pitch() < -M_PI/2.0f) setPitch(M_PI/2.0f);
+	if(pitch() < -M_PI/2.0f) setPitch(-M_PI/2.0f);
 
 	setRelativeVelocity(glm::vec3(latMovement, verticalMovement, longMovement));
 	integratePosition(deltaTime * s_moveSpeed);
