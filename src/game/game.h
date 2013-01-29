@@ -9,7 +9,9 @@
 #include "../controller/controller.h"
 #include "../player/player.h"
 #include "../drawable/drawable.h"
+#include "../drawable/text2d/text2d.h"
 #include "../object/text/text.h"
+
 
 class Game
 {
@@ -34,17 +36,21 @@ class Game
     // Scene objects
     std::vector<Object *> d_objects;
 
+    // Non-entity drawables (screen-space stuff)
+    std::vector<Drawable *> d_screenElements;
+
     // Vector of shader program pointers
     std::vector<ShaderProgram *> d_shaderPrograms;
 
-    // Projection matrix
+    // Projection matrices, TODO: put inside player?
     glm::mat4 d_projMat;
+    glm::mat4 d_orthoProjMat;
 
     float d_fov = 45.0f;
 
     // Current fps
     float d_fps;
-    Text *d_fpsText;
+    Text2D *d_fpsText;
 
 
     public:

@@ -3,4 +3,6 @@
 Object::Object(ShaderProgram &shaderProgram)
 :
 	Drawable(shaderProgram)
-{}
+{
+	modelMatUpdated();
+}

@@ -17,15 +17,15 @@ void Game::initGame()
 	cube2->setPosition(glm::vec3(-2.0f, 1.5f, 2.0f));
 
 
-	d_fpsText = new Text(*d_shaderPrograms[2], "");
-	d_fpsText->setPosition(glm::vec3(0.0f, 2.0f, 0.0f));
+	d_fpsText = new Text2D(*d_shaderPrograms[2], glm::vec2(0.0f, d_winHeight - 16.0f), glm::vec2(2.0f), "");
 
 	d_objects.push_back(grid);
 	d_objects.push_back(room);
 	d_objects.push_back(cube1);
 	d_objects.push_back(cube2);
 	d_objects.push_back(sphere);
-	d_objects.push_back(d_fpsText);
+
+	d_screenElements.push_back(d_fpsText);
 
 
 	d_player.setPosition(glm::vec3(0.0f, 4.0f, 5.0f));

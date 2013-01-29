@@ -22,7 +22,7 @@ class Text : public Object
 
     private:
         virtual void updateImpl(float deltaTime);
-    	virtual void drawImpl(glm::mat4 const &modelMat, glm::mat4 const &viewMat, glm::mat4 const &projMat);
+    	virtual void drawImpl(glm::mat4 const &viewMat, glm::mat4 const &projMat);
 };
 
 inline void Text::setText(std::string const &text)
