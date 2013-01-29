@@ -9,11 +9,11 @@ void Game::draw()
 	glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
-	// Draw everything
+	// Draw scene objects
 	glm::mat4 viewMat = d_player.viewMatrix();
 
-	for (Drawable *drawable : d_drawables)
-		drawable->draw(viewMat, d_projMat);
+	for (Object *object : d_objects)
+		object->draw(viewMat, d_projMat);
 
 	// Flip buffer
 	d_win.Display();

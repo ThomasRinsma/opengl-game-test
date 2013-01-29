@@ -3,15 +3,15 @@
 glm::mat4 const Player::viewMatrix() const
 {
 	glm::vec3 direction(
-		cos(d_pitch) * sin(d_yaw),
-		sin(d_pitch),
-		cos(d_pitch) * cos(d_yaw)
+		cos(pitch()) * sin(yaw()),
+		sin(pitch()),
+		cos(pitch()) * cos(yaw())
 	);
 
 	glm::vec3 right(
-		sin(d_yaw - M_PI/2.0f),
+		sin(yaw() - M_PI/2.0f),
 		0,
-		cos(d_yaw - M_PI/2.0f)
+		cos(yaw() - M_PI/2.0f)
 	);
 
 	glm::vec3 up = glm::cross(right, direction);

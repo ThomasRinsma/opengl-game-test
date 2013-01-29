@@ -1,6 +1,6 @@
 #include "player.ih"
 
-void Player::update(float deltaTime)
+void Player::updateImpl(float deltaTime)
 {
 	float latMovement = d_controller.moveRight() * 1.0f - d_controller.moveLeft() * 1.0f;
 	float longMovement = d_controller.moveForward() * 1.0f - d_controller.moveBack() * 1.0f;
@@ -8,14 +8,14 @@ void Player::update(float deltaTime)
 
 	// Mouse stuff
 	glm::vec2 mousePosDelta = d_controller.mouseOffset();
-	d_yaw -= mousePosDelta.x * s_mouseSpeed;
-	d_pitch -= mousePosDelta.y * s_mouseSpeed;
+	setYaw(yaw() - mousePosDelta.x * s_mouseSpeed);
+	setPitch(pitch() - mousePosDelta.y * s_mouseSpeed);
 
-	if(d_yaw > M_PI) d_yaw -= 2.0f * M_PI;
-	if(d_yaw < -M_PI) d_yaw += 2.0f * M_PI;
+	if(yaw() > M_PI) setYaw(yaw() - 2.0f * M_PI);
+	if(yaw() < -M_PI) setYaw(yaw() + 2.0f * M_PI);
 
-	if(d_pitch > M_PI/2.0f) d_pitch = M_PI/2.0f;
-	if(d_pitch < -M_PI/2.0f) d_pitch = -M_PI/2.0f;
+	if(pitch() > M_PI/2.0f) setPitch(M_PI/2.0f);
+	if(pitch() < -M_PI/2.0f) setPitch(M_PI/2.0f);
 
 	setRelativeVelocity(glm::vec3(latMovement, verticalMovement, longMovement));
 	integratePosition(deltaTime * s_moveSpeed);

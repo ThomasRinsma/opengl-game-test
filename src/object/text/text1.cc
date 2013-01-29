@@ -2,9 +2,9 @@
 
 string const fontPath = "textures/font.bmp"; // TODO: fix this constant
 
-Text::Text(ShaderProgram *shaderProgram, string const &text)
+Text::Text(ShaderProgram &shaderProgram, string const &text)
 :
-	Drawable(shaderProgram),
+	Object(shaderProgram),
 	d_text(text)
 {
 	// Create a VAO
@@ -29,11 +29,11 @@ Text::Text(ShaderProgram *shaderProgram, string const &text)
 	
 
 	// Link array buffer to "position" attribute
-	GLint posAttrib = d_shaderProgram->attribLocation("position");
+	GLint posAttrib = d_shaderProgram.attribLocation("position");
 	glEnableVertexAttribArray(posAttrib);
 	glVertexAttribPointer(posAttrib, 3, GL_FLOAT, GL_FALSE, 5 * sizeof(float), 0);
 
-	GLint texAttrib = d_shaderProgram->attribLocation("texcoord");
+	GLint texAttrib = d_shaderProgram.attribLocation("texcoord");
 	glEnableVertexAttribArray(texAttrib);
 	glVertexAttribPointer(texAttrib, 2, GL_FLOAT, GL_FALSE, 5 * sizeof(float), (void *)(3 * sizeof(float)));
 

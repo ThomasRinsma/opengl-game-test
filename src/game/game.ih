@@ -8,10 +8,10 @@
 #include <glm/gtc/matrix_transform.hpp>
 #include <glm/gtc/type_ptr.hpp>
 
-#include "../drawable/cube/cube.h"
-#include "../drawable/grid/grid.h"
-#include "../drawable/model/model.h"
-#include "../drawable/text/text.h"
+#include "../object/cube/cube.h"
+#include "../object/grid/grid.h"
+#include "../object/model/model.h"
+#include "../object/text/text.h"
 
 #include "game.h"
 

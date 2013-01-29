@@ -1,8 +1,8 @@
 #include "grid.ih"
 
-Grid::Grid(ShaderProgram *shaderProgram)
+Grid::Grid(ShaderProgram &shaderProgram)
 :
-	Drawable(shaderProgram)
+	Object(shaderProgram)
 {
 	// Create a VAO
 	glGenVertexArrays(1, &d_vao);
@@ -33,12 +33,12 @@ Grid::Grid(ShaderProgram *shaderProgram)
 	
 
 	// Link array buffer to "position" attribute
-	GLint posAttrib = d_shaderProgram->attribLocation("position");
+	GLint posAttrib = d_shaderProgram.attribLocation("position");
 	glEnableVertexAttribArray(posAttrib);
 	glVertexAttribPointer(posAttrib, 3, GL_FLOAT, GL_FALSE, 6 * sizeof(float), 0);
 
 	// Link array buffer to "color" attribute
-	GLint colAttrib = d_shaderProgram->attribLocation("color");
+	GLint colAttrib = d_shaderProgram.attribLocation("color");
 	glEnableVertexAttribArray(colAttrib);
 	glVertexAttribPointer(colAttrib, 3, GL_FLOAT, GL_FALSE, 6 * sizeof(float), (void *)(3 * sizeof(float)));
 }
