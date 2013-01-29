@@ -10,7 +10,7 @@ class Object : public Entity, public Drawable
 {
 	public:
 		Object(ShaderProgram &shaderProgram);
-		~Object();
+		virtual ~Object();
 	    void draw(glm::mat4 const &viewMat, glm::mat4 const &projMat);
 
 	private:
