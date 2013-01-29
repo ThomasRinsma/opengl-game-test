@@ -11,11 +11,18 @@ class Object : public Entity, public Drawable
 	public:
 		Object(ShaderProgram &shaderProgram);
 		virtual ~Object();
-	    void draw(glm::mat4 const &viewMat, glm::mat4 const &projMat);
 
 	private:
 		virtual void updateImpl(float deltaTime) = 0;
-		virtual void drawImpl(glm::mat4 const &modelMat, glm::mat4 const &viewMat, glm::mat4 const &projMat) = 0;
+		virtual void drawImpl(glm::mat4 const &viewMat, glm::mat4 const &projMat) = 0;
+		virtual void modelMatUpdated();
 };
+
+inline void Object::modelMatUpdated()
+{
+	// generate Entity's model matrix and
+	// set is as ours (Drawable's)
+	d_modelMat = modelMat(); 
+}
         
 #endif

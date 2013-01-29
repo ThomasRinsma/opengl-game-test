@@ -20,6 +20,7 @@ class Player : public Entity
         void updateImpl(float deltaTime);
         void integratePosition(float deltaTime);
         void setRelativeVelocity(glm::vec3 const &velocity);
+        void modelMatUpdated();
 };
 
         

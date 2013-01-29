@@ -11,9 +11,12 @@ void Game::draw()
 
 	// Draw scene objects
 	glm::mat4 viewMat = d_player.viewMatrix();
-
 	for (Object *object : d_objects)
 		object->draw(viewMat, d_projMat);
+
+	// Draw HUD elements
+	for (Drawable *element : d_screenElements)
+		element->draw(glm::mat4(1.0f), d_orthoProjMat);
 
 	// Flip buffer
 	d_win.Display();

@@ -41,6 +41,7 @@ class Entity
 
     private:
     	virtual void updateImpl(float deltaTime) = 0;
+        virtual void modelMatUpdated() = 0;
 };
 
 inline glm::vec3 const &Entity::position() const
@@ -82,36 +83,43 @@ inline float Entity::yaw() const
 inline void Entity::setPosition(glm::vec3 const &position)
 {
     d_position = position;
+    modelMatUpdated();
 }
 
 inline void Entity::setVelocity(glm::vec3 const &velocity)
 {
     d_velocity = velocity;
+    modelMatUpdated();
 }
 
 inline void Entity::setRotation(glm::vec3 const &rotation)
 {
     d_rotation = rotation;
+    modelMatUpdated();
 }
 
 inline void Entity::setScale(glm::vec3 const &scale)
 {
     d_scale = scale;
+    modelMatUpdated();
 }
 
 inline void Entity::setRoll(float roll)
 {
     d_rotation.z = roll;
+    modelMatUpdated();
 }
 
 inline void Entity::setPitch(float pitch)
 {
     d_rotation.x = pitch;
+    modelMatUpdated();
 }
 
 inline void Entity::setYaw(float yaw)
 {
     d_rotation.y = yaw;
+    modelMatUpdated();
 }
         
 #endif
