@@ -3,9 +3,9 @@
 string const texPrefix  = "textures/";
 string const texPostfix = ".png";
 
-Cube::Cube(ShaderProgram *shaderProgram, string const &texName)
+Cube::Cube(ShaderProgram &shaderProgram, string const &texName)
 :
-	Drawable(shaderProgram)
+	Object(shaderProgram)
 {
 	// Create a VAO
 	glGenVertexArrays(1, &d_vao);
@@ -65,16 +65,16 @@ Cube::Cube(ShaderProgram *shaderProgram, string const &texName)
 	
 
 	// Link array buffer to "position" attribute
-	GLint posAttrib = d_shaderProgram->attribLocation("position");
+	GLint posAttrib = d_shaderProgram.attribLocation("position");
 	glEnableVertexAttribArray(posAttrib);
 	glVertexAttribPointer(posAttrib, 3, GL_FLOAT, GL_FALSE, 8 * sizeof(float), 0);
 
-	GLint normAttrib = d_shaderProgram->attribLocation("normal");
+	GLint normAttrib = d_shaderProgram.attribLocation("normal");
 	glEnableVertexAttribArray(normAttrib);
 	glVertexAttribPointer(normAttrib, 3, GL_FLOAT, GL_FALSE, 8 * sizeof(float), (void *)(3 * sizeof(float)));
 
 	// Link array buffer to "texcoord" attribute
-	GLint texAttrib = d_shaderProgram->attribLocation("texcoord");
+	GLint texAttrib = d_shaderProgram.attribLocation("texcoord");
 	glEnableVertexAttribArray(texAttrib);
 	glVertexAttribPointer(texAttrib, 2, GL_FLOAT, GL_FALSE, 8 * sizeof(float), (void *)(6 * sizeof(float)));
 

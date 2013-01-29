@@ -11,21 +11,26 @@ PLAYER_FILES=$(wildcard src/player/*.cc) src/player/player.ih src/player/player.
 SHADERPROGRAM_FILES=$(wildcard src/shaderprogram/*.cc) src/shaderprogram/shaderprogram.ih src/shaderprogram/shaderprogram.h
 CONTROLLER_FILES=$(wildcard src/controller/*.cc) src/controller/controller.ih src/controller/controller.h
 DRAWABLE_FILES=$(wildcard src/drawable/*.cc) src/drawable/drawable.ih src/drawable/drawable.h
-CUBE_FILES=$(wildcard src/drawable/cube/*.cc) src/drawable/cube/cube.ih src/drawable/cube/cube.h
-GRID_FILES=$(wildcard src/drawable/grid/*.cc) src/drawable/grid/grid.ih src/drawable/grid/grid.h
-MODEL_FILES=$(wildcard src/drawable/model/*.cc) src/drawable/model/model.ih src/drawable/model/model.h
-TEXT_FILES=$(wildcard src/drawable/text/*.cc) src/drawable/text/text.ih src/drawable/text/text.h
+ENTITY_FILES=$(wildcard src/entity/*.cc) src/entity/entity.ih src/entity/entity.h
+OBJECT_FILES=$(wildcard src/object/*.cc) src/object/object.ih src/object/object.h
+
+CUBE_FILES=$(wildcard src/object/cube/*.cc) src/object/cube/cube.ih src/object/cube/cube.h
+GRID_FILES=$(wildcard src/object/grid/*.cc) src/object/grid/grid.ih src/object/grid/grid.h
+MODEL_FILES=$(wildcard src/object/model/*.cc) src/object/model/model.ih src/object/model/model.h
+TEXT_FILES=$(wildcard src/object/text/*.cc) src/object/text/text.ih src/object/text/text.h
 
 
-GAME_DEPS=$(CONTROLLER_FILES) $(PLAYER_FILES) $(DRAWABLE_FILES) $(CUBE_FILES) $(GRID_FILES) $(MODEL_FILES) $(TEXT_FILES)
-PLAYER_DEPS=$(CONTROLLER_FILES)
+GAME_DEPS=$(CONTROLLER_FILES) $(PLAYER_FILES) $(OBJECT_FILES) $(CUBE_FILES) $(GRID_FILES) $(MODEL_FILES) $(TEXT_FILES)
+PLAYER_DEPS=$(CONTROLLER_FILES) $(ENTITY_FILES)
 SHADERPROGRAM_DEPS=
 CONTROLLER_DEPS=
 DRAWABLE_DEPS=$(SHADERPROGRAM_FILES)
-CUBE_DEPS=$(SHADERPROGRAM_FILES) $(DRAWABLE_FILES)
-GRID_DEPS=$(SHADERPROGRAM_FILES) $(DRAWABLE_FILES)
-MODEL_DEPS=$(SHADERPROGRAM_FILES) $(DRAWABLE_FILES)
-TEXT_DEPS=$(SHADERPROGRAM_FILES) $(DRAWABLE_FILES)
+ENTITY_DEPS=
+OBJECT_DEPS=$(SHADERPROGRAM_FILES) $(DRAWABLE_FILES) $(ENTITY_FILES)
+CUBE_DEPS=$(SHADERPROGRAM_FILES) $(OBJECT_FILES)
+GRID_DEPS=$(SHADERPROGRAM_FILES) $(OBJECT_FILES)
+MODEL_DEPS=$(SHADERPROGRAM_FILES) $(OBJECT_FILES)
+TEXT_DEPS=$(SHADERPROGRAM_FILES) $(OBJECT_FILES)
 
 
 all: prep_out_dirs make_objs
@@ -34,8 +39,8 @@ make_objs: $(OBJ_FILES)
 	$(CXX) $^ -o openglgame $(LDLIBS)
 
 prep_out_dirs:
-	mkdir -p build/game build/player build/shaderprogram build/controller
-	mkdir -p build/drawable/cube build/drawable/grid build/drawable/model build/drawable/text
+	mkdir -p build/game build/player build/shaderprogram build/controller build/drawable build/entity build/object
+	mkdir -p build/object/cube build/object/grid build/object/model build/object/text
 
 build/main.o: src/main.cc
 	$(CXX) -c $(CPPFLAGS) $< -o $@
@@ -55,16 +60,22 @@ build/controller/%.o: src/controller/%.cc src/controller/controller.ih src/contr
 build/drawable/%.o: src/drawable/%.cc src/drawable/drawable.ih src/drawable/drawable.h $(DRAWABLE_DEPS)
 	$(CXX) -c $(CPPFLAGS) $< -o $@
 
-build/drawable/cube/%.o: src/drawable/cube/%.cc src/drawable/cube/cube.ih src/drawable/cube/cube.h $(CUBE_DEPS)
+build/entity/%.o: src/entity/%.cc src/entity/entity.ih src/entity/entity.h $(ENTITY_DEPS)
 	$(CXX) -c $(CPPFLAGS) $< -o $@
 
-build/drawable/grid/%.o: src/drawable/grid/%.cc src/drawable/grid/grid.ih src/drawable/grid/grid.h $(GRID_DEPS)
+build/object/%.o: src/object/%.cc src/object/object.ih src/object/object.h $(OBJECT_DEPS)
 	$(CXX) -c $(CPPFLAGS) $< -o $@
 
-build/drawable/model/%.o: src/drawable/model/%.cc src/drawable/model/model.ih src/drawable/model/model.h $(MODEL_DEPS)
+build/object/cube/%.o: src/object/cube/%.cc src/object/cube/cube.ih src/object/cube/cube.h $(CUBE_DEPS)
 	$(CXX) -c $(CPPFLAGS) $< -o $@
 
-build/drawable/text/%.o: src/drawable/text/%.cc src/drawable/text/text.ih src/drawable/text/text.h $(TEXT_DEPS)
+build/object/grid/%.o: src/object/grid/%.cc src/object/grid/grid.ih src/object/grid/grid.h $(GRID_DEPS)
+	$(CXX) -c $(CPPFLAGS) $< -o $@
+
+build/object/model/%.o: src/object/model/%.cc src/object/model/model.ih src/object/model/model.h $(MODEL_DEPS)
+	$(CXX) -c $(CPPFLAGS) $< -o $@
+
+build/object/text/%.o: src/object/text/%.cc src/object/text/text.ih src/object/text/text.h $(TEXT_DEPS)
 	$(CXX) -c $(CPPFLAGS) $< -o $@
 
 

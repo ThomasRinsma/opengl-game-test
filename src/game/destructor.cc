@@ -4,9 +4,9 @@ Game::~Game()
 {
 	d_win.Close();
 
-	for (ShaderProgram* sp : d_shaderPrograms)
+	for (ShaderProgram *sp : d_shaderPrograms)
 		delete sp;
 
-	for (Drawable* drawable : d_drawables)
-		delete drawable;
+	for (Object *object : d_objects)
+		delete object;
 }

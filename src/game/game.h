@@ -9,7 +9,7 @@
 #include "../controller/controller.h"
 #include "../player/player.h"
 #include "../drawable/drawable.h"
-#include "../drawable/text/text.h"
+#include "../object/text/text.h"
 
 class Game
 {
@@ -31,8 +31,8 @@ class Game
     // Player object (camera)
     Player d_player;
 
-    // Drawable objects
-    std::vector<Drawable *> d_drawables;
+    // Scene objects
+    std::vector<Object *> d_objects;
 
     // Vector of shader program pointers
     std::vector<ShaderProgram *> d_shaderPrograms;
