@@ -121,20 +121,9 @@ void Model::loadModel(string const &modelPath)
 		}
 		else
 		{
-			cout << "type: '" << type << "'" << endl;
+			//cout << "type: '" << type << "'" << endl;
 		}
 	}
 
 	d_numVerts = d_verts.size() / 8;
-
-	/*
-	for(int i = 0; i <= d_verts.size(); i += 8)
-	{
-		cout << "(" << d_verts[i]   << ", " << d_verts[i+1] << ", " << d_verts[i+2] << ") ";
-		cout << "(" << d_verts[i+3] << ", " << d_verts[i+4] << ", " << d_verts[i+5] << ") ";
-		cout << "(" << d_verts[i+6] << ", " << d_verts[i+7] << ")\n";
-	}
-
-	cout << "number of verts: " << d_numVerts << ", sizeof d_verts: " << d_verts.size() << "\n";
-	*/
 }

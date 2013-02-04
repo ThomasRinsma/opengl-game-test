@@ -12,6 +12,7 @@
 #include "../object/grid/grid.h"
 #include "../object/model/model.h"
 #include "../object/text/text.h"
+#include "../object/portal/portal.h"
 
 #include "game.h"
 
