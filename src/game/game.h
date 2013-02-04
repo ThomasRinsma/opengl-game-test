@@ -51,6 +51,9 @@ class Game
     float d_fps;
     Text2D *d_debugText;
 
+    // Test stuff
+    Portal *d_portal1;
+    Portal *d_portal2;
 
     public:
         Game();                              // full screen max res
