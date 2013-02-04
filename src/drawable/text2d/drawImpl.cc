@@ -11,8 +11,16 @@ void Text2D::drawImpl(glm::mat4 const &viewMat, glm::mat4 const &projMat)
 	glm::mat4 localMat = glm::scale(glm::mat4(1.0f), glm::vec3(8.0f));
 
 	glm::mat4 mvpMat = projMat * viewMat * d_modelMat;
-	for(size_t idx = 0; idx != d_text.length(); ++idx)
+	for(size_t idx = 0, lineLen = 0; idx != d_text.length(); ++idx)
 	{
+		// special stuff on newline, don't actually draw it
+		if (d_text[idx] == '\n')
+		{
+			localMat = glm::translate(localMat, glm::vec3(lineLen * -1.0f, -1.0f, 0.0f));
+			lineLen = 0;
+			continue;
+		}
+
 		// Update mvp uniform
 		glm::mat4 mvplMat = mvpMat * localMat;
 		glUniformMatrix4fv(d_shaderProgram.uniforms["mvp"], 1, GL_FALSE, glm::value_ptr(mvplMat));
@@ -22,6 +30,7 @@ void Text2D::drawImpl(glm::mat4 const &viewMat, glm::mat4 const &projMat)
 
 		// Move next char to the right
 		localMat = glm::translate(localMat, glm::vec3(1.0f, 0.0f, 0.0f));
+		++lineLen;
 	}
 
 }

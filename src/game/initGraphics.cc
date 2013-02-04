@@ -10,5 +10,9 @@ void Game::initGraphics()
 
 	glEnable(GL_DEPTH_TEST);
 	glEnable(GL_BLEND);
+	glEnable(GL_CULL_FACE);
 	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+
+	// wireframe mode, because why not
+	//glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
 }

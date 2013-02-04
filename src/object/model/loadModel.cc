@@ -30,7 +30,10 @@ void Model::loadModel(string const &modelPath)
 		lineStream >> type;
 
 		if (not lineStream)
+		{
+			cout << "continue, line probably empty!" << endl;
 			continue;
+		}
 
 
 		if (type == "v") // vertex
@@ -38,7 +41,10 @@ void Model::loadModel(string const &modelPath)
 			lineStream >> x >> y >> z;
 
 			if (not lineStream)
+			{
+				cout << "continue!" << endl;
 				continue;
+			}
 
 			verts.push_back(glm::vec3(x, y, z));
 		}
@@ -48,7 +54,10 @@ void Model::loadModel(string const &modelPath)
 			lineStream >> x >> y >> z;
 
 			if (not lineStream)
+			{
+				cout << "continue!" << endl;
 				continue;
+			}
 
 			norms.push_back(glm::vec3(x, y, z));
 		}
@@ -59,7 +68,10 @@ void Model::loadModel(string const &modelPath)
 			lineStream >> u >> v;
 
 			if (not lineStream)
+			{
+				cout << "continue!" << endl;
 				continue;
+			}
 
 			texcoords.push_back(glm::vec2(u, v));
 		}
@@ -70,7 +82,10 @@ void Model::loadModel(string const &modelPath)
 			lineStream >> v[0] >> v[1] >> v[2];
 
 			if (not lineStream)
+			{
+				cout << "continue!" << endl;
 				continue;
+			}
 
 			size_t vertNum[3], texCoordNum[3], normNum[3];
 
@@ -103,6 +118,10 @@ void Model::loadModel(string const &modelPath)
 				else
 					d_verts.insert(d_verts.end(), {0.0f, 1.0f});
 			}
+		}
+		else
+		{
+			cout << "type: '" << type << "'" << endl;
 		}
 	}
 
