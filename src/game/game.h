@@ -45,12 +45,11 @@ class Game
     // Projection matrices, TODO: put inside player?
     glm::mat4 d_projMat;
     glm::mat4 d_orthoProjMat;
-
     float d_fov = 45.0f;
 
     // Current fps
     float d_fps;
-    Text2D *d_fpsText;
+    Text2D *d_debugText;
 
 
     public:

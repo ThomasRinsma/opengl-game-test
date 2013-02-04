@@ -9,10 +9,15 @@ void Game::stepGame()
 
 	d_player.update(deltaTime);
 
+	// Update all objects (drawable entities)
 	for (Object *object : d_objects)
 		object->update(deltaTime);
 
+
 	ostringstream oss;
-	oss << "FPS: " << d_fps;
-	d_fpsText->setText(oss.str());
+	oss << "FPS: " << d_fps << "\n\n"
+		<< "X: " << d_player.position().x << '\n'
+		<< "Y: " << d_player.position().y << '\n'
+		<< "Z: " << d_player.position().z << '\n';
+	d_debugText->setText(oss.str());
 }
