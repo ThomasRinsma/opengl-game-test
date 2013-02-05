@@ -2,6 +2,7 @@
 
 void Scene::draw(Player const &player)
 {
+	
 	// Enable stencil test, increment on fail
 	glEnable(GL_STENCIL_TEST);
 	glStencilOp(GL_INCR, GL_KEEP, GL_KEEP);
@@ -22,7 +23,7 @@ void Scene::draw(Player const &player)
 		glClear(GL_STENCIL_BUFFER_BIT);
 		portal->draw(player.viewMat(), player.projMat());
 		
-
+		
 		// View matrix as if the player was already teleported
 		glm::mat4 destView = player.viewMat() * portal->modelMat()
 			* glm::rotate(glm::mat4(1.0f), 180.0f, glm::vec3(0.0f, 1.0f, 0.0f))
@@ -41,12 +42,15 @@ void Scene::draw(Player const &player)
 
 		// Draw scene objects with destView, limited to stencil buffer
 		drawSceneObjects(destView, player.projMat());
+		
 
 	}
 
 	// Disable stencil test and reset OP
 	glDisable(GL_STENCIL_TEST);
 	glStencilOp(GL_KEEP, GL_KEEP, GL_KEEP);
+
+	
 
 	// Draw portals into depth buffer
 	glClear(GL_DEPTH_BUFFER_BIT);
