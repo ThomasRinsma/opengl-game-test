@@ -1,6 +1,6 @@
 #include "player.ih"
 
-glm::mat4 const Player::viewMatrix() const
+glm::mat4 const Player::viewMat() const
 {
 	glm::vec3 direction(
 		cos(pitch()) * sin(yaw()),

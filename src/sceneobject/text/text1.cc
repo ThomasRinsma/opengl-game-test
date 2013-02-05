@@ -4,7 +4,7 @@ string const fontPath = "textures/font.bmp"; // TODO: fix this constant
 
 Text::Text(ShaderProgram &shaderProgram, string const &text)
 :
-	Object(shaderProgram),
+	SceneObject(shaderProgram),
 	d_text(text)
 {
 	// Create a VAO

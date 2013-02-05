@@ -8,8 +8,11 @@ void Game::initGame()
 	Cube* cube1 = new Cube(*d_shaderPrograms[1], "crate");
 	Cube* cube2 = new Cube(*d_shaderPrograms[1], "crate");
 
-	d_portal1 = new Portal(*d_shaderPrograms[0]);
-	d_portal2 = new Portal(*d_shaderPrograms[0]);
+	Portal *portal1 = new Portal(*d_shaderPrograms[0]);
+	Portal *portal2 = new Portal(*d_shaderPrograms[0]);
+
+	portal1->setDestination(portal2);
+	portal2->setDestination(portal1);
 
 	d_debugText = new Text2D(*d_shaderPrograms[2], glm::vec2(4.0f, d_winHeight - 20.0f), glm::vec2(2.0f), "");
 
@@ -19,15 +22,18 @@ void Game::initGame()
 	cube1->setPosition(glm::vec3(2.0f, 1.5f, 3.0f));
 	cube2->setPosition(glm::vec3(-2.0f, 1.5f, 3.0f));
 
-	d_portal1->setPosition(glm::vec3(-2.0f, 1.5f, 0.0f));
-	d_portal2->setPosition(glm::vec3( 2.0f, 1.5f, 0.0f));
-	d_portal2->setYaw(-90.0f);
+	portal1->setPosition(glm::vec3(-2.0f, 1.5f, 0.0f));
+	portal2->setPosition(glm::vec3( 2.0f, 1.5f, 0.0f));
+	portal2->setYaw(-90.0f);
 
-	d_objects.push_back(grid);
-	d_objects.push_back(room);
-	d_objects.push_back(cube1);
-	d_objects.push_back(cube2);
-	d_objects.push_back(monkey);
+
+	d_scene.add(grid);
+	d_scene.add(room);
+	d_scene.add(cube1);
+	d_scene.add(cube2);
+	d_scene.add(monkey);
+	d_scene.add(portal2);
+	d_scene.add(portal1);
 
 	d_screenElements.push_back(d_debugText);
 

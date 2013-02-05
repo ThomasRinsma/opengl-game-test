@@ -4,6 +4,7 @@ in vec3 position;
 in vec2 texcoord;
 
 uniform mat4 mvp;
+// TODO: color, uniform 'c'
 
 out vec2 var_texcoord;
 

@@ -8,11 +8,7 @@ void Game::stepGame()
 	float deltaTime = d_win.GetFrameTime();
 
 	d_player.update(deltaTime);
-
-	// Update all objects (drawable entities)
-	for (Object *object : d_objects)
-		object->update(deltaTime);
-
+	d_scene.update(deltaTime);
 
 	ostringstream oss;
 	oss << "FPS: " << d_fps << "\n\n"

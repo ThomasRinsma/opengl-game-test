@@ -2,11 +2,11 @@
 #define INCLUDED_MODEL_
 
 #include <glm/glm.hpp>
-#include "../object.h"
+#include "../sceneobject.h"
 #include "../../shaderprogram/shaderprogram.h"
 
 
-class Model : public Object
+class Model : public SceneObject
 {
 	GLuint d_vbo;
 	GLuint d_vao;

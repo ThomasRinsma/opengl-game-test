@@ -5,7 +5,7 @@ string const texPostfix = ".png";
 
 Cube::Cube(ShaderProgram &shaderProgram, string const &texName)
 :
-	Object(shaderProgram)
+	SceneObject(shaderProgram)
 {
 	// Create a VAO
 	glGenVertexArrays(1, &d_vao);

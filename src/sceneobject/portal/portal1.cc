@@ -1,8 +1,9 @@
 #include "portal.ih"
 
-Portal::Portal(ShaderProgram &shaderProgram)
+Portal::Portal(ShaderProgram &shaderProgram, Entity *destination)
 :
-	Object(shaderProgram)
+	SceneObject(shaderProgram),
+	d_destination(destination)
 {
 	// Create a VAO
 	glGenVertexArrays(1, &d_vao);
