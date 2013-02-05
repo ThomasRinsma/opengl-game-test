@@ -1,16 +1,16 @@
-#ifndef INCLUDED_OBJECT_
-#define INCLUDED_OBJECT_
+#ifndef INCLUDED_SCENEOBJECT_
+#define INCLUDED_SCENEOBJECT_
 
 #include <glm/glm.hpp> // for glm::mat4
 #include "../drawable/drawable.h"
 #include "../entity/entity.h"
 #include "../shaderprogram/shaderprogram.h"
 
-class Object : public Entity, public Drawable
+class SceneObject : public Entity, public Drawable
 {
 	public:
-		Object(ShaderProgram &shaderProgram);
-		virtual ~Object();
+		SceneObject(ShaderProgram &shaderProgram);
+		virtual ~SceneObject();
 
 	private:
 		virtual void updateImpl(float deltaTime) = 0;
@@ -18,7 +18,7 @@ class Object : public Entity, public Drawable
 		virtual void modelMatUpdated();
 };
 
-inline void Object::modelMatUpdated()
+inline void SceneObject::modelMatUpdated()
 {
 	// generate Entity's model matrix and
 	// set is as ours (Drawable's)

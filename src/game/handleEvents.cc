@@ -37,7 +37,10 @@ void Game::handleEvents()
 				d_fov -= event.MouseWheel.Delta * 5.0f;
 				if (d_fov > 175) d_fov = 175;
 				if (d_fov < 5) d_fov = 5;
-				setProjMat(d_fov, 0.1f, 100.0f);
+				d_player.setProjMat(d_fov,
+					static_cast<float>(d_win.GetWidth()) /
+					static_cast<float>(d_win.GetHeight()),
+					0.1f, 100.0f);
 				break;
 
 			default:

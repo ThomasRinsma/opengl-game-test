@@ -10,7 +10,7 @@
 #include "../player/player.h"
 #include "../drawable/drawable.h"
 #include "../drawable/text2d/text2d.h"
-#include "../object/text/text.h"
+#include "../scene/scene.h"
 
 
 class Game
@@ -34,7 +34,7 @@ class Game
     Player d_player;
 
     // Scene objects
-    std::vector<Object *> d_objects;
+    Scene d_scene;
 
     // Non-entity drawables (screen-space stuff)
     std::vector<Drawable *> d_screenElements;
@@ -51,10 +51,6 @@ class Game
     float d_fps;
     Text2D *d_debugText;
 
-    // Test stuff
-    Portal *d_portal1;
-    Portal *d_portal2;
-
     public:
         Game();                              // full screen max res
         Game(size_t width, size_t height);   // windowed
@@ -66,8 +62,6 @@ class Game
         void initWindow();
         void initGame();        // initializes game logic
         void initGraphics();    // initializes opengl stuff
-
-        void setProjMat(float fov, float near, float far);
 
         // These are directly called from run()
         void handleEvents();    // handles events, doh

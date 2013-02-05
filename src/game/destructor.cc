@@ -6,7 +6,4 @@ Game::~Game()
 
 	for (ShaderProgram *sp : d_shaderPrograms)
 		delete sp;
-
-	for (Object *object : d_objects)
-		delete object;
 }

@@ -11,10 +11,14 @@ class Player : public Entity
     static constexpr float s_moveSpeed = 2.0f; // units per second
 
     Controller &d_controller;
+    glm::mat4 d_projMat;
 
     public:
         Player(Controller &controller);
-        glm::mat4 const viewMatrix() const;
+        glm::mat4 const viewMat() const;
+        glm::mat4 const projMat() const;
+
+        void setProjMat(float fov, float ratio, float near, float far);
 
     private:
         void updateImpl(float deltaTime);

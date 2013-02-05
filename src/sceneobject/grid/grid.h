@@ -3,11 +3,11 @@
 
 
 #include <glm/glm.hpp>
-#include "../object.h"
+#include "../sceneobject.h"
 #include "../../shaderprogram/shaderprogram.h"
 
 
-class Grid : public Object
+class Grid : public SceneObject
 {
 	GLuint d_vbo;
 	GLuint d_vao;
