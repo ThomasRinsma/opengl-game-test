@@ -2,124 +2,96 @@
 #define INCLUDED_ENTITY_
 
 #include <glm/glm.hpp> // for glm::vec3
+#include <glm/gtc/quaternion.hpp>  // for glm::fquat
 
 class Entity
 {
-    protected:
-        // TODO: acceleration?
-    	glm::vec3 d_velocity; // absolute
-        glm::vec3 d_position;
-        glm::vec3 d_rotation;
-        glm::vec3 d_scale; // relative
+	protected:
+		// TODO: acceleration?
+		glm::vec3 d_velocity; // absolute
+		glm::vec3 d_position;
+		glm::vec3 d_scale; // relative
 
-    public:
-    	Entity();
-    	virtual ~Entity();
+		glm::fquat d_orientation;
 
-    	void update(float deltaTime);
+	public:
+		Entity();
+		virtual ~Entity();
 
-        void setPosition(glm::vec3 const &position);
-        void setVelocity(glm::vec3 const &velocity);
-        void setRotation(glm::vec3 const &rotation);
-        void setScale(glm::vec3 const &scale);
+		void update(float deltaTime);
 
-        glm::vec3 const &position() const;
-        glm::vec3 const &velocity() const;
-        glm::vec3 const &rotation() const;
-        glm::vec3 const &scale() const;
+		void setVelocity(glm::vec3 const &velocity);
+		void setPosition(glm::vec3 const &position);
+		void setScale(glm::vec3 const &scale);
+		void addOrientation(glm::vec3 const &axes, float radAngle, bool worldSpace);
 
-        // also allow rotation by seperate components
-        void setRoll(float roll);
-	    void setPitch(float pitch);
-	    void setYaw(float yaw);
+		glm::vec3 const &velocity() const;
+		glm::vec3 const &position() const;
+		glm::vec3 const &scale() const;
+		glm::fquat const &orientation() const;
 
-        float roll() const;
-        float pitch() const;
-        float yaw() const;
 
-        glm::mat4 const modelMat() const;
+		glm::mat4 const modelMat() const;
 
-    private:
-    	virtual void updateImpl(float deltaTime) = 0;
-        virtual void modelMatUpdated() = 0;
+	private:
+		virtual void updateImpl(float deltaTime) = 0;
+		virtual void modelMatUpdated() = 0;
 };
-
-inline glm::vec3 const &Entity::position() const
-{
-    return d_position;
-}
 
 inline glm::vec3 const &Entity::velocity() const
 {
-    return d_velocity;
+	return d_velocity;
 }
 
-inline glm::vec3 const &Entity::rotation() const
+inline glm::vec3 const &Entity::position() const
 {
-    return d_rotation;
+	return d_position;
 }
 
 inline glm::vec3 const &Entity::scale() const
 {
-    return d_scale;
+	return d_scale;
 }
 
-
-inline float Entity::roll() const
+inline glm::fquat const &Entity::orientation() const
 {
-    return d_rotation.z;
-}
-
-inline float Entity::pitch() const
-{
-	return d_rotation.x;
-}
-
-inline float Entity::yaw() const
-{
-	return d_rotation.y;
-}
-
-inline void Entity::setPosition(glm::vec3 const &position)
-{
-    d_position = position;
-    modelMatUpdated();
+	return d_orientation;
 }
 
 inline void Entity::setVelocity(glm::vec3 const &velocity)
 {
-    d_velocity = velocity;
-    modelMatUpdated();
+	d_velocity = velocity;
+	modelMatUpdated();
 }
 
-inline void Entity::setRotation(glm::vec3 const &rotation)
+inline void Entity::setPosition(glm::vec3 const &position)
 {
-    d_rotation = rotation;
-    modelMatUpdated();
+	d_position = position;
+	modelMatUpdated();
 }
 
 inline void Entity::setScale(glm::vec3 const &scale)
 {
-    d_scale = scale;
-    modelMatUpdated();
+	d_scale = scale;
+	modelMatUpdated();
 }
 
-inline void Entity::setRoll(float roll)
+inline void Entity::addOrientation(glm::vec3 const &axis, float radAngle, bool worldSpace)
 {
-    d_rotation.z = roll;
-    modelMatUpdated();
+    glm::vec3 axisNorm = glm::normalize(axis);
+    
+    axisNorm *= sin(radAngle / 2.0f);
+    float scalar = cos(radAngle / 2.0f);
+    
+    glm::fquat offset(scalar, axisNorm.x, axisNorm.y, axisNorm.z);
+    
+    if(worldSpace)
+        d_orientation = offset * d_orientation;
+   	else
+        d_orientation = d_orientation * offset;
+    
+    d_orientation = glm::normalize(d_orientation);
 }
 
-inline void Entity::setPitch(float pitch)
-{
-    d_rotation.x = pitch;
-    modelMatUpdated();
-}
-
-inline void Entity::setYaw(float yaw)
-{
-    d_rotation.y = yaw;
-    modelMatUpdated();
-}
-        
+		
 #endif
