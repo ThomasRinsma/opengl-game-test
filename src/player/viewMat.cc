@@ -2,19 +2,8 @@
 
 glm::mat4 const Player::viewMat() const
 {
-	glm::vec3 direction(
-		cos(pitch()) * sin(yaw()),
-		sin(pitch()),
-		cos(pitch()) * cos(yaw())
-	);
+	glm::mat4 rot = glm::mat4_cast(glm::conjugate(d_orientation));
+	glm::mat4 pos = glm::translate(glm::mat4(1.0f), -d_position);
 
-	glm::vec3 right(
-		sin(yaw() - M_PI/2.0f),
-		0,
-		cos(yaw() - M_PI/2.0f)
-	);
-
-	glm::vec3 up = glm::cross(right, direction);
-
-	return glm::lookAt(d_position, d_position + direction, up);
+	return rot * pos;
 }

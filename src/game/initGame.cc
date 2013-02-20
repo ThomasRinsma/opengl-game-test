@@ -24,7 +24,8 @@ void Game::initGame()
 
 	portal1->setPosition(glm::vec3(-2.0f, 1.5f, 0.0f));
 	portal2->setPosition(glm::vec3( 2.0f, 1.5f, 0.0f));
-	portal2->setYaw(-90.0f);
+	//portal2->setYaw(-90.0f);
+	//portal2->setPitch(45.0f);
 
 
 	d_scene.add(grid);
