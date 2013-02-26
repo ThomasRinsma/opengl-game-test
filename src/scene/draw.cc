@@ -46,9 +46,9 @@ void Scene::draw(Player const &player)
 
 
 		// Draw portal frame
-		glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
-		portal->draw(player.viewMat(), player.projMat());
-		glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
+		//glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
+		//portal->draw(player.viewMat(), player.projMat());
+		//glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
 	}
 
 	// Disable stencil test and reset OP
