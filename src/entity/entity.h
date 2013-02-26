@@ -24,6 +24,7 @@ class Entity
 		void setPosition(glm::vec3 const &position);
 		void setScale(glm::vec3 const &scale);
 		void addOrientation(glm::vec3 const &axes, float radAngle, bool worldSpace);
+		void resetOrientation();
 
 		glm::vec3 const &velocity() const;
 		glm::vec3 const &position() const;
@@ -83,7 +84,7 @@ inline void Entity::addOrientation(glm::vec3 const &axis, float radAngle, bool w
     axisNorm *= sin(radAngle / 2.0f);
     float scalar = cos(radAngle / 2.0f);
     
-    glm::fquat offset(scalar, axisNorm.x, axisNorm.y, axisNorm.z);
+    glm::fquat offset(scalar, axisNorm);
     
     if(worldSpace)
         d_orientation = offset * d_orientation;
@@ -93,5 +94,9 @@ inline void Entity::addOrientation(glm::vec3 const &axis, float radAngle, bool w
     d_orientation = glm::normalize(d_orientation);
 }
 
+inline void Entity::resetOrientation()
+{
+	d_orientation = glm::fquat(1.0f, 0.0f, 0.0f, 0.0f);
+}
 		
 #endif

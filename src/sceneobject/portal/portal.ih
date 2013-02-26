@@ -2,6 +2,7 @@
 #include <SFML/Graphics.hpp> // for sf::Image
 #include <glm/gtc/type_ptr.hpp>
 #include <glm/gtc/matrix_transform.hpp>
+#include <glm/gtc/matrix_access.hpp>
 #include "portal.h"
 #include <iostream>
 

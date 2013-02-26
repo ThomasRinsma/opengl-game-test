@@ -22,10 +22,9 @@ void Game::initGame()
 	cube1->setPosition(glm::vec3(2.0f, 1.5f, 3.0f));
 	cube2->setPosition(glm::vec3(-2.0f, 1.5f, 3.0f));
 
-	portal1->setPosition(glm::vec3(-2.0f, 1.5f, 0.0f));
-	portal2->setPosition(glm::vec3( 2.0f, 1.5f, 0.0f));
-	//portal2->setYaw(-90.0f);
-	//portal2->setPitch(45.0f);
+	portal1->setPosition(glm::vec3(-3.0f, 1.5f, 0.0f));
+	portal2->setPosition(glm::vec3( 3.0f, 1.5f, 0.0f));
+	portal1->addOrientation(glm::vec3(0.0f, 1.0f, 0.0f), M_PI/2.0f, true);
 
 
 	d_scene.add(grid);

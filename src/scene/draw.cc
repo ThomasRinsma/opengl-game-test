@@ -41,9 +41,14 @@ void Scene::draw(Player const &player)
 		glStencilFunc(GL_LEQUAL, 1, 0xFF);
 
 		// Draw scene objects with destView, limited to stencil buffer
+		//drawSceneObjects(destView, portal->clippedProjMat(destView, player.projMat()));
 		drawSceneObjects(destView, player.projMat());
-		
 
+
+		// Draw portal frame
+		glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
+		portal->draw(player.viewMat(), player.projMat());
+		glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
 	}
 
 	// Disable stencil test and reset OP
