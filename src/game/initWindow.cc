@@ -2,6 +2,8 @@
 
 void Game::initWindow()
 {
+	d_win.SetPosition(0, 0);
+	
 	// Set glew to use modern OpenGL
 	glewExperimental = GL_TRUE;
 

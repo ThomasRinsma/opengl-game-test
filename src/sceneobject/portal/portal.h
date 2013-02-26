@@ -22,6 +22,8 @@ class Portal : public SceneObject
         Entity *destination() const;
         void setDestination(Entity *destination);
 
+        glm::mat4 const clippedProjMat(glm::mat4 const &viewMat, glm::mat4 const &projMat) const;
+
     private:
         virtual void updateImpl(float deltaTime);
     	virtual void drawImpl(glm::mat4 const &viewMat, glm::mat4 const &projMat);
