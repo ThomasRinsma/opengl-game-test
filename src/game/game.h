@@ -11,6 +11,7 @@
 #include "../drawable/drawable.h"
 #include "../drawableentity/text/text.h"
 #include "../scene/scene.h"
+#include "../gui/gui.h"
 
 
 class Game
@@ -33,18 +34,14 @@ class Game
     // Scene objects
     Scene d_scene;
 
-    // Non-entity drawables (screen-space stuff)
-    std::vector<Drawable *> d_screenElements;
+    // GUI
+    GUI d_gui;
 
     // Vector of shader program pointers
     std::vector<ShaderProgram *> d_shaderPrograms;
 
-    // TODO: put this in some GUI class
-    glm::mat4 d_orthoProjMat;
-
     // Current fps
     float d_fps;
-    Text *d_debugText;
 
     public:
         Game();                              // full screen max res

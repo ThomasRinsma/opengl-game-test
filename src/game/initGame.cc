@@ -2,7 +2,7 @@
 
 void Game::initGame()
 {
-	d_debugText = new Text(*d_shaderPrograms[2], "");
+	Text *debugText = new Text(*d_shaderPrograms[2], "");
 	Grid* grid = new Grid(*d_shaderPrograms[0]);
 	Model* room = new Model(*d_shaderPrograms[1], "wall", "inverted_cube");
 	Model* monkey = new Model(*d_shaderPrograms[1], "wall", "monkey");
@@ -19,8 +19,8 @@ void Game::initGame()
 	portal1->addOrientation(glm::vec3(0.0f, 1.0f, 0.0f), M_PI/2.0f, true);
 	portal2->addOrientation(glm::vec3(0.0f, 1.0f, 0.0f), -M_PI/2.0f, true);
 
-	d_debugText->setScale(glm::vec3(16.0f, 16.0f, 1.0f));
-	d_debugText->setPosition(glm::vec3(4.0f, d_win.getSize().y - 20.0f, 0.0f));
+	debugText->setScale(glm::vec3(16.0f, 16.0f, 1.0f));
+	debugText->setPosition(glm::vec3(4.0f, d_win.getSize().y - 20.0f, 0.0f));
 
 	
 	cube->setPosition(glm::vec3(5.0f, 1.5f, 0.0f));
@@ -36,6 +36,7 @@ void Game::initGame()
 	d_scene.add(portal1);
 	d_scene.add(portal2);
 
-	d_screenElements.push_back(d_debugText);
+	d_gui.add("debugText", debugText);
+	
 	d_player.setPosition(glm::vec3(0.0f, 4.0f, 5.0f));
 }

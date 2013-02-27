@@ -9,9 +9,8 @@ void Game::draw()
 	// Draw scene
 	d_scene.draw(d_player);
 
-	// Draw HUD elements
-	for (Drawable *element : d_screenElements)
-		element->draw(glm::mat4(1.0f), d_orthoProjMat);
+	// Draw GUI/HUD
+	d_gui.draw();
 
 	// Flip buffer
 	d_win.display();

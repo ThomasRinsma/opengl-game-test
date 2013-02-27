@@ -2,8 +2,8 @@
 
 Game::~Game()
 {
-	d_win.close();
-
 	for (ShaderProgram *sp : d_shaderPrograms)
 		delete sp;
+	
+	d_win.close();
 }
