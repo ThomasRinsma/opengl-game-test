@@ -6,22 +6,22 @@
 
 class Controller
 {
-	typedef sf::Key::Code KeyCode_t;
+	typedef sf::Keyboard::Key Key_t;
 
 	sf::Window &d_win;
 
 	// These contain the key mappings
-	KeyCode_t d_keyForward;
-	KeyCode_t d_keyBack;
-	KeyCode_t d_keyLeft;
-	KeyCode_t d_keyRight;
-	KeyCode_t d_keyUp;
-	KeyCode_t d_keyDown;
+	Key_t d_keyForward;
+	Key_t d_keyBack;
+	Key_t d_keyLeft;
+	Key_t d_keyRight;
+	Key_t d_keyUp;
+	Key_t d_keyDown;
 
 	public:
-		Controller(sf::Window &win, KeyCode_t keyForward = KeyCode_t::W, KeyCode_t keyBack = KeyCode_t::S, 
-			KeyCode_t keyLeft = KeyCode_t::A, KeyCode_t keyRight = KeyCode_t::D,
-			KeyCode_t keyUp = KeyCode_t::Space, KeyCode_t keyDown = KeyCode_t::LControl);
+		Controller(sf::Window &win, Key_t keyForward = Key_t::W, Key_t keyBack = Key_t::S, 
+			Key_t keyLeft = Key_t::A, Key_t keyRight = Key_t::D,
+			Key_t keyUp = Key_t::Space, Key_t keyDown = Key_t::LControl);
 
 		// Getters
 		bool moveForward() const;
@@ -37,32 +37,32 @@ class Controller
 
 inline bool Controller::moveForward() const
 {
-	return d_win.GetInput().IsKeyDown(d_keyForward);
+	return sf::Keyboard::isKeyPressed(d_keyForward);
 }
 
 inline bool Controller::moveBack() const
 {
-	return d_win.GetInput().IsKeyDown(d_keyBack);
+	return sf::Keyboard::isKeyPressed(d_keyBack);
 }
 
 inline bool Controller::moveLeft() const
 {
-	return d_win.GetInput().IsKeyDown(d_keyLeft);
+	return sf::Keyboard::isKeyPressed(d_keyLeft);
 }
 
 inline bool Controller::moveRight() const
 {
-	return d_win.GetInput().IsKeyDown(d_keyRight);
+	return sf::Keyboard::isKeyPressed(d_keyRight);
 }
 
 inline bool Controller::moveUp() const
 {
-	return d_win.GetInput().IsKeyDown(d_keyUp);
+	return sf::Keyboard::isKeyPressed(d_keyUp);
 }
 
 inline bool Controller::moveDown() const
 {
-	return d_win.GetInput().IsKeyDown(d_keyDown);
+	return sf::Keyboard::isKeyPressed(d_keyDown);
 }
         
 #endif

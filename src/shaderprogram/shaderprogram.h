@@ -1,6 +1,7 @@
 #ifndef INCLUDED_SHADERPROGRAM_
 #define INCLUDED_SHADERPROGRAM_
 
+#include <SFML/OpenGL.hpp>
 #include <SFML/Window.hpp> // for opengl stuff
 #include <unordered_map>
 #include <vector>

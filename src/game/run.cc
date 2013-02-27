@@ -21,7 +21,7 @@ void Game::run()
 			draw();
 
 
-		curSec = sfmlclock.GetElapsedTime();
+		curSec = sfmlclock.getElapsedTime().asSeconds();
 		if (curSec - lastSec >= 1.0f)
 		{
 			lastSec = curSec;

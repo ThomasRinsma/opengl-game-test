@@ -6,26 +6,30 @@ void Game::handleEvents()
 		return;
 
 	sf::Event event;
-	while (d_win.GetEvent(event))
+	while (d_win.pollEvent(event))
 	{
-		switch (event.Type)
+		switch (event.type)
 		{
 			case sf::Event::Closed:
-				d_win.Close();
+				d_win.close();
 				d_running = false; // TODO: replace with exception
 				break;
 
+			case sf::Event::LostFocus:
+				d_running = false;
+				break;
+
 			case sf::Event::KeyPressed:
-				switch (event.Key.Code)
+				switch (event.key.code)
 				{
-					case sf::Key::Escape:
-						d_win.Close();
+					case sf::Keyboard::Escape:
+						d_win.close();
 						d_running = false; // TODO: replace with exception
 						break;
 
-					case sf::Key::F1:
+					case sf::Keyboard::F1:
 						d_vsync = not d_vsync;
-						d_win.UseVerticalSync(d_vsync);
+						d_win.setVerticalSyncEnabled(d_vsync);
 						break;
 
 					default:
@@ -34,12 +38,12 @@ void Game::handleEvents()
 				break;
 
 			case sf::Event::MouseWheelMoved:
-				d_fov -= event.MouseWheel.Delta * 5.0f;
+				d_fov -= event.mouseWheel.delta * 5.0f;
 				if (d_fov > 175) d_fov = 175;
 				if (d_fov < 5) d_fov = 5;
 				d_player.setProjMat(d_fov,
-					static_cast<float>(d_win.GetWidth()) /
-					static_cast<float>(d_win.GetHeight()),
+					static_cast<float>(d_win.getSize().x) /
+					static_cast<float>(d_win.getSize().y),
 					0.1f, 100.0f);
 				break;
 

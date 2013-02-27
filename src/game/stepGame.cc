@@ -5,7 +5,7 @@ void Game::stepGame()
 	if (not d_running)
 		return;
 
-	float deltaTime = d_win.GetFrameTime();
+	float deltaTime = d_timer.restart().asSeconds();
 
 	d_player.update(deltaTime);
 	d_scene.update(deltaTime);

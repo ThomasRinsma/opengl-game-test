@@ -2,7 +2,7 @@
 
 Game::~Game()
 {
-	d_win.Close();
+	d_win.close();
 
 	for (ShaderProgram *sp : d_shaderPrograms)
 		delete sp;

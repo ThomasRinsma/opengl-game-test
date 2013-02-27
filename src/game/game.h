@@ -26,6 +26,7 @@ class Game
 
     // SFML window
     sf::Window d_win;
+    sf::Clock d_timer;
 
     // Controller (keyboard + mouse)
     Controller d_controller;

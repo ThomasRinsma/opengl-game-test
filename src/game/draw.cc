@@ -17,5 +17,5 @@ void Game::draw()
 		element->draw(glm::mat4(1.0f), d_orthoProjMat);
 
 	// Flip buffer
-	d_win.Display();
+	d_win.display();
 }
