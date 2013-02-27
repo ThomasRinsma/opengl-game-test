@@ -2,33 +2,38 @@
 
 void Game::run()
 {
-	d_running = true;
-
 	sf::Clock sfmlclock;
 	float curSec = 2.0f, lastSec = 0.0f;
 	size_t frames = 0;
 
 	// The run-loop
-	while (d_running)
+	try
 	{
-		// TODO: replace ifs with exceptions
-		handleEvents();
+		while (true)
+		{
+			handleEvents();
 
-		if (d_running)
-			stepGame();
+			if (not d_paused)
+				stepGame();
 
-		if (d_running)
 			draw();
 
+			curSec = sfmlclock.getElapsedTime().asSeconds();
+			if (curSec - lastSec >= 1.0f)
+			{
+				lastSec = curSec;
+				d_fps = frames;
+				frames = 0;
+			}
 
-		curSec = sfmlclock.getElapsedTime().asSeconds();
-		if (curSec - lastSec >= 1.0f)
-		{
-			lastSec = curSec;
-			d_fps = frames;
-			frames = 0;
+			++frames;
 		}
+	}
+	catch (bool error)
+	{
+		if (error)
+			cout << "exited with error" << endl;
 
-		++frames;
+		d_win.close();
 	}
 }

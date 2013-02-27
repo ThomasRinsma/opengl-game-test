@@ -2,7 +2,7 @@
 
 void Game::initGame()
 {
-	d_debugText = new Text2D(*d_shaderPrograms[2], glm::vec2(4.0f, d_winHeight - 20.0f), glm::vec2(2.0f), "");
+	d_debugText = new Text2D(*d_shaderPrograms[2], glm::vec2(4.0f, d_win.getSize().y - 20.0f), glm::vec2(2.0f), "");
 	Grid* grid = new Grid(*d_shaderPrograms[0]);
 	Model* room = new Model(*d_shaderPrograms[1], "wall", "inverted_cube");
 	Model* monkey = new Model(*d_shaderPrograms[1], "wall", "monkey");

@@ -2,29 +2,30 @@
 
 void Game::handleEvents()
 {
-	if (not d_running)
-		return;
-
 	sf::Event event;
 	while (d_win.pollEvent(event))
 	{
 		switch (event.type)
 		{
 			case sf::Event::Closed:
-				d_win.close();
-				d_running = false; // TODO: replace with exception
+				throw false; // no error, exit cleanly
 				break;
 
 			case sf::Event::LostFocus:
-				d_running = false;
+				d_paused = true;
 				break;
 
 			case sf::Event::KeyPressed:
 				switch (event.key.code)
 				{
 					case sf::Keyboard::Escape:
-						d_win.close();
-						d_running = false; // TODO: replace with exception
+						if (d_fullscreen)
+							throw false;
+						else
+						{
+							d_paused = true;
+							d_win.setMouseCursorVisible(true);
+						}
 						break;
 
 					case sf::Keyboard::F1:
@@ -34,6 +35,14 @@ void Game::handleEvents()
 
 					default:
 						break;
+				}
+				break;
+
+			case sf::Event::MouseButtonPressed:
+				if (d_paused)
+				{
+					d_paused = false;
+					d_win.setMouseCursorVisible(false);
 				}
 				break;
 

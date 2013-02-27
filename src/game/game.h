@@ -15,12 +15,8 @@
 
 class Game
 {
-    // Window stuff
-    size_t d_winWidth;
-    size_t d_winHeight;
-
     // Flags
-    bool d_running = false;
+    bool d_paused = true;
     bool d_fullscreen = false;
     bool d_vsync = false;
 

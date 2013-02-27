@@ -10,11 +10,4 @@ Controller::Controller(sf::Window &win, Key_t keyForward, Key_t keyBack, Key_t k
 	d_keyRight(keyRight),
 	d_keyUp(keyUp),
 	d_keyDown(keyDown)
-{
-	// Hide mouse cursor
-	d_win.setMouseCursorVisible(false);
-
-	// Reset cursor to center
-	sf::Vector2i winCenter(d_win.getSize().x / 2, d_win.getSize().y / 2);
-	sf::Mouse::setPosition(winCenter, d_win);
-}
+{}

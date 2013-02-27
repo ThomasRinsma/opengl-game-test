@@ -4,12 +4,9 @@ string const windowTitle = "OpenGL Test";
 
 Game::Game()
 :
-	d_winWidth(sf::VideoMode::getDesktopMode().width),
-	d_winHeight(sf::VideoMode::getDesktopMode().height),
-	d_win(sf::VideoMode(d_winWidth, d_winHeight), windowTitle, sf::Style::Fullscreen, sf::ContextSettings(24, 8, 0, 3, 2)),
+	d_win(sf::VideoMode::getDesktopMode(), windowTitle, sf::Style::Fullscreen, sf::ContextSettings(24, 8, 0, 3, 2)),
 	d_controller(d_win),
 	d_player(d_controller)
-
 {
 	initWindow();
 	initGraphics();
