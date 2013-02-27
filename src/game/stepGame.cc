@@ -2,9 +2,6 @@
 
 void Game::stepGame()
 {
-	if (not d_running)
-		return;
-
 	float deltaTime = d_timer.restart().asSeconds();
 
 	d_player.update(deltaTime);

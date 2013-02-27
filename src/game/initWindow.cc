@@ -14,5 +14,5 @@ void Game::initWindow()
 	d_win.setVerticalSyncEnabled(d_vsync);
 
 	// Set up ortho matrix, TODO: somewhere else?
-	d_orthoProjMat = glm::ortho(0.0f, (float)d_winWidth, 0.0f, (float)d_winHeight, -1.0f, 1.0f);
+	d_orthoProjMat = glm::ortho(0.0f, (float)d_win.getSize().x, 0.0f, (float)d_win.getSize().y, -1.0f, 1.0f);
 }
