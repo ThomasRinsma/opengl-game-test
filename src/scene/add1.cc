@@ -1,7 +1,7 @@
 #include "scene.ih"
 
-void Scene::add(SceneObject *object)
+void Scene::add(DrawableEntity *object)
 {
 	// TODO: sort based on shader program, texture, etc? Maybe some sort of tree
-	d_sceneObjects.push_back(object);
+	d_drawableEntities.push_back(object);
 }

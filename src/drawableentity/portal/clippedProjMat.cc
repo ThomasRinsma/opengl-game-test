@@ -10,6 +10,9 @@ glm::mat4 const Portal::clippedProjMat(glm::mat4 const &viewMat, glm::mat4 const
 	glm::vec4 clipPlane(d_orientation * glm::vec3(0.0f, 0.0f, -1.0f), dist);
 	clipPlane = glm::inverse(glm::transpose(viewMat)) * clipPlane;
 
+	if (clipPlane.w > 0.0f)
+		clipPlane.w *= -1;
+
 	glm::vec4 q = glm::inverse(projMat) * glm::vec4(
         glm::sign(clipPlane.x),
         glm::sign(clipPlane.y),
@@ -24,4 +27,4 @@ glm::mat4 const Portal::clippedProjMat(glm::mat4 const &viewMat, glm::mat4 const
     newProj = glm::row(newProj, 2, c - glm::row(newProj, 3));
 
     return newProj;
-}
+} 

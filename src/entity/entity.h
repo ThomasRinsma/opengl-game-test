@@ -7,11 +7,11 @@
 class Entity
 {
 	protected:
+		glm::mat4 d_modelMat;
 		// TODO: acceleration?
 		glm::vec3 d_velocity; // absolute
 		glm::vec3 d_position;
 		glm::vec3 d_scale; // relative
-
 		glm::fquat d_orientation;
 
 	public:
@@ -36,8 +36,13 @@ class Entity
 
 	private:
 		virtual void updateImpl(float deltaTime) = 0;
-		virtual void modelMatUpdated() = 0;
+		void updateModelMat();
 };
+
+inline glm::mat4 const Entity::modelMat() const
+{
+	return d_modelMat;
+}
 
 inline glm::vec3 const &Entity::velocity() const
 {
@@ -62,19 +67,19 @@ inline glm::fquat const &Entity::orientation() const
 inline void Entity::setVelocity(glm::vec3 const &velocity)
 {
 	d_velocity = velocity;
-	modelMatUpdated();
+	updateModelMat();
 }
 
 inline void Entity::setPosition(glm::vec3 const &position)
 {
 	d_position = position;
-	modelMatUpdated();
+	updateModelMat();
 }
 
 inline void Entity::setScale(glm::vec3 const &scale)
 {
 	d_scale = scale;
-	modelMatUpdated();
+	updateModelMat();
 }
 
 inline void Entity::addOrientation(glm::vec3 const &axis, float radAngle, bool worldSpace)
@@ -92,11 +97,13 @@ inline void Entity::addOrientation(glm::vec3 const &axis, float radAngle, bool w
         d_orientation = d_orientation * offset;
     
     d_orientation = glm::normalize(d_orientation);
+    updateModelMat();
 }
 
 inline void Entity::resetOrientation()
 {
 	d_orientation = glm::fquat(1.0f, 0.0f, 0.0f, 0.0f);
+	updateModelMat();
 }
 		
 #endif

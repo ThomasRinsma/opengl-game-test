@@ -1,6 +1,6 @@
-#include "text2d.ih"
+#include "text.ih"
 
-void Text2D::drawImpl(glm::mat4 const &viewMat, glm::mat4 const &projMat)
+void Text::drawImpl(glm::mat4 const &viewMat, glm::mat4 const &projMat)
 {
 	d_shaderProgram.use();
 
@@ -8,7 +8,7 @@ void Text2D::drawImpl(glm::mat4 const &viewMat, glm::mat4 const &projMat)
 	glBindTexture(GL_TEXTURE_2D, d_tex);
 	glBindVertexArray(d_vao);
 
-	glm::mat4 localMat = glm::scale(glm::mat4(1.0f), glm::vec3(8.0f));
+	glm::mat4 localMat = glm::mat4(1.0f);
 
 	glm::mat4 mvpMat = projMat * viewMat * d_modelMat;
 	for(size_t idx = 0, lineLen = 0; idx != d_text.length(); ++idx)
@@ -32,5 +32,4 @@ void Text2D::drawImpl(glm::mat4 const &viewMat, glm::mat4 const &projMat)
 		localMat = glm::translate(localMat, glm::vec3(1.0f, 0.0f, 0.0f));
 		++lineLen;
 	}
-
 }

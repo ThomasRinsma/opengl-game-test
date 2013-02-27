@@ -2,11 +2,11 @@
 #define INCLUDED_CUBE_
 
 #include <glm/glm.hpp>
-#include "../sceneobject.h"
+#include "../drawableentity.h"
 #include "../../shaderprogram/shaderprogram.h"
 
 
-class Cube : public SceneObject
+class Cube : public DrawableEntity
 {
 	GLuint d_vbo;
 	GLuint d_vao;

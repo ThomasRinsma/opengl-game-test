@@ -8,11 +8,11 @@
 #include <glm/gtc/matrix_transform.hpp>
 #include <glm/gtc/type_ptr.hpp>
 
-#include "../sceneobject/cube/cube.h"
-#include "../sceneobject/grid/grid.h"
-#include "../sceneobject/model/model.h"
-#include "../sceneobject/text/text.h"
-#include "../sceneobject/portal/portal.h"
+#include "../drawableentity/cube/cube.h"
+#include "../drawableentity/grid/grid.h"
+#include "../drawableentity/model/model.h"
+#include "../drawableentity/text/text.h"
+#include "../drawableentity/portal/portal.h"
 
 #include "game.h"
 

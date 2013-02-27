@@ -43,7 +43,6 @@ class Player : public Entity
     private:
         void updateImpl(float deltaTime);
         void integratePosition(float deltaTime); // TODO: move to Entity?
-        void modelMatUpdated();
         void updateProjMat();
 };
 

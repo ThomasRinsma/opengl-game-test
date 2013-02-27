@@ -2,12 +2,12 @@
 #define INCLUDED_PORTAL_
 
 #include <glm/glm.hpp>
-#include "../sceneobject.h"
+#include "../drawableentity.h"
 #include "../../shaderprogram/shaderprogram.h"
 #include "../../entity/entity.h"
 
 
-class Portal : public SceneObject
+class Portal : public DrawableEntity
 {
 	Entity *d_destination;
 

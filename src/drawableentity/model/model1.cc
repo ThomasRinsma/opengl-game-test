@@ -8,7 +8,7 @@ string const texPostfix   = ".png";
 
 Model::Model(ShaderProgram &shaderProgram, string const &texName, string const &modelName)
 :
-	SceneObject(shaderProgram)
+	DrawableEntity(shaderProgram)
 {
 	loadModel(modelPrefix + modelName + modelPostfix);
 

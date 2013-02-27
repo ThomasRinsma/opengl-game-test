@@ -2,11 +2,11 @@
 #define INCLUDED_TEXT_
 
 #include <glm/glm.hpp>
-#include "../sceneobject.h"
+#include "../drawableentity.h"
 #include "../../shaderprogram/shaderprogram.h"
 
 
-class Text : public SceneObject
+class Text : public DrawableEntity
 {
 	GLuint d_vbo;
 	GLuint d_vao;
