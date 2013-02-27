@@ -8,7 +8,6 @@ class Drawable
 {
 	protected:
 		ShaderProgram &d_shaderProgram;
-		glm::mat4 d_modelMat;
 
     public:
         Drawable(ShaderProgram &shaderProgram);

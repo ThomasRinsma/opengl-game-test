@@ -2,11 +2,11 @@
 #define INCLUDED_MODEL_
 
 #include <glm/glm.hpp>
-#include "../sceneobject.h"
+#include "../drawableentity.h"
 #include "../../shaderprogram/shaderprogram.h"
 
 
-class Model : public SceneObject
+class Model : public DrawableEntity
 {
 	GLuint d_vbo;
 	GLuint d_vao;

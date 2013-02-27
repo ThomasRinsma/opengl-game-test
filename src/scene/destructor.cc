@@ -2,6 +2,6 @@
 
 Scene::~Scene()
 {
-	for (SceneObject *sceneObject : d_sceneObjects)
-		delete sceneObject;
+	for (DrawableEntity *drawableEntity : d_drawableEntities)
+		delete drawableEntity;
 }

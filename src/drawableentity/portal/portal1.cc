@@ -2,7 +2,7 @@
 
 Portal::Portal(ShaderProgram &shaderProgram, Entity *destination)
 :
-	SceneObject(shaderProgram),
+	DrawableEntity(shaderProgram),
 	d_destination(destination)
 {
 	// Create a VAO

@@ -42,7 +42,7 @@ void Scene::draw(Player const &player)
 
 		// Draw scene objects with destView, limited to stencil buffer
 		// use an edited projection matrix to set the near plane to the portal plane
-		drawSceneObjects(destView, portal->clippedProjMat(destView, player.projMat()));
+		drawNonPortals(destView, portal->clippedProjMat(destView, player.projMat()));
 	}
 
 	// Disable stencil test and reset OP
@@ -62,7 +62,7 @@ void Scene::draw(Player const &player)
 	// Draw scene objects normally
 	glColorMask(GL_TRUE, GL_TRUE, GL_TRUE, GL_TRUE);
 	glDepthMask(GL_TRUE);
-	drawSceneObjects(player.viewMat(), player.projMat());
+	drawNonPortals(player.viewMat(), player.projMat());
 	
 
 }

@@ -3,11 +3,11 @@
 
 
 #include <glm/glm.hpp>
-#include "../sceneobject.h"
+#include "../drawableentity.h"
 #include "../../shaderprogram/shaderprogram.h"
 
 
-class Grid : public SceneObject
+class Grid : public DrawableEntity
 {
 	GLuint d_vbo;
 	GLuint d_vao;

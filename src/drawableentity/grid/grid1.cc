@@ -2,7 +2,7 @@
 
 Grid::Grid(ShaderProgram &shaderProgram)
 :
-	SceneObject(shaderProgram)
+	DrawableEntity(shaderProgram)
 {
 	// Create a VAO
 	glGenVertexArrays(1, &d_vao);

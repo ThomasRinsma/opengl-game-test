@@ -12,16 +12,14 @@ SHADERPROGRAM_FILES=$(wildcard src/shaderprogram/*.cc) src/shaderprogram/shaderp
 CONTROLLER_FILES=$(wildcard src/controller/*.cc) src/controller/controller.ih src/controller/controller.h
 DRAWABLE_FILES=$(wildcard src/drawable/*.cc) src/drawable/drawable.ih src/drawable/drawable.h
 ENTITY_FILES=$(wildcard src/entity/*.cc) src/entity/entity.ih src/entity/entity.h
-SCENEOBJECT_FILES=$(wildcard src/sceneobject/*.cc) src/sceneobject/sceneobject.ih src/sceneobject/sceneobject.h
+DRAWABLEENTITY_FILES=$(wildcard src/drawableentity/*.cc) src/drawableentity/drawableentity.ih src/drawableentity/drawableentity.h
 SCENE_FILES=$(wildcard src/scene/*.cc) src/scene/scene.ih src/scene/scene.h
 
-CUBE_FILES=$(wildcard src/sceneobject/cube/*.cc) src/sceneobject/cube/cube.ih src/sceneobject/cube/cube.h
-GRID_FILES=$(wildcard src/sceneobject/grid/*.cc) src/sceneobject/grid/grid.ih src/sceneobject/grid/grid.h
-MODEL_FILES=$(wildcard src/sceneobject/model/*.cc) src/sceneobject/model/model.ih src/sceneobject/model/model.h
-TEXT_FILES=$(wildcard src/sceneobject/text/*.cc) src/sceneobject/text/text.ih src/sceneobject/text/text.h
-PORTAL_FILES=$(wildcard src/sceneobject/portal/*.cc) src/sceneobject/portal/portal.ih src/sceneobject/portal/portal.h
-
-TEXT2D_FILES=$(wildcard src/drawable/text2d/*.cc) src/drawable/text2d/text2d.ih src/drawable/text2d/text2d.h
+CUBE_FILES=$(wildcard src/drawableentity/cube/*.cc) src/drawableentity/cube/cube.ih src/drawableentity/cube/cube.h
+GRID_FILES=$(wildcard src/drawableentity/grid/*.cc) src/drawableentity/grid/grid.ih src/drawableentity/grid/grid.h
+MODEL_FILES=$(wildcard src/drawableentity/model/*.cc) src/drawableentity/model/model.ih src/drawableentity/model/model.h
+TEXT_FILES=$(wildcard src/drawableentity/text/*.cc) src/drawableentity/text/text.ih src/drawableentity/text/text.h
+PORTAL_FILES=$(wildcard src/drawableentity/portal/*.cc) src/drawableentity/portal/portal.ih src/drawableentity/portal/portal.h
 
 GAME_DEPS=$(CONTROLLER_FILES) $(PLAYER_FILES) $(CUBE_FILES) $(GRID_FILES) $(MODEL_FILES) $(TEXT_FILES) $(SCENE_FILES)
 PLAYER_DEPS=$(CONTROLLER_FILES) $(ENTITY_FILES)
@@ -29,14 +27,13 @@ SHADERPROGRAM_DEPS=
 CONTROLLER_DEPS=
 DRAWABLE_DEPS=$(SHADERPROGRAM_FILES)
 ENTITY_DEPS=
-SCENEOBJECT_DEPS=$(SHADERPROGRAM_FILES) $(DRAWABLE_FILES) $(ENTITY_FILES)
-SCENE_DEPS=$(PLAYER_FILES) $(SCENEOBJECT_FILES) $(PORTAL_FILES)
-CUBE_DEPS=$(SHADERPROGRAM_FILES) $(SCENEOBJECT_FILES)
-GRID_DEPS=$(SHADERPROGRAM_FILES) $(SCENEOBJECT_FILES)
-MODEL_DEPS=$(SHADERPROGRAM_FILES) $(SCENEOBJECT_FILES)
-TEXT_DEPS=$(SHADERPROGRAM_FILES) $(SCENEOBJECT_FILES)
-PORTAL_DEPS=$(SHADERPROGRAM_FILES) $(SCENEOBJECT_FILES) $(ENTITY_FILES)
-TEXT2D_DEPS=$(SHADERPROGRAM_FILES) $(DRAWABLE_FILES)
+DRAWABLEENTITY_DEPS=$(SHADERPROGRAM_FILES) $(DRAWABLE_FILES) $(ENTITY_FILES)
+SCENE_DEPS=$(PLAYER_FILES) $(DRAWABLEENTITY_FILES) $(PORTAL_FILES)
+CUBE_DEPS=$(SHADERPROGRAM_FILES) $(DRAWABLEENTITY_FILES)
+GRID_DEPS=$(SHADERPROGRAM_FILES) $(DRAWABLEENTITY_FILES)
+MODEL_DEPS=$(SHADERPROGRAM_FILES) $(DRAWABLEENTITY_FILES)
+TEXT_DEPS=$(SHADERPROGRAM_FILES) $(DRAWABLEENTITY_FILES)
+PORTAL_DEPS=$(SHADERPROGRAM_FILES) $(DRAWABLEENTITY_FILES) $(ENTITY_FILES)
 
 
 all: prep_out_dirs make_objs
@@ -45,9 +42,8 @@ make_objs: $(OBJ_FILES)
 	$(CXX) $^ -o openglgame $(LDLIBS)
 
 prep_out_dirs:
-	mkdir -p build/game build/player build/shaderprogram build/controller build/drawable build/entity build/sceneobject build/scene
-	mkdir -p build/drawable/text2d
-	mkdir -p build/sceneobject/cube build/sceneobject/grid build/sceneobject/model build/sceneobject/text build/sceneobject/portal
+	mkdir -p build/game build/player build/shaderprogram build/controller build/drawable build/entity build/drawableentity build/scene
+	mkdir -p build/drawableentity/cube build/drawableentity/grid build/drawableentity/model build/drawableentity/text build/drawableentity/portal
 
 build/main.o: src/main.cc
 	$(CXX) -c $(CPPFLAGS) $< -o $@
@@ -70,28 +66,25 @@ build/drawable/%.o: src/drawable/%.cc src/drawable/drawable.ih src/drawable/draw
 build/entity/%.o: src/entity/%.cc src/entity/entity.ih src/entity/entity.h $(ENTITY_DEPS)
 	$(CXX) -c $(CPPFLAGS) $< -o $@
 
-build/sceneobject/%.o: src/sceneobject/%.cc src/sceneobject/sceneobject.ih src/sceneobject/sceneobject.h $(SCENEOBJECT_DEPS)
+build/drawableentity/%.o: src/drawableentity/%.cc src/drawableentity/drawableentity.ih src/drawableentity/drawableentity.h $(DRAWABLEENTITY_DEPS)
 	$(CXX) -c $(CPPFLAGS) $< -o $@
 
-build/scene/%.o: src/scene/%.cc src/scene/scene.ih src/scene/scene.h $(SCENEOBJECT_DEPS)
+build/scene/%.o: src/scene/%.cc src/scene/scene.ih src/scene/scene.h $(DRAWABLEENTITY_DEPS)
 	$(CXX) -c $(CPPFLAGS) $< -o $@
 
-build/drawable/text2d/%.o: src/drawable/text2d/%.cc src/drawable/text2d/text2d.ih src/drawable/text2d/text2d.h $(TEXT2D_DEPS)
+build/drawableentity/cube/%.o: src/drawableentity/cube/%.cc src/drawableentity/cube/cube.ih src/drawableentity/cube/cube.h $(CUBE_DEPS)
 	$(CXX) -c $(CPPFLAGS) $< -o $@
 
-build/sceneobject/cube/%.o: src/sceneobject/cube/%.cc src/sceneobject/cube/cube.ih src/sceneobject/cube/cube.h $(CUBE_DEPS)
+build/drawableentity/grid/%.o: src/drawableentity/grid/%.cc src/drawableentity/grid/grid.ih src/drawableentity/grid/grid.h $(GRID_DEPS)
 	$(CXX) -c $(CPPFLAGS) $< -o $@
 
-build/sceneobject/grid/%.o: src/sceneobject/grid/%.cc src/sceneobject/grid/grid.ih src/sceneobject/grid/grid.h $(GRID_DEPS)
+build/drawableentity/model/%.o: src/drawableentity/model/%.cc src/drawableentity/model/model.ih src/drawableentity/model/model.h $(MODEL_DEPS)
 	$(CXX) -c $(CPPFLAGS) $< -o $@
 
-build/sceneobject/model/%.o: src/sceneobject/model/%.cc src/sceneobject/model/model.ih src/sceneobject/model/model.h $(MODEL_DEPS)
+build/drawableentity/text/%.o: src/drawableentity/text/%.cc src/drawableentity/text/text.ih src/drawableentity/text/text.h $(TEXT_DEPS)
 	$(CXX) -c $(CPPFLAGS) $< -o $@
 
-build/sceneobject/text/%.o: src/sceneobject/text/%.cc src/sceneobject/text/text.ih src/sceneobject/text/text.h $(TEXT_DEPS)
-	$(CXX) -c $(CPPFLAGS) $< -o $@
-
-build/sceneobject/portal/%.o: src/sceneobject/portal/%.cc src/sceneobject/portal/portal.ih src/sceneobject/portal/portal.h $(PORTAL_DEPS)
+build/drawableentity/portal/%.o: src/drawableentity/portal/%.cc src/drawableentity/portal/portal.ih src/drawableentity/portal/portal.h $(PORTAL_DEPS)
 	$(CXX) -c $(CPPFLAGS) $< -o $@
 
 

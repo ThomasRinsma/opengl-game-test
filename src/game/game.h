@@ -9,7 +9,7 @@
 #include "../controller/controller.h"
 #include "../player/player.h"
 #include "../drawable/drawable.h"
-#include "../drawable/text2d/text2d.h"
+#include "../drawableentity/text/text.h"
 #include "../scene/scene.h"
 
 
@@ -44,7 +44,7 @@ class Game
 
     // Current fps
     float d_fps;
-    Text2D *d_debugText;
+    Text *d_debugText;
 
     public:
         Game();                              // full screen max res
