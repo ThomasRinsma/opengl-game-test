@@ -1,6 +1,6 @@
 CXX=g++
 CPPFLAGS=-g -Wall --std=c++11 -DGLEW_STATIC
-LDLIBS=-L/usr/local/lib/ -lGLEW -lGLU -lsfml-graphics -lsfml-window -lsfml-system
+LDLIBS=-L/usr/local/lib/ -lGL -lGLEW -lGLU -lsfml-graphics -lsfml-window -lsfml-system
 
 SRC_FILES=$(wildcard src/*/*.cc) $(wildcard src/*/*/*.cc)
 OBJ_FILES=$(subst .cc,.o,$(subst src,build,$(SRC_FILES))) build/main.o
