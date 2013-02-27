@@ -16,8 +16,8 @@
 class Game
 {
     // Flags
+    bool d_fullscreen;
     bool d_paused = true;
-    bool d_fullscreen = false;
     bool d_vsync = false;
 
     // SFML window
@@ -39,10 +39,8 @@ class Game
     // Vector of shader program pointers
     std::vector<ShaderProgram *> d_shaderPrograms;
 
-    // Projection matrices, TODO: put inside player?
-    glm::mat4 d_projMat;
+    // TODO: put this in some GUI class
     glm::mat4 d_orthoProjMat;
-    float d_fov = 45.0f;
 
     // Current fps
     float d_fps;
@@ -60,10 +58,26 @@ class Game
         void initGame();        // initializes game logic
         void initGraphics();    // initializes opengl stuff
 
+        void pause();
+        void unpause();
+
         // These are directly called from run()
         void handleEvents();    // handles events, doh
         void stepGame();        // step game logic
         void draw();            // draw opengl stuff
 };
+
+
+inline void Game::pause()
+{
+    d_paused = true;
+    d_win.setMouseCursorVisible(true);
+}
+
+inline void Game::unpause()
+{
+    d_paused = false;
+    d_win.setMouseCursorVisible(false);
+}
         
 #endif

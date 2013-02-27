@@ -12,7 +12,12 @@ void Game::handleEvents()
 				break;
 
 			case sf::Event::LostFocus:
-				d_paused = true;
+				pause();
+				break;
+
+			case sf::Event::GainedFocus:
+				if (d_fullscreen)
+					unpause();
 				break;
 
 			case sf::Event::KeyPressed:
@@ -22,10 +27,7 @@ void Game::handleEvents()
 						if (d_fullscreen)
 							throw false;
 						else
-						{
-							d_paused = true;
-							d_win.setMouseCursorVisible(true);
-						}
+							pause();
 						break;
 
 					case sf::Keyboard::F1:
@@ -40,20 +42,17 @@ void Game::handleEvents()
 
 			case sf::Event::MouseButtonPressed:
 				if (d_paused)
-				{
-					d_paused = false;
-					d_win.setMouseCursorVisible(false);
-				}
+					unpause();
 				break;
 
 			case sf::Event::MouseWheelMoved:
-				d_fov -= event.mouseWheel.delta * 5.0f;
-				if (d_fov > 175) d_fov = 175;
-				if (d_fov < 5) d_fov = 5;
-				d_player.setProjMat(d_fov,
-					static_cast<float>(d_win.getSize().x) /
-					static_cast<float>(d_win.getSize().y),
-					0.1f, 100.0f);
+				d_player.setFov(d_player.fov() - event.mouseWheel.delta * 5.0f);
+				if (d_player.fov() > 175)
+					d_player.setFov(175);
+				
+				if (d_player.fov() < 5)
+					d_player.setFov(5);
+				
 				break;
 
 			default:
