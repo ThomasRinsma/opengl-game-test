@@ -2,10 +2,10 @@
 
 glm::vec2 Controller::mouseOffset()
 {
-	glm::vec2 mouse(d_win.GetInput().GetMouseX(), d_win.GetInput().GetMouseY());
-	glm::vec2 center(d_win.GetWidth() / 2, d_win.GetHeight() / 2);
+	sf::Vector2i mousePos = sf::Mouse::getPosition(d_win);
+	sf::Vector2i winCenter(d_win.getSize().x / 2, d_win.getSize().y / 2);
 
-	d_win.SetCursorPosition(center.x, center.y);
+	sf::Mouse::setPosition(winCenter, d_win);
 
-	return mouse - center;
+	return glm::vec2(mousePos.x - winCenter.x, mousePos.y - winCenter.y);
 }

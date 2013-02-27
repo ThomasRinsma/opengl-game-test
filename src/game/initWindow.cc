@@ -2,7 +2,7 @@
 
 void Game::initWindow()
 {
-	d_win.SetPosition(0, 0);
+	d_win.setPosition(sf::Vector2i(0, 0));
 	
 	// Set glew to use modern OpenGL
 	glewExperimental = GL_TRUE;
@@ -11,7 +11,7 @@ void Game::initWindow()
 	glewInit();
 
 	// Set VSync
-	d_win.UseVerticalSync(d_vsync);
+	d_win.setVerticalSyncEnabled(d_vsync);
 
 	// Set up ortho matrix, TODO: somewhere else?
 	d_orthoProjMat = glm::ortho(0.0f, (float)d_winWidth, 0.0f, (float)d_winHeight, -1.0f, 1.0f);

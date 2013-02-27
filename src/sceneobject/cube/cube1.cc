@@ -83,15 +83,15 @@ Cube::Cube(ShaderProgram &shaderProgram, string const &texName)
 	glBindTexture(GL_TEXTURE_2D, d_tex);
 
 	sf::Image texImage;
-	if (not texImage.LoadFromFile(texPrefix + texName + texPostfix))
+	if (not texImage.loadFromFile(texPrefix + texName + texPostfix))
 	{
 		cerr << "Error loading texture from file\n";
 		return;
 	}
 
 	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA,
-		texImage.GetWidth(), texImage.GetHeight(), 0,
-		GL_RGBA, GL_UNSIGNED_BYTE, texImage.GetPixelsPtr());
+		texImage.getSize().x, texImage.getSize().y, 0,
+		GL_RGBA, GL_UNSIGNED_BYTE, texImage.getPixelsPtr());
 
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
