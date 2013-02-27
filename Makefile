@@ -14,6 +14,7 @@ DRAWABLE_FILES=$(wildcard src/drawable/*.cc) src/drawable/drawable.ih src/drawab
 ENTITY_FILES=$(wildcard src/entity/*.cc) src/entity/entity.ih src/entity/entity.h
 DRAWABLEENTITY_FILES=$(wildcard src/drawableentity/*.cc) src/drawableentity/drawableentity.ih src/drawableentity/drawableentity.h
 SCENE_FILES=$(wildcard src/scene/*.cc) src/scene/scene.ih src/scene/scene.h
+GUI_FILES=$(wildcard src/gui/*.cc) src/gui/gui.ih src/gui/gui.h
 
 CUBE_FILES=$(wildcard src/drawableentity/cube/*.cc) src/drawableentity/cube/cube.ih src/drawableentity/cube/cube.h
 GRID_FILES=$(wildcard src/drawableentity/grid/*.cc) src/drawableentity/grid/grid.ih src/drawableentity/grid/grid.h
@@ -21,7 +22,7 @@ MODEL_FILES=$(wildcard src/drawableentity/model/*.cc) src/drawableentity/model/m
 TEXT_FILES=$(wildcard src/drawableentity/text/*.cc) src/drawableentity/text/text.ih src/drawableentity/text/text.h
 PORTAL_FILES=$(wildcard src/drawableentity/portal/*.cc) src/drawableentity/portal/portal.ih src/drawableentity/portal/portal.h
 
-GAME_DEPS=$(CONTROLLER_FILES) $(PLAYER_FILES) $(CUBE_FILES) $(GRID_FILES) $(MODEL_FILES) $(TEXT_FILES) $(SCENE_FILES)
+GAME_DEPS=$(CONTROLLER_FILES) $(PLAYER_FILES) $(CUBE_FILES) $(GRID_FILES) $(MODEL_FILES) $(TEXT_FILES) $(SCENE_FILES) $(GUI_FILES)
 PLAYER_DEPS=$(CONTROLLER_FILES) $(ENTITY_FILES)
 SHADERPROGRAM_DEPS=
 CONTROLLER_DEPS=
@@ -29,6 +30,8 @@ DRAWABLE_DEPS=$(SHADERPROGRAM_FILES)
 ENTITY_DEPS=
 DRAWABLEENTITY_DEPS=$(SHADERPROGRAM_FILES) $(DRAWABLE_FILES) $(ENTITY_FILES)
 SCENE_DEPS=$(PLAYER_FILES) $(DRAWABLEENTITY_FILES) $(PORTAL_FILES)
+GUI_DEPS=$(DRAWABLEENTITY_FILES) $(PLAYER_FILES)
+
 CUBE_DEPS=$(SHADERPROGRAM_FILES) $(DRAWABLEENTITY_FILES)
 GRID_DEPS=$(SHADERPROGRAM_FILES) $(DRAWABLEENTITY_FILES)
 MODEL_DEPS=$(SHADERPROGRAM_FILES) $(DRAWABLEENTITY_FILES)
@@ -42,7 +45,7 @@ make_objs: $(OBJ_FILES)
 	$(CXX) $^ -o openglgame $(LDLIBS)
 
 prep_out_dirs:
-	mkdir -p build/game build/player build/shaderprogram build/controller build/drawable build/entity build/drawableentity build/scene
+	mkdir -p build/game build/player build/shaderprogram build/controller build/drawable build/entity build/drawableentity build/scene build/gui
 	mkdir -p build/drawableentity/cube build/drawableentity/grid build/drawableentity/model build/drawableentity/text build/drawableentity/portal
 
 build/main.o: src/main.cc
@@ -69,7 +72,10 @@ build/entity/%.o: src/entity/%.cc src/entity/entity.ih src/entity/entity.h $(ENT
 build/drawableentity/%.o: src/drawableentity/%.cc src/drawableentity/drawableentity.ih src/drawableentity/drawableentity.h $(DRAWABLEENTITY_DEPS)
 	$(CXX) -c $(CPPFLAGS) $< -o $@
 
-build/scene/%.o: src/scene/%.cc src/scene/scene.ih src/scene/scene.h $(DRAWABLEENTITY_DEPS)
+build/scene/%.o: src/scene/%.cc src/scene/scene.ih src/scene/scene.h $(SCENE_DEPS)
+	$(CXX) -c $(CPPFLAGS) $< -o $@
+
+build/gui/%.o: src/gui/%.cc src/gui/gui.ih src/gui/gui.h $(GUI_DEPS)
 	$(CXX) -c $(CPPFLAGS) $< -o $@
 
 build/drawableentity/cube/%.o: src/drawableentity/cube/%.cc src/drawableentity/cube/cube.ih src/drawableentity/cube/cube.h $(CUBE_DEPS)
