@@ -2,8 +2,6 @@
 
 void Game::initWindow()
 {
-	d_win.setPosition(sf::Vector2i(0, 0));
-	
 	// Set glew to use modern OpenGL
 	glewExperimental = GL_TRUE;
 
