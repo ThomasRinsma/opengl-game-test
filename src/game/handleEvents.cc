@@ -8,7 +8,7 @@ void Game::handleEvents()
 		switch (event.type)
 		{
 			case sf::Event::Closed:
-				throw false; // no error, exit cleanly
+				throw true;
 				break;
 
 			case sf::Event::LostFocus:
@@ -25,7 +25,7 @@ void Game::handleEvents()
 				{
 					case sf::Keyboard::Escape:
 						if (d_fullscreen)
-							throw false;
+							throw true;
 						else
 							pause();
 						break;

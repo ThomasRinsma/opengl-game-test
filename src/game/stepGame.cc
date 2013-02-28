@@ -16,5 +16,4 @@ void Game::stepGame()
 		<< "Z: " << d_player.position().z << '\n';
 
 	dynamic_cast<Text *>(d_gui.get("debugText"))->setText(oss.str());
-	
 }
