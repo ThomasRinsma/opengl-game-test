@@ -1,8 +1,10 @@
 #include "portal.ih"
 
-Portal::Portal(ShaderProgram &shaderProgram, Entity *destination)
+string const requiredShader = "simpleColor";
+
+Portal::Portal(Entity *destination)
 :
-	DrawableEntity(shaderProgram),
+	d_shaderProgram(ResourceManager::instance().shaderProgram(requiredShader)),
 	d_destination(destination)
 {
 	// Create a VAO

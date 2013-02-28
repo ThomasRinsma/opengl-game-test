@@ -2,9 +2,10 @@
 #include <SFML/Graphics.hpp> // for sf::Image
 #include <glm/gtc/type_ptr.hpp>
 #include <glm/gtc/matrix_transform.hpp>
-#include "text.h"
 #include <iostream>
 #include <vector>
 #include <string>
+#include "../../resourcemanager/resourcemanager.h"
+#include "text.h"
 
 using namespace std;

@@ -1,6 +1,6 @@
-#include "model.ih"
+#include "genericmodel.ih"
 
-void Model::drawImpl(glm::mat4 const &viewMat, glm::mat4 const &projMat)
+void GenericModel::drawImpl(glm::mat4 const &viewMat, glm::mat4 const &projMat)
 {
 	d_shaderProgram.use();
 	
@@ -13,7 +13,6 @@ void Model::drawImpl(glm::mat4 const &viewMat, glm::mat4 const &projMat)
 	glUniformMatrix4fv(d_shaderProgram.uniforms["p"], 1, GL_FALSE, glm::value_ptr(projMat));
 
 	// Draw the model
-	glBindVertexArray(d_vao);
-	glBindTexture(GL_TEXTURE_2D, d_tex);
-	glDrawArrays(GL_TRIANGLES, 0, d_numVerts);
+	d_texture.bind();
+	d_model.draw();
 }

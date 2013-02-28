@@ -3,6 +3,7 @@
 
 #include <glm/glm.hpp>
 #include "../drawableentity.h"
+#include "../../texture/texture.h"
 #include "../../shaderprogram/shaderprogram.h"
 
 
@@ -10,12 +11,14 @@ class Text : public DrawableEntity
 {
 	GLuint d_vbo;
 	GLuint d_vao;
-	GLuint d_tex;
+	
+    Texture &d_texture;
+    ShaderProgram &d_shaderProgram;
 
 	std::string d_text;
 
     public:
-        Text(ShaderProgram &shaderProgram, std::string const &text); // TODO: color
+        Text(std::string const &text = ""); // TODO: color
         ~Text();
 
         void setText(std::string const &text);

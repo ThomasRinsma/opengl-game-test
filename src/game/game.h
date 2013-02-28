@@ -37,9 +37,6 @@ class Game
     // GUI
     GUI d_gui;
 
-    // Vector of shader program pointers
-    std::vector<ShaderProgram *> d_shaderPrograms;
-
     // Current fps
     float d_fps;
 

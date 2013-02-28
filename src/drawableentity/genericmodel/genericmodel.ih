@@ -2,10 +2,8 @@
 #include <SFML/Graphics.hpp> // for sf::Image
 #include <glm/gtc/type_ptr.hpp>
 #include <glm/gtc/matrix_transform.hpp>
-#include <glm/gtc/matrix_access.hpp>
 #include <iostream>
 #include "../../resourcemanager/resourcemanager.h"
-#include "portal.h"
-
+#include "genericmodel.h"
 using namespace std;
 

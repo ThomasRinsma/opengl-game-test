@@ -1,13 +1,10 @@
 #include "model.ih"
 
-void Model::loadModel(string const &modelPath)
+void Model::loadModel(string const &path)
 {
-	ifstream modelFile(modelPath);
+	ifstream modelFile(path);
 	if (not modelFile)
-	{
-		cerr << "Error loading model from file\n";
-		return;
-	}
+		throw string("failed to load model '" + path + "' from file.");
 
 	vector<glm::vec3> verts;
 	vector<glm::vec3> norms;

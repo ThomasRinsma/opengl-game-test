@@ -2,9 +2,8 @@
 
 void Game::initGraphics()
 {
-	d_shaderPrograms.push_back(new ShaderProgram("simpleColor", {"mvp"}));
-	d_shaderPrograms.push_back(new ShaderProgram("simpleTexture", {"m", "v", "p", "n"}));
-	d_shaderPrograms.push_back(new ShaderProgram("simpleText", {"mvp", "c"}));
+	// Load all resources from files
+	ResourceManager::instance().loadAll();
 
 	d_player.setFov(45.0f);
 	d_player.setScreenRatio(static_cast<float>(d_win.getSize().x) /

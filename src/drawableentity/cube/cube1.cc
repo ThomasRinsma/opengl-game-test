@@ -1,11 +1,11 @@
 #include "cube.ih"
 
-string const texPrefix  = "textures/";
-string const texPostfix = ".png";
+string const requiredShader = "simpleTexture";
 
-Cube::Cube(ShaderProgram &shaderProgram, string const &texName)
+Cube::Cube(string const &texName)
 :
-	DrawableEntity(shaderProgram)
+	d_texture(ResourceManager::instance().texture(texName)),
+	d_shaderProgram(ResourceManager::instance().shaderProgram(requiredShader))
 {
 	// Create a VAO
 	glGenVertexArrays(1, &d_vao);
@@ -77,27 +77,4 @@ Cube::Cube(ShaderProgram &shaderProgram, string const &texName)
 	GLint texAttrib = d_shaderProgram.attribLocation("texcoord");
 	glEnableVertexAttribArray(texAttrib);
 	glVertexAttribPointer(texAttrib, 2, GL_FLOAT, GL_FALSE, 8 * sizeof(float), (void *)(6 * sizeof(float)));
-
-	// Load texture
-	glGenTextures(1, &d_tex);
-	glBindTexture(GL_TEXTURE_2D, d_tex);
-
-	sf::Image texImage;
-	if (not texImage.loadFromFile(texPrefix + texName + texPostfix))
-	{
-		cerr << "Error loading texture from file\n";
-		return;
-	}
-
-	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA,
-		texImage.getSize().x, texImage.getSize().y, 0,
-		GL_RGBA, GL_UNSIGNED_BYTE, texImage.getPixelsPtr());
-
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
-
-
-	
 }

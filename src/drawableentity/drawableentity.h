@@ -9,7 +9,6 @@
 class DrawableEntity : public Drawable, public Entity
 {
 	public:
-		DrawableEntity(ShaderProgram &shaderProgram);
 		virtual ~DrawableEntity();
 
 	private:

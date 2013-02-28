@@ -13,7 +13,7 @@ void Cube::drawImpl(glm::mat4 const &viewMat, glm::mat4 const &projMat)
 	glUniformMatrix4fv(d_shaderProgram.uniforms["p"], 1, GL_FALSE, glm::value_ptr(projMat));
 
 	// Draw cube
+	d_texture.bind(); //glBindTexture(GL_TEXTURE_2D, d_tex);
 	glBindVertexArray(d_vao);
-	glBindTexture(GL_TEXTURE_2D, d_tex);
 	glDrawArrays(GL_TRIANGLES, 0, 36);
 }

@@ -3,6 +3,7 @@
 
 #include <glm/glm.hpp>
 #include "../drawableentity.h"
+#include "../../texture/texture.h"
 #include "../../shaderprogram/shaderprogram.h"
 
 
@@ -10,10 +11,12 @@ class Cube : public DrawableEntity
 {
 	GLuint d_vbo;
 	GLuint d_vao;
-	GLuint d_tex;
+
+	Texture &d_texture;
+	ShaderProgram &d_shaderProgram;
 
     public:
-        Cube(ShaderProgram &shaderProgram, std::string const &texName);
+        Cube(std::string const &texName);
         ~Cube();
 
 
