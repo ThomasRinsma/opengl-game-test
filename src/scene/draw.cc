@@ -2,6 +2,7 @@
 
 void Scene::draw(Player const &player)
 {
+	glEnable(GL_DEPTH_TEST);
 	
 	// Enable stencil test, increment on fail
 	glEnable(GL_STENCIL_TEST);
