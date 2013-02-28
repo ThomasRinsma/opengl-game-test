@@ -19,8 +19,8 @@ void Game::initGame()
 	portal1->addOrientation(glm::vec3(0.0f, 1.0f, 0.0f), M_PI/2.0f, true);
 	portal2->addOrientation(glm::vec3(0.0f, 1.0f, 0.0f), -M_PI/2.0f, true);
 
-	debugText->setScale(glm::vec3(16.0f, 16.0f, 1.0f));
-	debugText->setPosition(glm::vec3(4.0f, d_win.getSize().y - 20.0f, 0.0f));
+	debugText->setScale(glm::vec3(24.0f, 24.0f, 1.0f));
+	debugText->setPosition(glm::vec3(4.0f, d_win.getSize().y - 28.0f, 0.0f));
 
 	
 	cube->setPosition(glm::vec3(5.0f, 1.5f, 0.0f));
