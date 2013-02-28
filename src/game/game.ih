@@ -13,6 +13,7 @@
 #include "../drawableentity/genericmodel/genericmodel.h"
 #include "../drawableentity/text/text.h"
 #include "../drawableentity/portal/portal.h"
+#include "../light/light.h"
 
 #include "../resourcemanager/resourcemanager.h"
 

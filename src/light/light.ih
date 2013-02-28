@@ -1,0 +1,4 @@
+#include "light.h"
+
+using namespace std;
+
