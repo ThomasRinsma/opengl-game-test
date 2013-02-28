@@ -1,6 +1,6 @@
 #include "text.ih"
 
-string const fontPath = "textures/font.bmp"; // TODO: fix this constant
+string const fontPath = "textures/font.png"; // TODO: fix this constant
 
 Text::Text(ShaderProgram &shaderProgram, string const &text)
 :
