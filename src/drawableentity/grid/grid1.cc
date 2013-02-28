@@ -1,8 +1,10 @@
 #include "grid.ih"
 
-Grid::Grid(ShaderProgram &shaderProgram)
+string const requiredShader = "simpleColor";
+
+Grid::Grid()
 :
-	DrawableEntity(shaderProgram)
+	d_shaderProgram(ResourceManager::instance().shaderProgram(requiredShader))
 {
 	// Create a VAO
 	glGenVertexArrays(1, &d_vao);

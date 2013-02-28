@@ -9,14 +9,14 @@
 
 class Portal : public DrawableEntity
 {
-	Entity *d_destination;
-
 	GLuint d_vbo;
 	GLuint d_vao;
-	GLuint d_tex;
 
+    ShaderProgram &d_shaderProgram;
+    Entity *d_destination;
+	
     public:
-        Portal(ShaderProgram &shaderProgram, Entity *destination = nullptr);
+        Portal(Entity *destination = nullptr);
         ~Portal();
 
         Entity *destination() const;

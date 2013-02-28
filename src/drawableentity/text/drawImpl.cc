@@ -5,13 +5,12 @@ void Text::drawImpl(glm::mat4 const &viewMat, glm::mat4 const &projMat)
 	d_shaderProgram.use();
 
 	// Draw letters
-	glBindTexture(GL_TEXTURE_2D, d_tex);
+	d_texture.bind();
 	glBindVertexArray(d_vao);
 
 	glm::mat4 localMat = glm::mat4(1.0f);
-
 	glm::mat4 mvpMat = projMat * viewMat * d_modelMat;
-	for(size_t idx = 0, lineLen = 0; idx != d_text.length(); ++idx)
+	for (size_t idx = 0, lineLen = 0; idx != d_text.length(); ++idx)
 	{
 		// special stuff on newline, don't actually draw it
 		if (d_text[idx] == '\n')

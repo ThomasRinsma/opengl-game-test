@@ -18,7 +18,7 @@ struct ShaderProgram
 	    bool d_error = false;
 
     public:
-        ShaderProgram(std::string const &shaderName, std::vector<std::string> const &uniformNames);
+        ShaderProgram(std::string const &shaderPath);
 
         GLuint attribLocation(std::string const &attrName) const;
         void use() const;

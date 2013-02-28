@@ -2,14 +2,14 @@
 
 void Game::initGame()
 {
-	Text *debugText = new Text(*d_shaderPrograms[2], "");
-	Grid* grid = new Grid(*d_shaderPrograms[0]);
-	Model* room = new Model(*d_shaderPrograms[1], "wall", "inverted_cube");
-	Model* monkey = new Model(*d_shaderPrograms[1], "wall", "monkey");
-	Cube* cube = new Cube(*d_shaderPrograms[1], "crate");
+	Text *debugText = new Text();
+	Grid* grid = new Grid();
+	GenericModel* room = new GenericModel("wall", "inverted_cube");
+	GenericModel* monkey = new GenericModel("wall", "monkey");
+	Cube* cube = new Cube("crate");
 
-	Portal *portal1 = new Portal(*d_shaderPrograms[0]);
-	Portal *portal2 = new Portal(*d_shaderPrograms[0]);
+	Portal *portal1 = new Portal();
+	Portal *portal2 = new Portal();
 
 	portal1->setDestination(portal2);
 	portal2->setDestination(portal1);

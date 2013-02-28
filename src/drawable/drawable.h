@@ -6,15 +6,10 @@
 
 class Drawable
 {
-	protected:
-		ShaderProgram &d_shaderProgram;
-
     public:
-        Drawable(ShaderProgram &shaderProgram);
     	virtual ~Drawable();
 
         void draw(glm::mat4 const &viewMat, glm::mat4 const &projMat);
-
 
     private:
         virtual void drawImpl(glm::mat4 const &viewMat, glm::mat4 const &projMat) = 0;

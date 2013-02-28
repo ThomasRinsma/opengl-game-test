@@ -1,10 +1,12 @@
 #include "text.ih"
 
-string const fontPath = "textures/font.png"; // TODO: fix this constant
+string const fontTexName = "font";
+string const requiredShader = "simpleText";
 
-Text::Text(ShaderProgram &shaderProgram, string const &text)
+Text::Text(string const &text)
 :
-	DrawableEntity(shaderProgram),
+	d_texture(ResourceManager::instance().texture(fontTexName)),
+	d_shaderProgram(ResourceManager::instance().shaderProgram(requiredShader)),
 	d_text(text)
 {
 	// Create a VAO
@@ -37,26 +39,4 @@ Text::Text(ShaderProgram &shaderProgram, string const &text)
 	GLint texAttrib = d_shaderProgram.attribLocation("texcoord");
 	glEnableVertexAttribArray(texAttrib);
 	glVertexAttribPointer(texAttrib, 2, GL_FLOAT, GL_FALSE, 5 * sizeof(float), (void *)(3 * sizeof(float)));
-
-	// Make texture
-	glGenTextures(1, &d_tex);
-	glBindTexture(GL_TEXTURE_2D, d_tex);
-
-	sf::Image texImage;
-	if (not texImage.loadFromFile(fontPath))
-	{
-		cerr << "Error loading font texture from file\n";
-		return;
-	}
-
-	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA,
-		texImage.getSize().x, texImage.getSize().y, 0,
-		GL_RGBA, GL_UNSIGNED_BYTE, texImage.getPixelsPtr());
-
-	//glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_MIRRORED_REPEAT);
-	//glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_MIRRORED_REPEAT);
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_BORDER);
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_BORDER);
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
 }
