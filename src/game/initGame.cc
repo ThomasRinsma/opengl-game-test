@@ -11,6 +11,8 @@ void Game::initGame()
 	Portal *portal1 = new Portal();
 	Portal *portal2 = new Portal();
 
+	Light *light = new Light(glm::vec3(0.0f, 5.0f, 0.0f));
+
 	portal1->setDestination(portal2);
 	portal2->setDestination(portal1);
 
@@ -27,6 +29,8 @@ void Game::initGame()
 	monkey->setPosition(glm::vec3(0.0f, 2.0f, -3.0f));
 	room->setPosition(glm::vec3(0.0f, 6.0f, 0.0f));
 	room->setScale(glm::vec3(15.0f, 10.0f, 15.0f)); // room sized
+
+	d_scene.add(light);
 
 	d_scene.add(grid);
 	d_scene.add(room);

@@ -18,6 +18,7 @@ GUI_FILES=$(wildcard src/gui/*.cc) src/gui/gui.ih src/gui/gui.h
 TEXTURE_FILES=$(wildcard src/texture/*.cc) src/texture/texture.ih src/texture/texture.h
 MODEL_FILES=$(wildcard src/model/*.cc) src/model/model.ih src/model/model.h
 RESOURCEMANAGER_FILES=$(wildcard src/resourcemanager/*.cc) src/resourcemanager/resourcemanager.ih src/resourcemanager/resourcemanager.h
+LIGHT_FILES=$(wildcard src/light/*.cc) src/light/light.ih src/light/light.h
 
 CUBE_FILES=$(wildcard src/drawableentity/cube/*.cc) src/drawableentity/cube/cube.ih src/drawableentity/cube/cube.h
 GRID_FILES=$(wildcard src/drawableentity/grid/*.cc) src/drawableentity/grid/grid.ih src/drawableentity/grid/grid.h
@@ -25,18 +26,19 @@ GENERICMODEL_FILES=$(wildcard src/drawableentity/genericmodel/*.cc) src/drawable
 TEXT_FILES=$(wildcard src/drawableentity/text/*.cc) src/drawableentity/text/text.ih src/drawableentity/text/text.h
 PORTAL_FILES=$(wildcard src/drawableentity/portal/*.cc) src/drawableentity/portal/portal.ih src/drawableentity/portal/portal.h
 
-GAME_DEPS=$(CONTROLLER_FILES) $(PLAYER_FILES) $(CUBE_FILES) $(GRID_FILES) $(GENERICMODEL_FILES) $(TEXT_FILES) $(SCENE_FILES) $(GUI_FILES) $(RESOURCEMANAGER_FILES)
+GAME_DEPS=$(CONTROLLER_FILES) $(PLAYER_FILES) $(CUBE_FILES) $(GRID_FILES) $(GENERICMODEL_FILES) $(TEXT_FILES) $(SCENE_FILES) $(GUI_FILES) $(RESOURCEMANAGER_FILES) $(LIGHT_FILES)
 PLAYER_DEPS=$(CONTROLLER_FILES) $(ENTITY_FILES)
 SHADERPROGRAM_DEPS=
 CONTROLLER_DEPS=
 DRAWABLE_DEPS=$(SHADERPROGRAM_FILES)
 ENTITY_DEPS=
 DRAWABLEENTITY_DEPS=$(SHADERPROGRAM_FILES) $(DRAWABLE_FILES) $(ENTITY_FILES)
-SCENE_DEPS=$(PLAYER_FILES) $(DRAWABLEENTITY_FILES) $(PORTAL_FILES)
+SCENE_DEPS=$(PLAYER_FILES) $(DRAWABLEENTITY_FILES) $(PORTAL_FILES) $(LIGHT_FILES) $(RESOURCEMANAGER_FILES)
 GUI_DEPS=$(DRAWABLEENTITY_FILES) $(PLAYER_FILES)
 TEXTURE_DEPS=
 MODEL_DEPS=$(SHADERPROGRAM_FILES)
 RESOURCEMANAGER_DEPS=$(MODEL_FILES) $(TEXTURE_FILES) $(SHADERPROGRAM_FILES)
+LIGHT_DEPS=$(ENTITY_FILES)
 
 CUBE_DEPS=$(SHADERPROGRAM_FILES) $(DRAWABLEENTITY_FILES) $(TEXTURE_FILES) $(RESOURCEMANAGER_FILES)
 GRID_DEPS=$(SHADERPROGRAM_FILES) $(DRAWABLEENTITY_FILES) $(RESOURCEMANAGER_FILES)
@@ -51,7 +53,7 @@ make_objs: $(OBJ_FILES)
 	$(CXX) $^ -o openglgame $(LDLIBS)
 
 prep_out_dirs:
-	mkdir -p build/game build/player build/shaderprogram build/controller build/drawable build/entity
+	mkdir -p build/game build/player build/shaderprogram build/controller build/drawable build/entity build/light
 	mkdir -p build/texture build/model build/drawableentity build/scene build/gui build/resourcemanager
 	mkdir -p build/drawableentity/cube build/drawableentity/grid build/drawableentity/genericmodel
 	mkdir -p build/drawableentity/text build/drawableentity/portal
@@ -90,6 +92,9 @@ build/texture/%.o: src/texture/%.cc src/texture/texture.ih src/texture/texture.h
 	$(CXX) -c $(CPPFLAGS) $< -o $@
 
 build/model/%.o: src/model/%.cc src/model/model.ih src/model/model.h $(MODEL_DEPS)
+	$(CXX) -c $(CPPFLAGS) $< -o $@
+
+build/light/%.o: src/light/%.cc src/light/light.ih src/light/light.h $(LIGHT_DEPS)
 	$(CXX) -c $(CPPFLAGS) $< -o $@
 
 build/resourcemanager/%.o: src/resourcemanager/%.cc src/resourcemanager/resourcemanager.ih src/resourcemanager/resourcemanager.h $(RESOURCEMANAGER_DEPS)

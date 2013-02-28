@@ -2,3 +2,12 @@ m
 v
 p
 n
+light.pos
+light.color
+light.spec
+light.constAtt
+light.linAtt
+light.quadAtt
+light.spotDir
+light.spotCutoff
+light.spotExp
