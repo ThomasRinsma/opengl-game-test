@@ -29,11 +29,14 @@ void Game::run()
 			++frames;
 		}
 	}
-	catch (bool error)
+	catch (string &errorMsg)
 	{
-		if (error)
-			cout << "exited with error" << endl;
-
-		d_win.close();
+		cerr << "Error while running: " << errorMsg << endl;
 	}
+	catch (...)
+	{
+		// exit cleanly
+	}
+
+	d_win.close();
 }

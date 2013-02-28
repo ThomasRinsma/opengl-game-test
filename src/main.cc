@@ -12,6 +12,6 @@ int main()
 	}
 	catch (string &str)
 	{
-		cout << "ERROR: " << str << endl;
+		cout << "Error starting game: " << str << endl;
 	}
 }
