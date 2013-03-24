@@ -4,7 +4,7 @@ string const requiredShader = "simpleColor";
 
 Grid::Grid()
 :
-	d_shaderProgram(ResourceManager::instance().shaderProgram(requiredShader))
+	DrawableEntity(ResourceManager::instance().shaderProgram(requiredShader))
 {
 	// Create a VAO
 	glGenVertexArrays(1, &d_vao);

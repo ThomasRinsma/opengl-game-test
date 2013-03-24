@@ -4,8 +4,8 @@ string const requiredShader = "simpleTexture";
 
 Cube::Cube(string const &texName)
 :
-	d_texture(ResourceManager::instance().texture(texName)),
-	d_shaderProgram(ResourceManager::instance().shaderProgram(requiredShader))
+	DrawableEntity(ResourceManager::instance().shaderProgram(requiredShader)),
+	d_texture(ResourceManager::instance().texture(texName))
 {
 	// Create a VAO
 	glGenVertexArrays(1, &d_vao);

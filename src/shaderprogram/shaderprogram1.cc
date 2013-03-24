@@ -6,9 +6,7 @@ string const uniPostfix = "/uniforms.txt";
 
 ShaderProgram::ShaderProgram(string const &shaderPath)
 {
-	// TODO: exceptions instead of flag
-	d_error = not loadShaders(shaderPath + vertPostfix,
-							shaderPath + fragPostfix);
+	loadShaders(shaderPath + vertPostfix, shaderPath + fragPostfix);
 
 	vector<string> uniformNames;
 
@@ -20,6 +18,5 @@ ShaderProgram::ShaderProgram(string const &shaderPath)
 		uniformNames.push_back(name);
 	}
 
-	if (not d_error)
-		linkShaders(uniformNames);
+	linkShaders(uniformNames);
 }

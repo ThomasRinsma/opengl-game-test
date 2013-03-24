@@ -14,6 +14,8 @@ class Scene
 	std::vector<Portal *> d_portals;
     std::vector<Light *> d_lights;
 
+    static const size_t s_lightsPerObject = 3;
+
     public:
         Scene();
         ~Scene();
@@ -27,7 +29,7 @@ class Scene
 
     private:
     	void drawNonPortals(glm::mat4 const &viewMat, glm::mat4 const &projMat);
-        void updateLightData();
+        void updateLightData(DrawableEntity *drawableEntity);
 };
         
 #endif

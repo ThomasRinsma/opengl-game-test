@@ -5,8 +5,8 @@ string const requiredShader = "simpleText";
 
 Text::Text(string const &text)
 :
+	DrawableEntity(ResourceManager::instance().shaderProgram(requiredShader)),
 	d_texture(ResourceManager::instance().texture(fontTexName)),
-	d_shaderProgram(ResourceManager::instance().shaderProgram(requiredShader)),
 	d_text(text)
 {
 	// Create a VAO

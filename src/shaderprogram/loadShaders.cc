@@ -1,6 +1,6 @@
 #include "shaderprogram.ih"
 
-bool ShaderProgram::loadShaders(string const &vertPath, string const &fragPath)
+void ShaderProgram::loadShaders(string const &vertPath, string const &fragPath)
 {
 	// Load the files into ifstreams
 	ifstream vertexFile(vertPath);
@@ -35,7 +35,7 @@ bool ShaderProgram::loadShaders(string const &vertPath, string const &fragPath)
 		char buffer[512];
 		glGetShaderInfoLog(d_vertexShader, 512, NULL, buffer);
 		cerr << buffer << endl;
-		return false;
+		throw string("error while compiling vertex shader");
 	}
 
 	glShaderSource(d_fragmentShader, 1, &fragCString, NULL);
@@ -47,7 +47,7 @@ bool ShaderProgram::loadShaders(string const &vertPath, string const &fragPath)
 		char buffer[512];
 		glGetShaderInfoLog(d_fragmentShader, 512, NULL, buffer);
 		cerr << buffer << endl;;
-		return false;
+		throw string("error while compiling fragment shader");
 	}
 
 	// Create the shader program
@@ -55,6 +55,4 @@ bool ShaderProgram::loadShaders(string const &vertPath, string const &fragPath)
 	
 	glAttachShader(d_shaderProgram, d_vertexShader);
 	glAttachShader(d_shaderProgram, d_fragmentShader);
-
-	return true;
 }
