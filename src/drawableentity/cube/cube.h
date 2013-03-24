@@ -13,7 +13,6 @@ class Cube : public DrawableEntity
 	GLuint d_vao;
 
 	Texture &d_texture;
-	ShaderProgram &d_shaderProgram;
 
     public:
         Cube(std::string const &texName);

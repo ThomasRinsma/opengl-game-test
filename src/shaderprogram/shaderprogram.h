@@ -15,8 +15,6 @@ struct ShaderProgram
 		GLuint d_vertexShader, d_fragmentShader;
 	    GLuint d_shaderProgram;
 
-	    bool d_error = false;
-
     public:
         ShaderProgram(std::string const &shaderPath);
 
@@ -24,7 +22,7 @@ struct ShaderProgram
         void use() const;
 
     private:
-    	bool loadShaders(std::string const &vertPath, std::string const &fragPath);
+    	void loadShaders(std::string const &vertPath, std::string const &fragPath);
     	void linkShaders(std::vector<std::string> const &uniformNames);
 };
         

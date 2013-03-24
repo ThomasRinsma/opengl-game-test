@@ -13,7 +13,6 @@ class GenericModel : public DrawableEntity
 {
     Model &d_model;
     Texture &d_texture;
-    ShaderProgram &d_shaderProgram;
 
     public:
         GenericModel(std::string const &texName, std::string const &modelName);

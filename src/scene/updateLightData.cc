@@ -1,34 +1,57 @@
 #include "scene.ih"
 
-void Scene::updateLightData()
+void Scene::updateLightData(DrawableEntity *drawableEntity)
 {
+
+	// TODO: Check if drawableEntity needs lighting at all!!
+
 	// Update light positions (only one now) in all shaders that use lighting (only one now)
-	ShaderProgram &sp = ResourceManager::instance().shaderProgram("simpleTexture");
+	ShaderProgram &sp = drawableEntity->shaderProgram();
 	sp.use();
 
-	/*
-		struct lightData
+	// Sort lights in new vector, ordered by distance to drawableEntity.
+	vector<Light *> closestLights(d_lights);
+	sort(closestLights.begin(), closestLights.end(),
+		[&drawableEntity](Light *a, Light *b)
 		{
-			vec3 pos;
-			vec3 color;
-			vec3 spec;
-			float constAtt;
-			float linAtt;
-			float quadAtt;
+			return glm::distance(drawableEntity->position(), a->position()) <
+				glm::distance(drawableEntity->position(), b->position());
+		}
+	);
 
-			vec3 spotDir;
-			float spotCutoff;
-			float spotExp;
-		};
-	*/
-	Light &light = *d_lights[0];
-	glUniform3f(sp.uniforms["light.pos"], light.position().x, light.position().y, light.position().z);
-	glUniform3f(sp.uniforms["light.color"], light.color.x, light.color.y, light.color.z);
-	glUniform3f(sp.uniforms["light.spec"], light.spec.x, light.spec.y, light.spec.z);
-	glUniform1f(sp.uniforms["light.constAtt"], light.constAtt);
-	glUniform1f(sp.uniforms["light.linAtt"], light.linAtt);
-	glUniform1f(sp.uniforms["light.quadAtt"], light.quadAtt);
-	glUniform3f(sp.uniforms["light.spotDir"], light.spotDir.x, light.spotDir.y, light.spotDir.z);
-	glUniform1f(sp.uniforms["light.spotCutoff"], light.spotCutoff);
-	glUniform1f(sp.uniforms["light.spotExp"], light.spotExp);
+	// Only pass the first
+	//     max(s_lightsPerObject, amount of lights)
+	// lights to the shader.
+	for (size_t idx = 0; idx != s_lightsPerObject and idx < closestLights.size(); ++idx)
+	{
+		Light &light = *closestLights[idx];
+		string lightName = "light" + to_string(idx);
+
+		glUniform3f(sp.uniforms[lightName + ".pos"], light.position().x, light.position().y, light.position().z);
+		glUniform3f(sp.uniforms[lightName + ".color"], light.color.x, light.color.y, light.color.z);
+		glUniform3f(sp.uniforms[lightName + ".spec"], light.spec.x, light.spec.y, light.spec.z);
+		glUniform1f(sp.uniforms[lightName + ".constAtt"], light.constAtt);
+		glUniform1f(sp.uniforms[lightName + ".linAtt"], light.linAtt);
+		glUniform1f(sp.uniforms[lightName + ".quadAtt"], light.quadAtt);
+		glUniform3f(sp.uniforms[lightName + ".spotDir"], light.spotDir.x, light.spotDir.y, light.spotDir.z);
+		glUniform1f(sp.uniforms[lightName + ".spotCutoff"], light.spotCutoff);
+		glUniform1f(sp.uniforms[lightName + ".spotExp"], light.spotExp);
+	}
 }
+
+
+/*
+	struct lightData
+	{
+		vec3 pos;
+		vec3 color;
+		vec3 spec;
+		float constAtt;
+		float linAtt;
+		float quadAtt;
+
+		vec3 spotDir;
+		float spotCutoff;
+		float spotExp;
+	};
+*/

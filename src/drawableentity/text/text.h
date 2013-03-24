@@ -13,7 +13,6 @@ class Text : public DrawableEntity
 	GLuint d_vao;
 	
     Texture &d_texture;
-    ShaderProgram &d_shaderProgram;
 
 	std::string d_text;
 

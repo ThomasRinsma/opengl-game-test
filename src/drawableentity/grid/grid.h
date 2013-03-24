@@ -11,8 +11,6 @@ class Grid : public DrawableEntity
 	GLuint d_vbo;
 	GLuint d_vao;
 
-	ShaderProgram &d_shaderProgram;
-
     public:
         Grid(); // TODO: color
         ~Grid();

@@ -12,7 +12,6 @@ class Portal : public DrawableEntity
 	GLuint d_vbo;
 	GLuint d_vao;
 
-    ShaderProgram &d_shaderProgram;
     Entity *d_destination;
 	
     public:

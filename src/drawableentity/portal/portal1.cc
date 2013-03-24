@@ -4,7 +4,7 @@ string const requiredShader = "simpleColor";
 
 Portal::Portal(Entity *destination)
 :
-	d_shaderProgram(ResourceManager::instance().shaderProgram(requiredShader)),
+	DrawableEntity(ResourceManager::instance().shaderProgram(requiredShader)),
 	d_destination(destination)
 {
 	// Create a VAO
