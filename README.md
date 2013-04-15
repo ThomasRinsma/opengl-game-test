@@ -8,4 +8,4 @@ with new C++11 stuff. I'm also using the development version
 of SFML, so you'll need to have quite new packages to be able
 to compile this.
 
-![Screenshot](screenshot.png)
+![Screenshot](https://bitbucket.org/ThomasRinsma/opengl-game-test/raw/tip/screenshot.png)
