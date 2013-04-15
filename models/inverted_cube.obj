@@ -1,6 +1,6 @@
 # Blender v2.63 (sub 0) OBJ File: ''
 # www.blender.org
-o Cube
+o InvertedCube
 v 0.500000 -0.500000 -0.500000
 v 0.500000 -0.500000 0.500000
 v -0.500000 -0.500000 0.499999

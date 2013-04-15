@@ -2,6 +2,9 @@
 
 Model::~Model()
 {
-	glDeleteBuffers(1, &d_vbo);
-	glDeleteVertexArrays(1, &d_vao);
+	for (WavefrontObject &wo : d_objects)
+	{
+		glDeleteBuffers(1, &wo.vbo);
+		glDeleteVertexArrays(1, &wo.vao);
+	}
 }

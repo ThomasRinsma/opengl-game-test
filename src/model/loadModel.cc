@@ -1,126 +1,173 @@
 #include "model.ih"
 
+void Model::insertVertices(vector<size_t> indices, int *vertIdx, int *texIdx, int *normIdx)
+{
+	vector<float> &arr = d_objects.back().vboArray;
+
+	glm::vec3 vert[3], norm[3];
+	glm::vec2 tex[3];
+	int j = 0;
+
+	for (size_t i : indices)
+	{
+		vert[j] = d_objects.back().verts[vertIdx[i] - 1];
+
+		if (texIdx[i] > 0)
+			tex[j] = d_objects.back().texcoords[texIdx[i] - 1];
+		else if (texIdx[i] < 0)
+			tex[j] = *(d_objects.back().texcoords.end() + texIdx[i]);
+		else
+			tex[j] = glm::vec2(0.0f);
+
+		if (normIdx[i] > 0)
+			norm[j] = d_objects.back().norms[normIdx[i] - 1];
+		else if (normIdx[i] < 0)
+			norm[j] = *(d_objects.back().norms.end() + normIdx[i]);
+		else
+			norm[j] = glm::vec3(0.0f);
+
+		arr.insert(arr.end(), {vert[j].x, vert[j].y, vert[j].z});
+		arr.insert(arr.end(), {norm[j].x, norm[j].y, norm[j].z});
+		arr.insert(arr.end(), {tex[j].x, tex[j].y});
+
+		++j;
+	}
+}
+
 void Model::loadModel(string const &path)
 {
 	ifstream modelFile(path);
 	if (not modelFile)
 		throw string("failed to load model '" + path + "' from file.");
 
-	vector<glm::vec3> verts;
-	vector<glm::vec3> norms;
-	vector<glm::vec2> texcoords;
+	bool smoothing; // TODO
+	bool firstObject = true;
+	d_objects.push_back(WavefrontObject());
 
 	while (modelFile)
 	{
-		string lineStr;
-		getline(modelFile, lineStr);
-
-		if (not modelFile)
-			break;
-
-		stringstream lineStream(lineStr);
-
-		float x, y, z;
-		float u, v;
-
-		string type;
+		string currentLine, type;
+		
+		getline(modelFile, currentLine);
+		stringstream lineStream(currentLine);
 		lineStream >> type;
 
-		if (not lineStream)
-		{
-			cout << "continue, line probably empty!" << endl;
+		// comment
+		if (type == "#")
 			continue;
+
+		// object name
+		else if (type == "o")
+		{
+			string name;
+			lineStream >> name;
+
+			if (not firstObject)
+				d_objects.push_back(WavefrontObject());
+
+			firstObject = false;
+
+			d_objects.back().name = name;
+
+			cout << "o line spotted: name = " << name << endl;
 		}
 
-
-		if (type == "v") // vertex
+		// smoothing group
+		else if (type == "s")
 		{
+			// Sets the smoothing group number
+			// to disable: 0 or 'off'
+			// to enable: any other positive number
+			size_t smoothNum = 0;
+			lineStream >> smoothNum;
+
+			if (smoothNum > 0)
+				smoothing = true;
+		}
+
+		// vertex specification
+		else if (type == "v")
+		{
+			// v x y z
+			float x, y, z;
 			lineStream >> x >> y >> z;
 
-			if (not lineStream)
-			{
-				cout << "continue!" << endl;
-				continue;
-			}
-
-			verts.push_back(glm::vec3(x, y, z));
+			d_objects.back().verts.push_back(glm::vec3(x, y, z));
 		}
 
-		else if (type == "vn") // normal
+		// vertex normal specification
+		else if (type == "vn")
 		{
-			lineStream >> x >> y >> z;
+			// vn i j k
+			float i, j, k;
+			lineStream >> i >> j >> k;
 
-			if (not lineStream)
-			{
-				cout << "continue!" << endl;
-				continue;
-			}
-
-			norms.push_back(glm::vec3(x, y, z));
+			d_objects.back().norms.push_back(glm::vec3(i, j, k));
 		}
 
-		else if (type == "vt") // tex coord
+		// texture coordinate specification
+		else if (type == "vt")
 		{
-			// TODO: sometimes there's a third (w) coord, read it
+			// vt u v(0) w(0)
+			float u, v = 0;
 			lineStream >> u >> v;
 
-			if (not lineStream)
-			{
-				cout << "continue!" << endl;
-				continue;
-			}
-
-			texcoords.push_back(glm::vec2(u, v));
+			d_objects.back().texcoords.push_back(glm::vec2(u, 1.0f-v));
 		}
 
-		else if (type == "f") // face, assume triangles, assume faces come last
+		// face specification
+		else if (type == "f")
 		{
-			string v[3];
-			lineStream >> v[0] >> v[1] >> v[2];
+			// f v1(/[vt1]/vn1) v2(/[vt2]/vn2) v3(/[vt3]/vn3) v4(/[vt4]/vn4)  ...
+			// minimum of 3 vertices, no maximum
+			// indices start from 1, can be negative to count relatively upwards
+			// in the file (-1 is the last one before this line)
 
-			if (not lineStream)
+			size_t vertNum = 0;
+			int vertIdx[4], texIdx[4], normIdx[4];
+			while (lineStream)
 			{
-				cout << "continue!" << endl;
-				continue;
-			}
+				string vertStr;
+				lineStream >> vertStr;
 
-			size_t vertNum[3], texCoordNum[3], normNum[3];
+				if (vertStr.size() == 0)
+					continue;
 
-			for (size_t idx = 0; idx != 3; ++idx)
-			{
-				// Split string of format "123/456/789" or "123//789"
-				// into three size_t's.
-				// This is probably the worst way to do this
-				// TODO: Replace with some fancy GA/STL way
-				vertNum[idx] = stoi(v[idx].substr(0, v[idx].find('/')));
-
-				int len = v[idx].find('/', v[idx].find('/') + 1) - (v[idx].find('/') + 1);
-
-				texCoordNum[idx] = 0;
-				if (len != 0)
+				if (vertStr.find("//") != string::npos) // v and vn are given
 				{
-					texCoordNum[idx] = stoi(v[idx].substr(v[idx].find('/') + 1, len));
+					sscanf(vertStr.c_str(), "%d//%d", &vertIdx[vertNum], &normIdx[vertNum]);
+					texIdx[vertNum] = 0;
 				}
-				
-				normNum[idx] = stoi(v[idx].substr(v[idx].find('/') + 1 + len + 1));
+				else if (vertStr.find("/") != string::npos) // v, vt and vn are given
+				{
+					sscanf(vertStr.c_str(), "%d/%d/%d", &vertIdx[vertNum], &texIdx[vertNum], &normIdx[vertNum]);
+				}
+				else // only v is given
+				{
+					sscanf(vertStr.c_str(), "%d", &vertIdx[vertNum]);
+					texIdx[vertNum] = 0;
+					normIdx[vertNum] = 0;
+				}
 
-				// insert into vertex vector
-				// push verts[vertNum[idx]], norms[normNum[idx]], texcoords[texCoordNum[idx]])
-
-				d_verts.insert(d_verts.end(), {verts[vertNum[idx]-1].x, verts[vertNum[idx]-1].y, verts[vertNum[idx]-1].z});
-				d_verts.insert(d_verts.end(), {norms[normNum[idx]-1].x, norms[normNum[idx]-1].y, norms[normNum[idx]-1].z});
-
-				if(texCoordNum[idx] != 0)
-					d_verts.insert(d_verts.end(), {texcoords[texCoordNum[idx]-1].x, texcoords[texCoordNum[idx]-1].y});
-				else
-					d_verts.insert(d_verts.end(), {0.0f, 1.0f});
+				++vertNum;
+				if (vertNum == 4)
+					break;
 			}
-		}
-		else
-		{
-			//cout << "type: '" << type << "'" << endl;
-		}
-	}
 
-	d_numVerts = d_verts.size() / 8;
+			if (vertNum < 3)
+				throw string(path + ": face statement with less than three vertices.");
+
+			// triangle
+			insertVertices({0, 1, 2}, vertIdx, texIdx, normIdx);
+
+			if (vertNum == 4) // square, extra triangle
+				insertVertices({2, 3, 0}, vertIdx, texIdx, normIdx);
+		}
+
+		else if (type.length() > 0)
+		{
+			throw string(path + ": unsupported command '" + type + "' found.");
+		}
+
+	}
 }

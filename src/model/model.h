@@ -4,15 +4,24 @@
 #include <vector>
 #include <string>
 #include <GL/gl.h>
+#include <glm/glm.hpp>
 #include "../shaderprogram/shaderprogram.h"
 
 class Model
 {
-	GLuint d_vbo;
-	GLuint d_vao;
+    struct WavefrontObject
+    {
+        GLuint vbo;
+        GLuint vao;
 
-	std::vector<float> d_verts;
-	size_t d_numVerts;
+        std::string name; 
+        std::vector<glm::vec3> verts;
+        std::vector<glm::vec3> norms;
+        std::vector<glm::vec2> texcoords;
+        std::vector<float> vboArray;
+    };
+
+    std::vector<WavefrontObject> d_objects;
 
     public:
         Model(std::string const &path);
@@ -23,6 +32,9 @@ class Model
 
     private:
     	void loadModel(std::string const &path);
+
+        // helper for loadModel
+        void insertVertices(std::vector<size_t> indices, int *vertIdx, int *texIdx, int *normIdx);
 };
         
 #endif
