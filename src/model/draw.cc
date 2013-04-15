@@ -2,6 +2,10 @@
 
 void Model::draw() const
 {
-	glBindVertexArray(d_vao);
-	glDrawArrays(GL_TRIANGLES, 0, d_numVerts);
+	for (WavefrontObject const &wo : d_objects)
+	{
+		glBindVertexArray(wo.vao);
+		//cout << "drawing " << wo.name << " with " << (wo.vboArray.size() / 8) << "vertices.\n";
+		glDrawArrays(GL_TRIANGLES, 0, wo.vboArray.size() / 8);
+	}
 }
