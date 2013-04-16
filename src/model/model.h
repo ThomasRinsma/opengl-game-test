@@ -15,9 +15,11 @@ class Model
         GLuint vao;
 
         std::string name; 
+
         std::vector<glm::vec3> verts;
         std::vector<glm::vec3> norms;
         std::vector<glm::vec2> texcoords;
+        
         std::vector<float> vboArray;
     };
 

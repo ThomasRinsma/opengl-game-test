@@ -4,11 +4,10 @@ Model::Model(std::string const &path)
 {
 	loadModel(path);
 
-	// Create a VAO
 	for (WavefrontObject &wo : d_objects)
 	{
+		// Create a VAO
 		glGenVertexArrays(1, &wo.vao);
-		cout << "generated vao: " << wo.vao << endl;
 		glBindVertexArray(wo.vao);
 
 		// Create a VBO

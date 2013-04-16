@@ -68,8 +68,6 @@ void Model::loadModel(string const &path)
 			firstObject = false;
 
 			d_objects.back().name = name;
-
-			cout << "o line spotted: name = " << name << endl;
 		}
 
 		// smoothing group
@@ -168,6 +166,5 @@ void Model::loadModel(string const &path)
 		{
 			throw string(path + ": unsupported command '" + type + "' found.");
 		}
-
 	}
 }
