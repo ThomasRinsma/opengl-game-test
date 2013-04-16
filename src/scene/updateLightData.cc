@@ -21,9 +21,8 @@ void Scene::updateLightData(DrawableEntity *drawableEntity)
 		}
 	);
 
-	// Only pass the first
-	//     min(s_lightsPerObject, amount of lights)
-	// lights to the shader.
+	// s_lightsPerObject is the maximum number of lights
+	// the shader accepts, defined as a constant in the shader.
 	for (size_t idx = 0; idx != s_lightsPerObject; ++idx)
 	{
 		Light &light = *closestLights[idx];
