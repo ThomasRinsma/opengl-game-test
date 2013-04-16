@@ -27,15 +27,15 @@ void Scene::updateLightData(DrawableEntity *drawableEntity)
 		Light &light = *closestLights[idx];
 		string lightName = "light" + to_string(idx);
 
-		glUniform3f(sp.uniforms[lightName + ".pos"], light.position().x, light.position().y, light.position().z);
-		glUniform3f(sp.uniforms[lightName + ".color"], light.color.x, light.color.y, light.color.z);
-		glUniform3f(sp.uniforms[lightName + ".spec"], light.spec.x, light.spec.y, light.spec.z);
-		glUniform1f(sp.uniforms[lightName + ".constAtt"], light.constAtt);
-		glUniform1f(sp.uniforms[lightName + ".linAtt"], light.linAtt);
-		glUniform1f(sp.uniforms[lightName + ".quadAtt"], light.quadAtt);
-		glUniform3f(sp.uniforms[lightName + ".spotDir"], light.spotDir.x, light.spotDir.y, light.spotDir.z);
-		glUniform1f(sp.uniforms[lightName + ".spotCutoff"], light.spotCutoff);
-		glUniform1f(sp.uniforms[lightName + ".spotExp"], light.spotExp);
+		glUniform3f(sp.uniform(lightName + ".pos"), light.position().x, light.position().y, light.position().z);
+		glUniform3f(sp.uniform(lightName + ".color"), light.color.x, light.color.y, light.color.z);
+		glUniform3f(sp.uniform(lightName + ".spec"), light.spec.x, light.spec.y, light.spec.z);
+		glUniform1f(sp.uniform(lightName + ".constAtt"), light.constAtt);
+		glUniform1f(sp.uniform(lightName + ".linAtt"), light.linAtt);
+		glUniform1f(sp.uniform(lightName + ".quadAtt"), light.quadAtt);
+		glUniform3f(sp.uniform(lightName + ".spotDir"), light.spotDir.x, light.spotDir.y, light.spotDir.z);
+		glUniform1f(sp.uniform(lightName + ".spotCutoff"), light.spotCutoff);
+		glUniform1f(sp.uniform(lightName + ".spotExp"), light.spotExp);
 	}
 }
 

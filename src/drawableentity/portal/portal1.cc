@@ -30,13 +30,13 @@ Portal::Portal(Entity *destination)
 	
 
 	// Link array buffer to "position" attribute
-	GLint posAttrib = d_shaderProgram.attribLocation("position");
+	GLint posAttrib = d_shaderProgram.attribute("position");
 	glEnableVertexAttribArray(posAttrib);
 	glVertexAttribPointer(posAttrib, 3, GL_FLOAT, GL_FALSE, 6 * sizeof(float), 0);
 
 
 	// Link array buffer to "color" attribute
-	GLint colAttrib = d_shaderProgram.attribLocation("color");
+	GLint colAttrib = d_shaderProgram.attribute("color");
 	glEnableVertexAttribArray(colAttrib);
 	glVertexAttribPointer(colAttrib, 3, GL_FLOAT, GL_FALSE, 6 * sizeof(float), (void *)(3 * sizeof(float)));
 }

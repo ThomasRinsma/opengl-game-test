@@ -6,7 +6,7 @@ void Portal::drawImpl(glm::mat4 const &viewMat, glm::mat4 const &projMat)
 	
 	// Update uniform
 	glm::mat4 mvpMat = projMat * viewMat * d_modelMat;
-	glUniformMatrix4fv(d_shaderProgram.uniforms["mvp"], 1, GL_FALSE, glm::value_ptr(mvpMat));
+	glUniformMatrix4fv(d_shaderProgram.uniform("mvp"), 1, GL_FALSE, glm::value_ptr(mvpMat));
 
 	// Draw portal
 	glBindVertexArray(d_vao);

@@ -4,26 +4,28 @@
 #include <SFML/OpenGL.hpp>
 #include <SFML/Window.hpp> // for opengl stuff
 #include <unordered_map>
-#include <vector>
 #include <iosfwd>
 
 struct ShaderProgram
 {
-	std::unordered_map<std::string, GLint> uniforms;
-
 	private:
 		GLuint d_vertexShader, d_fragmentShader;
 	    GLuint d_shaderProgram;
 
+        std::unordered_map<std::string, GLuint> d_uniforms;
+        std::unordered_map<std::string, GLuint> d_attributes;
+
     public:
         ShaderProgram(std::string const &shaderPath);
 
-        GLuint attribLocation(std::string const &attrName) const;
+        GLuint attribute(std::string const &attributeName) const;
+        GLuint uniform(std::string const &uniformName) const;
+
         void use() const;
 
     private:
     	void loadShaders(std::string const &vertPath, std::string const &fragPath);
-    	void linkShaders(std::vector<std::string> const &uniformNames);
+    	void linkShaders();
 };
         
 #endif
