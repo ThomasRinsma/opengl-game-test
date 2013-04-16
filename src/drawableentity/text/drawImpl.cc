@@ -22,9 +22,9 @@ void Text::drawImpl(glm::mat4 const &viewMat, glm::mat4 const &projMat)
 
 		// Update mvp uniform
 		glm::mat4 mvplMat = mvpMat * localMat;
-		glUniformMatrix4fv(d_shaderProgram.uniforms["mvp"], 1, GL_FALSE, glm::value_ptr(mvplMat));
+		glUniformMatrix4fv(d_shaderProgram.uniform("mvp"), 1, GL_FALSE, glm::value_ptr(mvplMat));
 
-		glUniform1i(d_shaderProgram.uniforms["c"], d_text[idx]);
+		glUniform1i(d_shaderProgram.uniform("c"), d_text[idx]);
 		glDrawArrays(GL_TRIANGLES, 0, 6);
 
 		// Move next char to the right

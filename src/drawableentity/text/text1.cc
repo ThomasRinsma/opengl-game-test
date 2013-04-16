@@ -32,11 +32,11 @@ Text::Text(string const &text)
 	
 
 	// Link array buffer to "position" attribute
-	GLint posAttrib = d_shaderProgram.attribLocation("position");
+	GLint posAttrib = d_shaderProgram.attribute("position");
 	glEnableVertexAttribArray(posAttrib);
 	glVertexAttribPointer(posAttrib, 3, GL_FLOAT, GL_FALSE, 5 * sizeof(float), 0);
 
-	GLint texAttrib = d_shaderProgram.attribLocation("texcoord");
+	GLint texAttrib = d_shaderProgram.attribute("texcoord");
 	glEnableVertexAttribArray(texAttrib);
 	glVertexAttribPointer(texAttrib, 2, GL_FLOAT, GL_FALSE, 5 * sizeof(float), (void *)(3 * sizeof(float)));
 
