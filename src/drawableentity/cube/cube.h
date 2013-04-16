@@ -18,10 +18,17 @@ class Cube : public DrawableEntity
         Cube(std::string const &texName);
         ~Cube();
 
+        virtual bool needsLighting() const;
+
 
     private:
         virtual void updateImpl(float deltaTime);
     	virtual void drawImpl(glm::mat4 const &viewMat, glm::mat4 const &projMat);
 };
+
+inline bool Cube::needsLighting() const
+{
+	return true;
+}
         
 #endif

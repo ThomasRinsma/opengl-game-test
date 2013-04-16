@@ -15,9 +15,16 @@ class Grid : public DrawableEntity
         Grid(); // TODO: color
         ~Grid();
 
+        virtual bool needsLighting() const;
+
     private:
     	virtual void updateImpl(float deltaTime);
     	virtual void drawImpl(glm::mat4 const &viewMat, glm::mat4 const &projMat);
 };
+
+inline bool Grid::needsLighting() const
+{
+	return false;
+}
         
 #endif

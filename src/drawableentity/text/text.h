@@ -22,6 +22,8 @@ class Text : public DrawableEntity
 
         void setText(std::string const &text);
 
+        virtual bool needsLighting() const;
+
     private:
         virtual void updateImpl(float deltaTime);
     	virtual void drawImpl(glm::mat4 const &viewMat, glm::mat4 const &projMat);
@@ -30,6 +32,11 @@ class Text : public DrawableEntity
 inline void Text::setText(std::string const &text)
 {
     d_text = text;
+}
+
+inline bool Text::needsLighting() const
+{
+    return false;
 }
         
 #endif

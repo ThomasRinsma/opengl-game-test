@@ -18,9 +18,16 @@ class GenericModel : public DrawableEntity
         GenericModel(std::string const &texName, std::string const &modelName);
         ~GenericModel();
 
+        virtual bool needsLighting() const;
+
     private:
     	virtual void updateImpl(float deltaTime);
     	virtual void drawImpl(glm::mat4 const &viewMat, glm::mat4 const &projMat);
 };
+
+inline bool GenericModel::needsLighting() const
+{
+	return true;
+}
         
 #endif
