@@ -6,6 +6,10 @@
 
 class Entity
 {
+	// These are for positionChanged()
+	glm::vec3 d_prevPosition;
+	bool d_positionChanged = true;
+
 	protected:
 		glm::mat4 d_modelMat;
 		// TODO: acceleration?
@@ -26,6 +30,8 @@ class Entity
 		void addOrientation(glm::vec3 const &axes, float radAngle, bool worldSpace);
 		void resetOrientation();
 
+		bool positionChanged() const;
+
 		glm::vec3 const &velocity() const;
 		glm::vec3 const &position() const;
 		glm::vec3 const &scale() const;
@@ -38,6 +44,11 @@ class Entity
 		virtual void updateImpl(float deltaTime) = 0;
 		void updateModelMat();
 };
+
+inline bool Entity::positionChanged() const
+{
+	return d_positionChanged;
+}
 
 inline glm::mat4 const Entity::modelMat() const
 {

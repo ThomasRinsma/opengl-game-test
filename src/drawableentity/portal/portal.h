@@ -21,6 +21,8 @@ class Portal : public DrawableEntity
         Entity *destination() const;
         void setDestination(Entity *destination);
 
+        virtual bool needsLighting() const;
+
         glm::mat4 const clippedProjMat(glm::mat4 const &viewMat, glm::mat4 const &projMat) const;
 
     private:
@@ -36,6 +38,11 @@ inline Entity *Portal::destination() const
 inline void Portal::setDestination(Entity *destination)
 {
 	d_destination = destination;
+}
+
+inline bool Portal::needsLighting() const
+{
+    return false;
 }
         
 #endif

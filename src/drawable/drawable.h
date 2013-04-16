@@ -16,6 +16,7 @@ class Drawable
         ShaderProgram &shaderProgram();
 
         void draw(glm::mat4 const &viewMat, glm::mat4 const &projMat);
+        virtual bool needsLighting() const = 0;
 
     private:
         virtual void drawImpl(glm::mat4 const &viewMat, glm::mat4 const &projMat) = 0;

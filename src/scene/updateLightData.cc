@@ -1,11 +1,12 @@
 #include "scene.ih"
-
+#include <iostream>
 void Scene::updateLightData(DrawableEntity *drawableEntity)
 {
+	// Check if the entity needs lighting at all
+	if (not drawableEntity->needsLighting())
+		return;
 
-	// TODO: Check if drawableEntity needs lighting at all!!
-
-	// Update light positions (only one now) in all shaders that use lighting (only one now)
+	// Switch to the entity's shader
 	ShaderProgram &sp = drawableEntity->shaderProgram();
 	sp.use();
 
@@ -20,11 +21,17 @@ void Scene::updateLightData(DrawableEntity *drawableEntity)
 	);
 
 	// Only pass the first
-	//     max(s_lightsPerObject, amount of lights)
+	//     min(s_lightsPerObject, amount of lights)
 	// lights to the shader.
-	for (size_t idx = 0; idx != s_lightsPerObject and idx < closestLights.size(); ++idx)
+	for (size_t idx = 0; idx != s_lightsPerObject and idx != closestLights.size(); ++idx)
 	{
 		Light &light = *closestLights[idx];
+
+		// Only send data to shader if entity's position changed,
+		// or if light's position changed.
+		if ((not drawableEntity->positionChanged()) and (not light.positionChanged()))
+			continue;
+
 		string lightName = "light" + to_string(idx);
 
 		glUniform3f(sp.uniform(lightName + ".pos"), light.position().x, light.position().y, light.position().z);
