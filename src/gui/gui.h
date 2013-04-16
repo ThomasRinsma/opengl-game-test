@@ -6,7 +6,6 @@
 #include <SFML/Window.hpp> // for sf::Window
 #include <glm/glm.hpp> // for glm::mat4
 #include "../drawableentity/drawableentity.h"
-#include "../player/player.h"
 
 class GUI
 {
@@ -14,12 +13,8 @@ class GUI
 	glm::mat4 d_viewMat;
 	glm::mat4 d_projMat;
 
-    // Store Player to retrieve info from?
-    // TODO: is this necesairy?
-    Player &d_player;
-
     public:
-        GUI(sf::Window &win, Player &player);
+        GUI(sf::Window &win);
         ~GUI();
 
         void add(std::string const &name, DrawableEntity *object);
@@ -27,14 +22,8 @@ class GUI
         void draw();
 
         DrawableEntity *get(std::string const &name);
-        //glm::mat4 &getProjMat() const;
 
     private:
 };
-
-//inline glm::mat4 &GUI::getProjMat() const
-//{
-//	return d_projMat;
-//}
         
 #endif
