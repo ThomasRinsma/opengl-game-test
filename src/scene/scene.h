@@ -14,7 +14,7 @@ class Scene
 	std::vector<Portal *> d_portals;
     std::vector<Light *> d_lights;
 
-    static const size_t s_lightsPerObject = 3;
+    static const size_t s_lightsPerObject = 8;
 
     public:
         Scene();
