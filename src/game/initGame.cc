@@ -28,7 +28,7 @@ void Game::initGame()
 	debugText->setPosition(glm::vec3(4.0f, d_win.getSize().y - 20.0f, 0.0f));
 
 	
-	cube->setPosition(glm::vec3(5.0f, 1.5f, 0.0f));
+	cube->setPosition(glm::vec3(0.0f, 1.5f, 1.5f));
 	monkey->setPosition(glm::vec3(0.0f, 2.0f, -3.0f));
 	companion->setPosition(glm::vec3(0.0f, 2.0f, 3.0f));
 
