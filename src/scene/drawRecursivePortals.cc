@@ -1,6 +1,6 @@
 #include "scene.ih"
 
-void Scene::drawRecursivePortals(glm::mat4 const &viewMat, glm::mat4 const &projMat, size_t recursionLevel)
+void Scene::drawRecursivePortals(glm::mat4 const &viewMat, glm::mat4 const &projMat, size_t maxRecursionLevel, size_t recursionLevel)
 {
 	for (Portal *portal : d_portals)
 	{
@@ -36,7 +36,7 @@ void Scene::drawRecursivePortals(glm::mat4 const &viewMat, glm::mat4 const &proj
 			* glm::inverse(portal->destination()->modelMat());
 
 		// Base case, render inside of inner portal
-		if (recursionLevel == 2)
+		if (recursionLevel == maxRecursionLevel)
 		{
 			// Enable color and depth drawing
 			glColorMask(GL_TRUE, GL_TRUE, GL_TRUE, GL_TRUE);
@@ -70,7 +70,7 @@ void Scene::drawRecursivePortals(glm::mat4 const &viewMat, glm::mat4 const &proj
 		{
 			// Recursion case
 			// Pass our new view matrix and the clipped projection matrix (see above)
-			drawRecursivePortals(destView, portal->clippedProjMat(destView, projMat), recursionLevel + 1);
+			drawRecursivePortals(destView, portal->clippedProjMat(destView, projMat), maxRecursionLevel, recursionLevel + 1);
 		}
 
 		// Disable color and depth drawing
