@@ -10,14 +10,17 @@
 
 class Scene
 {
+    Player &d_player;
+
 	std::vector<DrawableEntity *> d_drawableEntities;
 	std::vector<Portal *> d_portals;
     std::vector<Light *> d_lights;
 
-    static const size_t s_lightsPerObject = 8;
+    static constexpr const size_t s_lightsPerObject = 8;
+    static constexpr const float s_teleportThreshold = 0.3f;
 
     public:
-        Scene();
+        Scene(Player &player);
         ~Scene();
 
         void add(DrawableEntity *object);	// general
@@ -25,12 +28,13 @@ class Scene
         void add(Light *light);
 
         void update(float deltaTime);
-        void draw(Player const &player);
+        void draw();
 
     private:
         void drawRecursivePortals(glm::mat4 const &viewMat, glm::mat4 const &projMat, size_t recursionLevel);
     	void drawNonPortals(glm::mat4 const &viewMat, glm::mat4 const &projMat);
         void updateLightData(DrawableEntity *drawableEntity);
+        void handleCollisions();
 };
         
 #endif

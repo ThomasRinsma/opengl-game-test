@@ -1,4 +1,6 @@
 #include "scene.ih"
 
-Scene::Scene()
+Scene::Scene(Player &player)
+:
+	d_player(player)
 {}
