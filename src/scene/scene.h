@@ -31,7 +31,7 @@ class Scene
         void draw();
 
     private:
-        void drawRecursivePortals(glm::mat4 const &viewMat, glm::mat4 const &projMat, size_t recursionLevel);
+        void drawRecursivePortals(glm::mat4 const &viewMat, glm::mat4 const &projMat, size_t maxRecursionLevel, size_t recursionLevel = 0);
     	void drawNonPortals(glm::mat4 const &viewMat, glm::mat4 const &projMat);
         void updateLightData(DrawableEntity *drawableEntity);
         void handleCollisions();
