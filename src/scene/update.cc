@@ -7,4 +7,6 @@ void Scene::update(float deltaTime)
 
 	for (Portal *portal : d_portals)
 		portal->update(deltaTime);
+
+	handleCollisions();
 }
