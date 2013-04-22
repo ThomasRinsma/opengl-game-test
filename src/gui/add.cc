@@ -1,6 +1,6 @@
 #include "gui.ih"
 
-void GUI::add(std::string const &name, DrawableEntity *object)
+void GUI::add(string const &name, DrawableEntity* object)
 {
-	d_screenElements.emplace(name, object);
+	d_screenElements[name] = unique_ptr<DrawableEntity>(object);
 }
