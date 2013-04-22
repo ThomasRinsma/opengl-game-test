@@ -35,19 +35,19 @@ void Game::initGame()
 	room->setPosition(glm::vec3(0.0f, 6.0f, 0.0f));
 	room->setScale(glm::vec3(15.0f, 10.0f, 15.0f)); // room sized
 
-	d_scene.add(light1);
-	d_scene.add(light2);
-	d_scene.add(light3);
+	d_scene.add("light1", light1);
+	d_scene.add("light2", light2);
+	d_scene.add("light3", light3);
 
 
-	d_scene.add(grid);
-	d_scene.add(room);
-	d_scene.add(cube);
-	d_scene.add(monkey);
-	d_scene.add(companion);
+	d_scene.add("grid", grid);
+	d_scene.add("room", room);
+	d_scene.add("cube", cube);
+	d_scene.add("monkey", monkey);
+	d_scene.add("companion", companion);
 
-	d_scene.add(portal1);
-	d_scene.add(portal2);
+	d_scene.add("p1", portal1);
+	d_scene.add("p2", portal2);
 
 	d_gui.add("debugText", debugText);
 	
