@@ -2,8 +2,8 @@
 #define INCLUDED_RESOURCEMANAGER_
 
 #include <string>
-#include <unordered_map>
 #include <memory>
+#include <unordered_map>
 #include "../model/model.h"
 #include "../texture/texture.h"
 #include "../shaderprogram/shaderprogram.h"
@@ -17,14 +17,6 @@ class ResourceManager
 
 	std::string const d_resourcePath = "./";
 	
-	// private constructor
-	ResourceManager();
-
-	// No copying
-	ResourceManager(const ResourceManager &) = delete;
-	ResourceManager(const ResourceManager &&) = delete;
-	void operator=(ResourceManager const &) = delete;
-
     public:
     	enum class Type
     	{
@@ -46,6 +38,13 @@ class ResourceManager
         ShaderProgram &shaderProgram(std::string const &name);
 
     private:
+    	// private constructor
+    	ResourceManager();
+
+    	// No copying
+    	ResourceManager(const ResourceManager &) = delete;
+    	ResourceManager(const ResourceManager &&) = delete;
+    	void operator=(ResourceManager const &) = delete;
 };
 
 inline Model &ResourceManager::model(std::string const &name)
