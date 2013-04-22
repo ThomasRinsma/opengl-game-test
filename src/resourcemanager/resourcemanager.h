@@ -11,9 +11,9 @@
 // This is a singleton
 class ResourceManager
 {
-	std::unordered_map<std::string, std::shared_ptr<Model>> d_models;
-	std::unordered_map<std::string, std::shared_ptr<Texture>> d_textures;
-	std::unordered_map<std::string, std::shared_ptr<ShaderProgram>> d_shaderPrograms;
+	std::unordered_map<std::string, std::unique_ptr<Model>> d_models;
+	std::unordered_map<std::string, std::unique_ptr<Texture>> d_textures;
+	std::unordered_map<std::string, std::unique_ptr<ShaderProgram>> d_shaderPrograms;
 
 	std::string const d_resourcePath = "./";
 	

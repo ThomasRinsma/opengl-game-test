@@ -16,7 +16,6 @@ class GUI
 
     public:
         GUI(sf::Window &win);
-        ~GUI();
 
         void add(std::string const &name, DrawableEntity* object);
         void update(float deltaTime);
