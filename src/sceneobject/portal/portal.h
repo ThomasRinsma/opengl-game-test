@@ -2,12 +2,12 @@
 #define INCLUDED_PORTAL_
 
 #include <glm/glm.hpp>
-#include "../drawableentity.h"
+#include "../sceneobject.h"
 #include "../../shaderprogram/shaderprogram.h"
 #include "../../entity/entity.h"
 
 
-class Portal : public DrawableEntity
+class Portal : public SceneObject
 {
 	GLuint d_vbo;
 	GLuint d_vao;
@@ -20,8 +20,6 @@ class Portal : public DrawableEntity
 
         Entity *destination() const;
         void setDestination(Entity *destination);
-
-        virtual bool needsLighting() const;
 
         glm::mat4 const clippedProjMat(glm::mat4 const &viewMat, glm::mat4 const &projMat) const;
 
@@ -38,11 +36,6 @@ inline Entity *Portal::destination() const
 inline void Portal::setDestination(Entity *destination)
 {
 	d_destination = destination;
-}
-
-inline bool Portal::needsLighting() const
-{
-    return false;
 }
         
 #endif

@@ -1,0 +1,4 @@
+#include "sceneobject.h"
+
+using namespace std;
+

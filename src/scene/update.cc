@@ -2,7 +2,7 @@
 
 void Scene::update(float deltaTime)
 {
-	for (auto &pair : d_drawableEntities)
+	for (auto &pair : d_sceneObjects)
 		pair.second->update(deltaTime);
 
 	for (auto &pair : d_portals)

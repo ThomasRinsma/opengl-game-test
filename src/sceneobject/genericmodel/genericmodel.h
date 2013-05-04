@@ -3,13 +3,13 @@
 
 #include <vector>
 #include <glm/glm.hpp>
-#include "../drawableentity.h"
+#include "../sceneobject.h"
 #include "../../model/model.h"
 #include "../../texture/texture.h"
 #include "../../shaderprogram/shaderprogram.h"
 
 
-class GenericModel : public DrawableEntity
+class GenericModel : public SceneObject
 {
     Model &d_model;
     Texture &d_texture;
@@ -18,7 +18,7 @@ class GenericModel : public DrawableEntity
         GenericModel(std::string const &texName, std::string const &modelName);
         ~GenericModel();
 
-        virtual bool needsLighting() const;
+        bool needsLighting() const;
 
     private:
     	virtual void updateImpl(float deltaTime);

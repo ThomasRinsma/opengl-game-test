@@ -2,12 +2,12 @@
 #define INCLUDED_CUBE_
 
 #include <glm/glm.hpp>
-#include "../drawableentity.h"
+#include "../sceneobject.h"
 #include "../../texture/texture.h"
 #include "../../shaderprogram/shaderprogram.h"
 
 
-class Cube : public DrawableEntity
+class Cube : public SceneObject
 {
 	GLuint d_vbo;
 	GLuint d_vao;
@@ -18,7 +18,7 @@ class Cube : public DrawableEntity
         Cube(std::string const &texName);
         ~Cube();
 
-        virtual bool needsLighting() const;
+        bool needsLighting() const;
 
 
     private:

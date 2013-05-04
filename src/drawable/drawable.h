@@ -16,11 +16,16 @@ class Drawable
         ShaderProgram &shaderProgram();
 
         void draw(glm::mat4 const &viewMat, glm::mat4 const &projMat);
-        virtual bool needsLighting() const = 0;
+        virtual bool needsLighting() const;
 
     private:
         virtual void drawImpl(glm::mat4 const &viewMat, glm::mat4 const &projMat) = 0;
 };
+
+inline bool Drawable::needsLighting() const
+{
+    return false;
+}
 
 inline ShaderProgram &Drawable::shaderProgram()
 {

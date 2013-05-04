@@ -5,7 +5,7 @@ string const requiredShader = "simpleText";
 
 Text::Text(string const &text)
 :
-	DrawableEntity(ResourceManager::instance().shaderProgram(requiredShader)),
+	Drawable(ResourceManager::instance().shaderProgram(requiredShader)),
 	d_texture(ResourceManager::instance().texture(fontTexName)),
 	d_text(text)
 {

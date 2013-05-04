@@ -6,22 +6,22 @@
 #include <memory>
 #include <SFML/Window.hpp> // for sf::Window
 #include <glm/glm.hpp> // for glm::mat4
-#include "../drawableentity/drawableentity.h"
+#include "../screenelement/screenelement.h"
 
 class GUI
 {
-	std::unordered_map<std::string, std::unique_ptr<DrawableEntity>> d_screenElements;
+	std::unordered_map<std::string, std::unique_ptr<ScreenElement>> d_screenElements;
 	glm::mat4 d_viewMat;
 	glm::mat4 d_projMat;
 
     public:
         GUI(sf::Window &win);
 
-        void add(std::string const &name, DrawableEntity* object);
+        void add(std::string const &name, ScreenElement* element);
         void update(float deltaTime);
         void draw();
 
-        DrawableEntity &get(std::string const &name);
+        ScreenElement &get(std::string const &name);
 
         template <typename T>
         T &get(std::string const &name);

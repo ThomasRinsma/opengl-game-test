@@ -4,7 +4,7 @@ string const requiredShader = "simpleTexture";
 
 GenericModel::GenericModel(string const &texName, string const &modelName)
 :
-	DrawableEntity(ResourceManager::instance().shaderProgram(requiredShader)),
+	SceneObject(ResourceManager::instance().shaderProgram(requiredShader)),
 	d_model(ResourceManager::instance().model(modelName)),
 	d_texture(ResourceManager::instance().texture(texName))
 {
