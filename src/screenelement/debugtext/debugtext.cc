@@ -1,8 +1,8 @@
 #include "debugtext.ih"
 
-DebugText::DebugText(glm::vec3 const &coords)
+DebugText::DebugText(glm::vec3 const &playerPosition)
 :
 	Text(),
 	ScreenElement(Text::shaderProgram()),
-	d_coords(coords)
+	d_playerPosition(playerPosition)
 {}

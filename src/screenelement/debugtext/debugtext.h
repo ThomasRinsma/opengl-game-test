@@ -7,12 +7,12 @@
 
 class DebugText : public Text, public ScreenElement
 {
-	glm::vec3 const &d_coords;
+	glm::vec3 const &d_playerPosition;
     // TODO: add velocity and/or other stuff
 	float d_fps;
 
     public:
-    	DebugText(glm::vec3 const &coords);
+    	DebugText(glm::vec3 const &playerPosition);
 
     	void setFPS(float fps);
 
