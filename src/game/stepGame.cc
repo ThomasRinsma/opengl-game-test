@@ -8,12 +8,5 @@ void Game::stepGame()
 	d_scene.update(deltaTime);
 	d_gui.update(deltaTime);
 
-	
-	ostringstream oss;
-	oss << "FPS: " << d_fps << "\n\n"
-		<< "X: " << d_player.position().x << '\n'
-		<< "Y: " << d_player.position().y << '\n'
-		<< "Z: " << d_player.position().z << '\n';
-
-	d_gui.get<Text>("debugText").setText(oss.str());
+	d_gui.get<DebugText>("debugText").setFPS(d_fps);
 }
