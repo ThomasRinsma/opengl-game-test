@@ -1,25 +1,25 @@
 #include "scene.ih"
 
-void Scene::updateLightData(DrawableEntity &drawableEntity)
+void Scene::updateLightData(SceneObject &sceneObject)
 {
 	// Check if the entity needs lighting at all
-	if (not drawableEntity.needsLighting())
+	if (not sceneObject.needsLighting())
 		return;
 
 	// Switch to the entity's shader
-	ShaderProgram &sp = drawableEntity.shaderProgram();
+	ShaderProgram &sp = sceneObject.shaderProgram();
 	sp.use();
 
-	// Sort lights in new vector, ordered by distance to drawableEntity.
+	// Sort lights in new vector, ordered by distance to sceneObject.
 	vector<Light *> closestLights;
 	for (auto &pair : d_lights)
 		closestLights.push_back(pair.second.get());
 
 	sort(closestLights.begin(), closestLights.end(),
-		[&drawableEntity](Light *a, Light *b)
+		[&sceneObject](Light *a, Light *b)
 		{
-			return glm::distance(drawableEntity.position(), a->position()) <
-				glm::distance(drawableEntity.position(), b->position());
+			return glm::distance(sceneObject.position(), a->position()) <
+				glm::distance(sceneObject.position(), b->position());
 		}
 	);
 
@@ -39,7 +39,7 @@ void Scene::updateLightData(DrawableEntity &drawableEntity)
 
 		// Only send data to shader if entity's position changed,
 		// or if light's position changed.
-		if ((not drawableEntity.positionChanged()) and (not light.positionChanged()))
+		if ((not sceneObject.positionChanged()) and (not light.positionChanged()))
 			continue;
 
 		glUniform1i(sp.uniform(lightName + ".enabled"), 1);

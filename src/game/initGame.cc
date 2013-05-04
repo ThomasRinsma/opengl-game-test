@@ -2,7 +2,7 @@
 
 void Game::initGame()
 {
-	Text *debugText = new Text();
+	DebugText *debugText = new DebugText(d_player.position());
 	Grid* grid = new Grid();
 	GenericModel* room = new GenericModel("wall", "inverted_cube");
 	GenericModel* monkey = new GenericModel("monkeytex", "monkey");

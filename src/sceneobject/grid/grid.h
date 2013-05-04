@@ -2,11 +2,11 @@
 #define INCLUDED_GRID_
 
 #include <glm/glm.hpp>
-#include "../drawableentity.h"
+#include "../sceneobject.h"
 #include "../../shaderprogram/shaderprogram.h"
 
 
-class Grid : public DrawableEntity
+class Grid : public SceneObject
 {
 	GLuint d_vbo;
 	GLuint d_vao;
@@ -15,16 +15,9 @@ class Grid : public DrawableEntity
         Grid(); // TODO: color
         ~Grid();
 
-        virtual bool needsLighting() const;
-
     private:
     	virtual void updateImpl(float deltaTime);
     	virtual void drawImpl(glm::mat4 const &viewMat, glm::mat4 const &projMat);
 };
-
-inline bool Grid::needsLighting() const
-{
-	return false;
-}
-        
+    
 #endif

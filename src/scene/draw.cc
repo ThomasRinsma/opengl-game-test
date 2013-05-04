@@ -3,6 +3,6 @@
 void Scene::draw()
 {
 	// Start the recursion
-	size_t maxRecursionLevel = 2;
+	size_t maxRecursionLevel = 0;
 	drawRecursivePortals(d_player.viewMat(), d_player.projMat(), maxRecursionLevel);
 }

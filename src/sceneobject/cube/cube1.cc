@@ -4,7 +4,7 @@ string const requiredShader = "simpleTexture";
 
 Cube::Cube(string const &texName)
 :
-	DrawableEntity(ResourceManager::instance().shaderProgram(requiredShader)),
+	SceneObject(ResourceManager::instance().shaderProgram(requiredShader)),
 	d_texture(ResourceManager::instance().texture(texName))
 {
 	// Create a VAO

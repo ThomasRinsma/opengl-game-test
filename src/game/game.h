@@ -9,7 +9,6 @@
 #include "../controller/controller.h"
 #include "../player/player.h"
 #include "../drawable/drawable.h"
-#include "../drawableentity/text/text.h"
 #include "../scene/scene.h"
 #include "../gui/gui.h"
 

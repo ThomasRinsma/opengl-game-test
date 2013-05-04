@@ -1,16 +1,18 @@
-#ifndef INCLUDED_DRAWABLE_ENTITY_
-#define INCLUDED_DRAWABLE_ENTITY_
+#ifndef INCLUDED_SCENE_OBJECT_
+#define INCLUDED_SCENE_OBJECT_
 
 #include <glm/glm.hpp> // for glm::mat4
 #include "../drawable/drawable.h"
 #include "../entity/entity.h"
 #include "../shaderprogram/shaderprogram.h"
 
-class DrawableEntity : public Drawable, public Entity
+class SceneObject : public Drawable, public Entity
 {
 	public:
-		DrawableEntity(ShaderProgram &shaderProgram);
-		virtual ~DrawableEntity();
+		SceneObject(ShaderProgram &shaderProgram);
+		virtual ~SceneObject();
+
+		//virtual bool needsLighting() const;
 
 	private:
 		virtual void updateImpl(float deltaTime) = 0;
