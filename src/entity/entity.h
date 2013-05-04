@@ -30,7 +30,7 @@ class Entity
 		void addOrientation(glm::vec3 const &axes, float radAngle, bool worldSpace);
 		void resetOrientation();
 
-		bool positionChanged();
+		bool positionChanged() const;
 
 		glm::vec3 const &velocity() const;
 		glm::vec3 const &position() const;
@@ -45,15 +45,9 @@ class Entity
 		void updateModelMat();
 };
 
-inline bool Entity::positionChanged()
+inline bool Entity::positionChanged() const
 {
-	if (d_positionChanged)
-	{
-		d_positionChanged = false;
-		return true;
-	}
-
-	return false;
+	return d_positionChanged;
 }
 
 inline glm::mat4 const Entity::modelMat() const
@@ -90,7 +84,6 @@ inline void Entity::setVelocity(glm::vec3 const &velocity)
 inline void Entity::setPosition(glm::vec3 const &position)
 {
 	d_position = position;
-	d_positionChanged = true;
 	updateModelMat();
 }
 
