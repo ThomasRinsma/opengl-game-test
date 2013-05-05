@@ -2,10 +2,17 @@
 
 void Player::updateImpl(float deltaTime)
 {
-	float latMovement = d_controller.moveRight() * 1.0f - d_controller.moveLeft() * 1.0f;
-	float longMovement = d_controller.moveBack() * 1.0f - d_controller.moveForward() * 1.0f;
-	float verticalMovement = d_controller.moveUp() * 1.0f - d_controller.moveDown() * 1.0f;
+	// Update FOV
+	d_fov += d_controller.mouseWheelDelta * -5.0f;
+	if (d_fov > 175)
+		d_fov = 175;
+	
+	if (d_fov < 5)
+		d_fov = 5;
 
+	updateProjMat();
+
+	// Update orientation
 	glm::vec2 mousePosDelta = d_controller.mouseOffset();
 
 	d_yaw -= mousePosDelta.x * s_mouseSpeed; 
@@ -23,10 +30,16 @@ void Player::updateImpl(float deltaTime)
 	if(d_pitch < -M_PI/2.0f)
 		d_pitch = -M_PI/2.0f;
 
-
+	// Define orientation from absolute yaw and pitch
 	resetOrientation();
 	addOrientation(glm::vec3(0.0f, 1.0f, 0.0f), d_yaw, true);
 	addOrientation(glm::vec3(1.0f, 0.0f, 0.0f), d_pitch, false);
+
+
+	// Update position and movement
+	float latMovement = d_controller.moveRight() * 1.0f - d_controller.moveLeft() * 1.0f;
+	float longMovement = d_controller.moveBack() * 1.0f - d_controller.moveForward() * 1.0f;
+	float verticalMovement = d_controller.moveUp() * 1.0f - d_controller.moveDown() * 1.0f;
 
 	// Sets d_velocity according to movement keys
 	// lat and long movement are relative to d_orientation, vertical movement is not.

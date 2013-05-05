@@ -11,13 +11,10 @@ void Game::run()
 	{
 		while (true)
 		{
-			handleEvents();
-
-			if (not d_paused)
-				stepGame();
-
+			stepGame();
 			draw();
 
+			// Calculate FPS
 			curSec = sfmlclock.getElapsedTime().asSeconds();
 			if (curSec - lastSec >= 1.0f)
 			{

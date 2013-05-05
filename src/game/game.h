@@ -53,9 +53,9 @@ class Game
 
         void pause();
         void unpause();
+        void stop();
 
         // These are directly called from run()
-        void handleEvents();    // handles events, doh
         void stepGame();        // step game logic
         void draw();            // draw opengl stuff
 };
@@ -71,6 +71,11 @@ inline void Game::unpause()
 {
     d_paused = false;
     d_win.setMouseCursorVisible(false);
+}
+
+inline void Game::stop()
+{
+    throw true;
 }
         
 #endif
