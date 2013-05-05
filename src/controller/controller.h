@@ -17,11 +17,13 @@ class Controller
 	Key_t d_keyRight;
 	Key_t d_keyUp;
 	Key_t d_keyDown;
+	Key_t d_keyConsole;
 
 	public:
 		Controller(sf::Window &win, Key_t keyForward = Key_t::W, Key_t keyBack = Key_t::S, 
 			Key_t keyLeft = Key_t::A, Key_t keyRight = Key_t::D,
-			Key_t keyUp = Key_t::Space, Key_t keyDown = Key_t::LControl);
+			Key_t keyUp = Key_t::Space, Key_t keyDown = Key_t::LControl,
+			Key_t keyConsole = Key_t::F12);
 
 		// Getters
 		bool moveForward() const;
@@ -30,6 +32,7 @@ class Controller
 		bool moveRight() const;
 		bool moveUp() const;
 		bool moveDown() const;
+		bool toggleConsole() const;
 
 		glm::vec2 mouseOffset();
 };
@@ -63,6 +66,11 @@ inline bool Controller::moveUp() const
 inline bool Controller::moveDown() const
 {
 	return sf::Keyboard::isKeyPressed(d_keyDown);
+}
+
+inline bool Controller::toggleConsole() const
+{
+	return sf::Keyboard::isKeyPressed(d_keyConsole);
 }
         
 #endif

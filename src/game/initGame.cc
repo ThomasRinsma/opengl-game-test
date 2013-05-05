@@ -2,6 +2,7 @@
 
 void Game::initGame()
 {
+	Console *console = new Console(d_controller);
 	DebugText *debugText = new DebugText(d_player.position());
 	Grid* grid = new Grid();
 	GenericModel* room = new GenericModel("wall", "inverted_cube");
@@ -12,9 +13,9 @@ void Game::initGame()
 	Portal *portal1 = new Portal();
 	Portal *portal2 = new Portal();
 
-	Light *light1 = new Light(glm::vec3(-5.0f, 4.0f, 0.0f), glm::vec3(2.0f, 0.5f, 0.0f));
-	Light *light2 = new Light(glm::vec3(5.0f, 4.0f, 0.0f), glm::vec3(0.0f, 0.0f, 2.0f));
-	Light *light3 = new Light(glm::vec3(0.0f, 4.0f, 3.0f), glm::vec3(1.0f));
+	Light *light1 = new Light(glm::vec3(-5.0f, 4.0f, 0.0f));
+	Light *light2 = new Light(glm::vec3(5.0f, 4.0f, 0.0f));
+	Light *light3 = new Light(glm::vec3(0.0f, 4.0f, 3.0f));
 
 	portal1->setDestination(portal2);
 	portal2->setDestination(portal1);
@@ -24,8 +25,15 @@ void Game::initGame()
 	portal1->addOrientation(glm::vec3(0.0f, 1.0f, 0.0f), M_PI/2.0f, true);
 	portal2->addOrientation(glm::vec3(0.0f, 1.0f, 0.0f), -M_PI/2.0f, true);
 
+	// scale and position are in pixels
+	// position is from the bottom left
 	debugText->setScale(glm::vec3(16.0f, 16.0f, 1.0f));
-	debugText->setPosition(glm::vec3(4.0f, d_win.getSize().y - 20.0f, 0.0f));
+	debugText->setPosition(glm::vec3(4.0f, 70.0f, 0.0f));
+
+	// console has 100% width and 300px height
+	console->setScale(glm::vec3(d_win.getSize().x, 300, 1.0f));
+	// console position is the top left corner
+	console->setPosition(glm::vec3(0.0f, d_win.getSize().y, 0.0f));
 
 	
 	cube->setPosition(glm::vec3(0.0f, 1.5f, 1.5f));
@@ -50,6 +58,7 @@ void Game::initGame()
 	d_scene.add("p2", portal2);
 
 	d_gui.add("debugText", debugText);
+	d_gui.add("console", console);
 	
 	d_player.setPosition(glm::vec3(0.0f, 4.0f, 5.0f));
 }

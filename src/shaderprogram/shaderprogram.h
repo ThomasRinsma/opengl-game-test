@@ -18,8 +18,8 @@ struct ShaderProgram
     public:
         ShaderProgram(std::string const &shaderPath);
 
-        GLuint attribute(std::string const &attributeName) const;
-        GLuint uniform(std::string const &uniformName) const;
+        GLuint attribute(std::string const &attributeName);
+        GLuint uniform(std::string const &uniformName);
 
         void use() const;
 
