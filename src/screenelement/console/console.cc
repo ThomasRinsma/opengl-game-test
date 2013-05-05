@@ -1,11 +1,15 @@
 #include "console.ih"
 
-Console::Console(Controller const &controller)
+Console::Console(Controller &controller, sf::Window &win)
 :
 	ScreenElement(ResourceManager::instance().shaderProgram("simpleColor")),
 	d_controller(controller),
-	d_consoleDown(false),
-	d_toggleKeyDown(false)
+	d_win(win),
+	d_lines(14, ""),
+	d_inputLine(""),
+	d_cursorState(false),
+	d_timeSinceBlink(0.0f),
+	d_consoleDown(false)
 {
 	// Create a VAO
 	glGenVertexArrays(1, &d_vao);

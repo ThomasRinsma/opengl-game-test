@@ -2,7 +2,7 @@
 
 void Game::initGame()
 {
-	Console *console = new Console(d_controller);
+	Console *console = new Console(d_controller, d_win);
 	DebugText *debugText = new DebugText(d_player.position());
 	Grid* grid = new Grid();
 	GenericModel* room = new GenericModel("wall", "inverted_cube");
@@ -30,8 +30,8 @@ void Game::initGame()
 	debugText->setScale(glm::vec3(16.0f, 16.0f, 1.0f));
 	debugText->setPosition(glm::vec3(4.0f, 70.0f, 0.0f));
 
-	// console has 100% width and 300px height
-	console->setScale(glm::vec3(d_win.getSize().x, 300, 1.0f));
+	// console has 100% width and 250px height (15 lines)
+	console->setScale(glm::vec3(d_win.getSize().x, 250, 1.0f));
 	// console position is the top left corner
 	console->setPosition(glm::vec3(0.0f, d_win.getSize().y, 0.0f));
 

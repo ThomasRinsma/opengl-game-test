@@ -3,7 +3,7 @@
 void Player::updateImpl(float deltaTime)
 {
 	// Update FOV
-	d_fov += d_controller.mouseWheelDelta * -5.0f;
+	d_fov += d_controller.mouseWheelDelta() * -5.0f;
 	if (d_fov > 175)
 		d_fov = 175;
 	

@@ -1,7 +1,9 @@
 #ifndef INCLUDED_CONSOLE_
 #define INCLUDED_CONSOLE_
 
+#include <SFML/Window.hpp> // for sf::Window
 #include <glm/glm.hpp> // for glm::vec3
+#include <deque>
 #include "../screenelement.h"
 #include "../../controller/controller.h"
 #include "../../drawable/text/text.h"
@@ -9,18 +11,23 @@
 
 class Console : public ScreenElement
 {
-	Controller const &d_controller;
+	Controller &d_controller;
+	sf::Window &d_win;
 
+	// Text stuff
 	Text d_consoleText;
+	std::deque<std::string> d_lines;
+	std::string d_inputLine;
+	bool d_cursorState;
+	float d_timeSinceBlink;
 
 	GLuint d_vbo;
 	GLuint d_vao;
 
 	bool d_consoleDown;
-	bool d_toggleKeyDown;
 
     public:
-    	Console(Controller const &controller);
+    	Console(Controller &controller, sf::Window &win);
 
     private:
 		virtual void updateImpl(float deltaTime);
