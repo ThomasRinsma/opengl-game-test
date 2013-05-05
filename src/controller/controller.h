@@ -8,7 +8,9 @@ class Controller
 {
 	typedef sf::Keyboard::Key Key_t;
 
-	sf::Window &d_win;	
+	sf::Window &d_win;
+
+	bool d_enabled = true;
 
 	// These contain the key mappings
 	Key_t d_keyForward;
@@ -25,15 +27,14 @@ class Controller
 	bool d_keysPressed[Key_t::KeyCount];
 
 	// Other flags and states
-	public:
-		bool closedWindow;
-		bool lostFocus;
-		bool gainedFocus;
-		bool exitPressed;
-		bool mouseLeftPressed;
-		bool mouseRightPressed;
-		bool mouseMiddlePressed;
-		int  mouseWheelDelta;
+	bool d_closedWindow = false;
+	bool d_lostFocus = false;
+	bool d_gainedFocus = false;
+	bool d_exitPressed = false;
+	bool d_mouseLeftPressed = false;
+	bool d_mouseRightPressed = false;
+	bool d_mouseMiddlePressed = false;
+	int  d_mouseWheelDelta = 0;
 
 
 	public:
@@ -43,7 +44,11 @@ class Controller
 			Key_t keyToggleConsole = Key_t::F12, Key_t keyToggleVsync = Key_t::F1,
 			Key_t keyExit = Key_t::Escape);
 
+		void enable();
+		void disable();
+
 		void update(float deltaTime);
+		void processEvent(sf::Event &event);
 
 		// Getters
 		bool moveForward() const;
@@ -53,58 +58,173 @@ class Controller
 		bool moveUp() const;
 		bool moveDown() const;
 
-		bool toggleConsole() const;
-		bool toggleVsync() const;
+		bool toggleConsole();
+		bool toggleVsync();
 
-		bool exit() const;
+		bool exit();
+
+		bool closedWindow();
+		bool lostFocus();
+		bool gainedFocus();
+		bool mouseLeft();
+		bool mouseRight();
+		bool mouseMiddle();
+		int  mouseWheelDelta();
+
 
 		glm::vec2 mouseOffset();
 };
 
+inline void Controller::enable()
+{
+	d_enabled = true;
+}
+
+inline void Controller::disable()
+{
+	d_enabled = false;
+}
+
 
 inline bool Controller::moveForward() const
 {
-	return d_keysPressed[d_keyForward];
+	return d_enabled and d_keysPressed[d_keyForward];
 }
 
 inline bool Controller::moveBack() const
 {
-	return d_keysPressed[d_keyBack];
+	return d_enabled and d_keysPressed[d_keyBack];
 }
 
 inline bool Controller::moveLeft() const
 {
-	return d_keysPressed[d_keyLeft];
+	return d_enabled and d_keysPressed[d_keyLeft];
 }
 
 inline bool Controller::moveRight() const
 {
-	return d_keysPressed[d_keyRight];
+	return d_enabled and d_keysPressed[d_keyRight];
 }
 
 inline bool Controller::moveUp() const
 {
-	return d_keysPressed[d_keyUp];
+	return d_enabled and d_keysPressed[d_keyUp];
 }
 
 inline bool Controller::moveDown() const
 {
-	return d_keysPressed[d_keyDown];
+	return d_enabled and d_keysPressed[d_keyDown];
 }
 
-inline bool Controller::toggleConsole() const
+inline bool Controller::toggleConsole()
 {
-	return d_keysPressed[d_keyToggleConsole];
+	// Don't listen to d_enabled, this allows us
+	// to bring the console back up
+	if (d_keysPressed[d_keyToggleConsole])
+	{
+		d_keysPressed[d_keyToggleConsole] = false;
+		return true;
+	}
+
+	return false;
 }
 
-inline bool Controller::toggleVsync() const
+inline bool Controller::toggleVsync()
 {
-	return d_keysPressed[d_keyToggleVsync];
+	if (d_keysPressed[d_keyToggleVsync])
+	{
+		d_keysPressed[d_keyToggleVsync] = false;
+		return true;
+	}
+
+	return false;
 }
   
-inline bool Controller::exit() const
+inline bool Controller::exit()
 {
-	return exitPressed;
+	// Don't listen to d_enabled, this allows us
+	// to exit the game while the console is open
+	if (d_exitPressed)
+	{
+		d_exitPressed = false;
+		return true;
+	}
+
+	return false;
+}
+
+inline bool Controller::closedWindow()
+{
+	if (d_closedWindow)
+	{
+		d_closedWindow = false;
+		return true;
+	}
+
+	return false;
+}
+
+inline bool Controller::lostFocus()
+{
+	if (d_lostFocus)
+	{
+		d_lostFocus = false;
+		return true;
+	}
+
+	return false;
+}
+
+inline bool Controller::gainedFocus()
+{
+	if (d_gainedFocus)
+	{
+		d_gainedFocus = false;
+		return true;
+	}
+
+	return false;
+}
+
+inline bool Controller::mouseLeft()
+{
+	if (d_mouseLeftPressed)
+	{
+		d_mouseLeftPressed = false;
+		return true;
+	}
+
+	return false;
+}
+
+inline bool Controller::mouseMiddle()
+{
+	if (d_mouseMiddlePressed)
+	{
+		d_mouseMiddlePressed = false;
+		return true;
+	}
+
+	return false;
+}
+
+
+inline bool Controller::mouseRight()
+{
+	if (d_mouseRightPressed)
+	{
+		d_mouseRightPressed = false;
+		return true;
+	}
+
+	return false;
+}
+
+inline int Controller::mouseWheelDelta()
+{
+	int m = d_mouseWheelDelta;
+	d_mouseWheelDelta = 0;
+	return m;
 }
 
 #endif
