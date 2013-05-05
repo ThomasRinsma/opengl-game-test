@@ -28,9 +28,10 @@ TEXT_FILES=$(wildcard src/drawable/text/*.cc) src/drawable/text/text.ih src/draw
 PORTAL_FILES=$(wildcard src/sceneobject/portal/*.cc) src/sceneobject/portal/portal.ih src/sceneobject/portal/portal.h
 
 DEBUGTEXT_FILES=$(wildcard src/screenelement/debugtext/*.cc) src/screenelement/debugtext/debugtext.ih src/screenelement/debugtext/debugtext.h
+CONSOLE_FILES=$(wildcard src/screenelement/console/*.cc) src/screenelement/console/console.ih src/screenelement/console/console.h
 
 
-GAME_DEPS=$(CONTROLLER_FILES) $(PLAYER_FILES) $(CUBE_FILES) $(GRID_FILES) $(GENERICMODEL_FILES) $(PORTAL_FILES) $(DEBUGTEXT_FILES) $(SCENE_FILES) $(GUI_FILES) $(RESOURCEMANAGER_FILES) $(LIGHT_FILES)
+GAME_DEPS=$(CONTROLLER_FILES) $(PLAYER_FILES) $(CUBE_FILES) $(GRID_FILES) $(GENERICMODEL_FILES) $(PORTAL_FILES) $(DEBUGTEXT_FILES) $(CONSOLE_FILES) $(SCENE_FILES) $(GUI_FILES) $(RESOURCEMANAGER_FILES) $(LIGHT_FILES)
 PLAYER_DEPS=$(CONTROLLER_FILES) $(ENTITY_FILES)
 SHADERPROGRAM_DEPS=
 CONTROLLER_DEPS=
@@ -52,7 +53,7 @@ TEXT_DEPS=$(SHADERPROGRAM_FILES) $(SCENEOBJECT_FILES) $(TEXTURE_FILES) $(RESOURC
 PORTAL_DEPS=$(SHADERPROGRAM_FILES) $(SCENEOBJECT_FILES) $(ENTITY_FILES) $(RESOURCEMANAGER_FILES)
 
 DEBUGTEXT_DEPS=$(SCREENELEMENT_FILES) $(TEXT_FILES)
-
+CONSOLE_DEPS=$(SCREENELEMENT_FILES) $(TEXT_FILES) $(CONTROLLER_FILES) $(RESOURCEMANAGER_FILES)
 
 all: prep_out_dirs make_objs
 
@@ -64,7 +65,7 @@ prep_out_dirs:
 	mkdir -p build/texture build/model build/sceneobject build/scene build/gui build/resourcemanager
 	mkdir -p build/sceneobject/cube build/sceneobject/grid build/sceneobject/genericmodel
 	mkdir -p build/sceneobject/text build/sceneobject/portal
-	mkdir -p build/drawable/text build/screenelement/debugtext
+	mkdir -p build/drawable/text build/screenelement/debugtext build/screenelement/console
 
 build/main.o: src/main.cc
 	$(CXX) -c $(CPPFLAGS) $< -o $@
@@ -127,6 +128,9 @@ build/sceneobject/portal/%.o: src/sceneobject/portal/%.cc src/sceneobject/portal
 	$(CXX) -c $(CPPFLAGS) $< -o $@
 
 build/screenelement/debugtext/%.o: src/screenelement/debugtext/%.cc src/screenelement/debugtext/debugtext.ih src/screenelement/debugtext/debugtext.h $(DEBUGTEXT_DEPS)
+	$(CXX) -c $(CPPFLAGS) $< -o $@
+
+build/screenelement/console/%.o: src/screenelement/console/%.cc src/screenelement/console/console.ih src/screenelement/console/console.h $(CONSOLE_DEPS)
 	$(CXX) -c $(CPPFLAGS) $< -o $@
 
 

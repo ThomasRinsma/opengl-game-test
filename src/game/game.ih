@@ -10,7 +10,10 @@
 #include "../sceneobject/grid/grid.h"
 #include "../sceneobject/genericmodel/genericmodel.h"
 #include "../sceneobject/portal/portal.h"
+
 #include "../screenelement/debugtext/debugtext.h"
+#include "../screenelement/console/console.h"
+
 #include "../light/light.h"
 
 #include "../resourcemanager/resourcemanager.h"
