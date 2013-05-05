@@ -10,4 +10,6 @@ void Game::initWindow()
 
 	// Set VSync
 	d_win.setVerticalSyncEnabled(d_vsync);
+
+	d_win.setKeyRepeatEnabled(false);
 }
