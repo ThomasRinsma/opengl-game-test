@@ -1,5 +1,4 @@
 #include "controller.h"
-#include "../game/game.h"
 #include <algorithm>
 
 using namespace std;
