@@ -1,5 +1,5 @@
 #include "console.ih"
-#include <iostream>
+
 void Console::updateImpl(float deltaTime)
 {
 	// If the toggle button was pressed since the last update
@@ -42,9 +42,6 @@ void Console::updateImpl(float deltaTime)
 
 					d_inputLine.clear();
 				}
-
-				cout << "char: " << (int)c << endl;
-				
 			}
 			else if(event.type == sf::Event::MouseWheelMoved)
 			{
@@ -72,7 +69,7 @@ void Console::updateImpl(float deltaTime)
 			d_timeSinceBlink = 0.0f;
 		}
 
-		// Draw white cursor every other second
+		// Draw white cursor every other 0.5 seconds
 		if (d_cursorState)
 			totalText += "^7_";
 
@@ -82,5 +79,4 @@ void Console::updateImpl(float deltaTime)
 		// Submit string to Text object
 		d_consoleText.setText(totalText);
 	}
-	//d_consoleText.setText("^7Line 1\nLine 2\nLine 3\nLine 4\nLine 5\nLine 6\nLine 7\nLine 8\nLine 9\nLine 10\nLine 1\nLine 2\nLine 3\nLine 4\nLine 5");
 }
