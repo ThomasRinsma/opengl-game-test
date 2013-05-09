@@ -17,7 +17,6 @@ void Game::stepGame()
 
 	if (d_controller.exit())
 	{
-		cout << "d_controller.exit() == true" << endl;
 		if (d_paused)
 			stop();
 		else
