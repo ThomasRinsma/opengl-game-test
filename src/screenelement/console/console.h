@@ -26,16 +26,19 @@ class Console : public ScreenElement
 
 	bool d_consoleDown;
 
-    public:
-    	Console(Controller &controller, sf::Window &win);
+	public:
+		Console(Controller &controller, sf::Window &win);
 
-    private:
+		// Allow the outside to print stuff to the game console
+		void printLine(std::string const &line);
+
+	private:
 		virtual void updateImpl(float deltaTime);
-	    virtual void drawImpl(glm::mat4 const &viewMat, glm::mat4 const &projMat);
+		virtual void drawImpl(glm::mat4 const &viewMat, glm::mat4 const &projMat);
 
-	    // helper functions for drawImpl()
-	    void drawBackground(glm::mat4 const &viewMat, glm::mat4 const &projMat);
-	    void drawText(glm::mat4 const &viewMat, glm::mat4 const &projMat);
+		// helper functions for drawImpl()
+		void drawBackground(glm::mat4 const &viewMat, glm::mat4 const &projMat);
+		void drawText(glm::mat4 const &viewMat, glm::mat4 const &projMat);
 };
-        
+		
 #endif
