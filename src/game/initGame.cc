@@ -3,6 +3,9 @@
 void Game::initGame()
 {
 	Console *console = new Console(d_controller, d_win);
+
+	console->printLine("^3Welcome to [insert game name here]!");
+
 	DebugText *debugText = new DebugText(d_player.position());
 	Grid* grid = new Grid();
 	GenericModel* room = new GenericModel("wall", "inverted_cube");

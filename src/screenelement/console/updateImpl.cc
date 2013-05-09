@@ -2,18 +2,20 @@
 #include <iostream>
 void Console::updateImpl(float deltaTime)
 {
-
+	// If the toggle button was pressed since the last update
 	if (d_controller.toggleConsole())
 	{
 		d_consoleDown = not d_consoleDown;
 
+		// Disable (most of) the controller's input handling
+		// while the console is visible
 		if (d_consoleDown)
 			d_controller.disable();
 		else
 			d_controller.enable();
 	}
 
-	// The console is down
+	// The console is down (visible)
 	if (d_consoleDown)
 	{
 		// Capture key presses
@@ -25,11 +27,11 @@ void Console::updateImpl(float deltaTime)
 			{
 				char c = static_cast<char>(event.text.unicode);
 
-				// Backspace pressed, and string not empty
+				// Backspace pressed and string not empty: remove last character
 				if (c == 8 and d_inputLine.size() > 0)
 					d_inputLine.pop_back(); // yay c++11
 
-				// Readable character
+				// Readable character, append it
 				if (c >= ' ' and c <= '~')
 					d_inputLine.push_back(c);
 
@@ -43,6 +45,11 @@ void Console::updateImpl(float deltaTime)
 
 				cout << "char: " << (int)c << endl;
 				
+			}
+			else if(event.type == sf::Event::MouseWheelMoved)
+			{
+				// TODO: possible scroll the console history?
+				// for now just silently ignore
 			}
 			else
 				d_controller.processEvent(event);

@@ -1,6 +1,6 @@
 #include "text.ih"
 
-string const fontTexName = "font";
+string const fontTexName = "liberationmono";
 string const requiredShader = "simpleText";
 
 Text::Text(string const &text)
