@@ -1,5 +1,6 @@
 #include "controller.ih"
 #include <iostream>
+
 void Controller::processEvent(sf::Event &event)
 {
 	switch (event.type)
