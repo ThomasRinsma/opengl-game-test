@@ -1,6 +1,0 @@
-#include <iostream>
-#include <dirent.h>
-#include "resourcemanager.h"
-
-using namespace std;
-

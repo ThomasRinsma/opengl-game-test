@@ -1,5 +1,0 @@
-#include <SFML/Graphics.hpp> // for sf::Image
-#include "texture.h"
-
-using namespace std;
-
