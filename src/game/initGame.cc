@@ -4,7 +4,7 @@ void Game::initGame()
 {
 	Console *console = new Console(d_controller, d_win);
 
-	console->printLine("^7Welcome to [game name]! Try 'help'.");
+	console->printLine("^7Welcome! Try entering 'help'.");
 
 	DebugText *debugText = new DebugText(d_player.position());
 	Grid* grid = new Grid();
@@ -23,10 +23,13 @@ void Game::initGame()
 	portal1->setDestination(portal2);
 	portal2->setDestination(portal1);
 
-	portal1->setPosition(glm::vec3(-3.0f, 1.5f, 0.0f));
-	portal2->setPosition(glm::vec3( 3.0f, 1.5f, 0.0f));
+	portal1->setPosition(glm::vec3(-2.0f, 1.5f, 0.5f));
+	portal2->setPosition(glm::vec3( 2.0f, 1.5f, 0.5f));
 	portal1->addOrientation(glm::vec3(0.0f, 1.0f, 0.0f), M_PI/2.0f, true);
 	portal2->addOrientation(glm::vec3(0.0f, 1.0f, 0.0f), -M_PI/2.0f, true);
+
+	portal1->setScale(glm::vec3(2.0));
+	portal2->setScale(glm::vec3(2.0));
 
 	// scale and position are in pixels
 	// position is from the bottom left
@@ -41,10 +44,14 @@ void Game::initGame()
 	
 	cube->setPosition(glm::vec3(0.0f, 1.5f, 1.5f));
 	monkey->setPosition(glm::vec3(0.0f, 2.0f, -3.0f));
-	companion->setPosition(glm::vec3(0.0f, 2.0f, 3.0f));
+	companion->setPosition(glm::vec3(0.0f, 1.5f, 0.0f));
 
 	room->setPosition(glm::vec3(0.0f, 6.0f, 0.0f));
 	room->setScale(glm::vec3(15.0f, 10.0f, 15.0f)); // room sized
+
+
+	// add floor collision
+	//CollidablePlane floorCol(room, )
 
 	d_scene.add("light1", light1);
 	d_scene.add("light2", light2);
@@ -53,8 +60,8 @@ void Game::initGame()
 
 	d_scene.add("grid", grid);
 	d_scene.add("room", room);
-	d_scene.add("cube", cube);
-	d_scene.add("monkey", monkey);
+	//d_scene.add("cube", cube);
+	//d_scene.add("monkey", monkey);
 	d_scene.add("companion", companion);
 
 	d_scene.add("p1", portal1);
