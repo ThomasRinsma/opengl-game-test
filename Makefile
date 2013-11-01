@@ -20,6 +20,9 @@ MODEL_FILES=$(wildcard src/model/*.cc) src/model/model.ih src/model/model.h
 RESOURCEMANAGER_FILES=$(wildcard src/resourcemanager/*.cc) src/resourcemanager/resourcemanager.ih src/resourcemanager/resourcemanager.h
 LIGHT_FILES=$(wildcard src/light/*.cc) src/light/light.ih src/light/light.h
 SCREENELEMENT_FILES=$(wildcard src/screenelement/*.cc) src/screenelement/screenelement.ih src/screenelement/screenelement.h
+COLLIDABLE_FILES=$(wildcard src/collidable/*.cc) src/collidable/collidable.ih src/collidable/collidable.h
+
+COLLIDABLEPLANE_FILES=$(wildcard src/collidable/collidableplane/*.cc) src/collidable/collidableplane/collidableplane.ih src/collidable/collidableplane/collidableplane.h
 
 CUBE_FILES=$(wildcard src/sceneobject/cube/*.cc) src/sceneobject/cube/cube.ih src/sceneobject/cube/cube.h
 GRID_FILES=$(wildcard src/sceneobject/grid/*.cc) src/sceneobject/grid/grid.ih src/sceneobject/grid/grid.h
@@ -31,20 +34,23 @@ DEBUGTEXT_FILES=$(wildcard src/screenelement/debugtext/*.cc) src/screenelement/d
 CONSOLE_FILES=$(wildcard src/screenelement/console/*.cc) src/screenelement/console/console.ih src/screenelement/console/console.h
 
 
-GAME_DEPS=$(CONTROLLER_FILES) $(PLAYER_FILES) $(CUBE_FILES) $(GRID_FILES) $(GENERICMODEL_FILES) $(PORTAL_FILES) $(DEBUGTEXT_FILES) $(CONSOLE_FILES) $(SCENE_FILES) $(GUI_FILES) $(RESOURCEMANAGER_FILES) $(LIGHT_FILES)
+GAME_DEPS=$(CONTROLLER_FILES) $(PLAYER_FILES) $(CUBE_FILES) $(GRID_FILES) $(GENERICMODEL_FILES) $(PORTAL_FILES) $(DEBUGTEXT_FILES) $(CONSOLE_FILES) $(SCENE_FILES) $(GUI_FILES) $(RESOURCEMANAGER_FILES) $(LIGHT_FILES) $(COLLIDABLEPLANE_FILES)
 PLAYER_DEPS=$(CONTROLLER_FILES) $(ENTITY_FILES)
 SHADERPROGRAM_DEPS=
 CONTROLLER_DEPS=
 DRAWABLE_DEPS=$(SHADERPROGRAM_FILES)
 ENTITY_DEPS=
 SCENEOBJECT_DEPS=$(SHADERPROGRAM_FILES) $(DRAWABLE_FILES) $(ENTITY_FILES)
-SCENE_DEPS=$(PLAYER_FILES) $(SCENEOBJECT_FILES) $(PORTAL_FILES) $(LIGHT_FILES) $(RESOURCEMANAGER_FILES)
+SCENE_DEPS=$(PLAYER_FILES) $(SCENEOBJECT_FILES) $(PORTAL_FILES) $(LIGHT_FILES) $(RESOURCEMANAGER_FILES) $(COLLIDABLE_FILES)
 GUI_DEPS=$(SCENEOBJECT_FILES)
 TEXTURE_DEPS=
 MODEL_DEPS=$(SHADERPROGRAM_FILES)
 RESOURCEMANAGER_DEPS=$(MODEL_FILES) $(TEXTURE_FILES) $(SHADERPROGRAM_FILES)
 LIGHT_DEPS=$(ENTITY_FILES)
 SCREENELEMENT_DEPS=$(DRAWABLE_FILES) $(ENTITY_FILES) $(SHADERPROGRAM_FILES)
+COLLIDABLE_DEPS=$(ENTITY_FILES)
+
+COLLIDABLEPLANE_DEPS=$(COLLIDABLE_FILES)
 
 CUBE_DEPS=$(SHADERPROGRAM_FILES) $(SCENEOBJECT_FILES) $(TEXTURE_FILES) $(RESOURCEMANAGER_FILES)
 GRID_DEPS=$(SHADERPROGRAM_FILES) $(SCENEOBJECT_FILES) $(RESOURCEMANAGER_FILES)
@@ -66,6 +72,7 @@ prep_out_dirs:
 	mkdir -p build/sceneobject/cube build/sceneobject/grid build/sceneobject/genericmodel
 	mkdir -p build/sceneobject/text build/sceneobject/portal
 	mkdir -p build/drawable/text build/screenelement/debugtext build/screenelement/console
+	mkdir -p build/collidable/collidableplane
 
 build/main.o: src/main.cc
 	$(CXX) -c $(CPPFLAGS) $< -o $@
@@ -131,6 +138,12 @@ build/screenelement/debugtext/%.o: src/screenelement/debugtext/%.cc src/screenel
 	$(CXX) -c $(CPPFLAGS) $< -o $@
 
 build/screenelement/console/%.o: src/screenelement/console/%.cc src/screenelement/console/console.ih src/screenelement/console/console.h $(CONSOLE_DEPS)
+	$(CXX) -c $(CPPFLAGS) $< -o $@
+
+build/collidable/%.o: src/collidable/%.cc src/collidable/collidable.ih src/collidable/collidable.h $(COLLIDABLE_DEPS)
+	$(CXX) -c $(CPPFLAGS) $< -o $@
+
+build/collidable/collidableplane/%.o: src/collidable/collidableplane/%.cc src/collidable/collidableplane/collidableplane.ih src/collidable/collidableplane/collidableplane.h $(COLLIDABLEPLANE_DEPS)
 	$(CXX) -c $(CPPFLAGS) $< -o $@
 
 
