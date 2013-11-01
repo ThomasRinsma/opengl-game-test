@@ -9,6 +9,7 @@ of SFML, so you'll need to have quite new packages to be able
 to compile this.
 
 Depends on:
+
 	* libsfml-dev >= 2.0
 	* libglew-dev >= ?
 	* libglm-dev >= ?
