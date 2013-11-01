@@ -1,0 +1,89 @@
+#include <iostream>
+#include <glm/gtc/matrix_transform.hpp>
+#include <glm/gtx/quaternion.hpp>
+#include <cmath>
+#include "player.h"
+
+using namespace std;
+
+Player::Player(Controller &controller)
+:
+	d_controller(controller),
+	d_projMat(glm::mat4(1.0f))
+{}
+
+void Player::updateImpl(float deltaTime)
+{
+	// Update FOV
+	d_fov += d_controller.mouseWheelDelta() * -5.0f;
+	if (d_fov > 175)
+		d_fov = 175;
+	
+	if (d_fov < 5)
+		d_fov = 5;
+
+	updateProjMat();
+
+	// Update orientation
+	glm::vec2 mousePosDelta = d_controller.mouseOffset();
+
+	d_yaw -= mousePosDelta.x * s_mouseSpeed; 
+	d_pitch -= mousePosDelta.y * s_mouseSpeed;
+
+	if (d_yaw > M_PI)
+		d_yaw -= 2.0f * M_PI;
+
+	if (d_yaw < -M_PI)
+		d_yaw += 2.0f * M_PI;
+
+	if(d_pitch > M_PI/2.0f)
+		d_pitch = M_PI/2.0f;
+
+	if(d_pitch < -M_PI/2.0f)
+		d_pitch = -M_PI/2.0f;
+
+	// Define orientation from absolute yaw and pitch
+	resetOrientation();
+	addOrientation(glm::vec3(0.0f, 1.0f, 0.0f), d_yaw, true);
+	addOrientation(glm::vec3(1.0f, 0.0f, 0.0f), d_pitch, false);
+
+
+	// Update position and movement
+	float latMovement = d_controller.moveRight() * 1.0f - d_controller.moveLeft() * 1.0f;
+	float longMovement = d_controller.moveBack() * 1.0f - d_controller.moveForward() * 1.0f;
+	float verticalMovement = d_controller.moveUp() * 1.0f - d_controller.moveDown() * 1.0f;
+
+	// Sets d_velocity according to movement keys
+	// lat and long movement are relative to d_orientation, vertical movement is not.
+	// normalize them all three to get a semi-constant speed
+	glm::vec3 relVel = glm::vec3(latMovement, verticalMovement, longMovement);
+	glm::vec3 normVel = glm::length(relVel) > 0 ? glm::normalize(relVel) : relVel;
+	d_velocity = glm::vec3(normVel.x, 0.0f, normVel.z) * glm::conjugate(d_orientation);
+	d_velocity += glm::vec3(0.0f, verticalMovement, 0.0f);
+
+	// Integrate velocity to a new position using time
+	integratePosition(deltaTime * s_moveSpeed);
+}
+
+glm::mat4 const Player::viewMat() const
+{
+	glm::mat4 rot = glm::mat4_cast(glm::conjugate(d_orientation));
+	glm::mat4 pos = glm::translate(glm::mat4(1.0f), -d_position);
+
+	return rot * pos;
+}
+
+glm::mat4 const Player::projMat() const
+{
+	return d_projMat;
+}
+
+void Player::updateProjMat()
+{
+	d_projMat = glm::perspective(d_fov, d_screenRatio, d_zNear, d_zFar);
+}
+
+void Player::integratePosition(float deltaTime)
+{
+	d_position += d_velocity * deltaTime;
+}

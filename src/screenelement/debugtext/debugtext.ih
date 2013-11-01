@@ -1,5 +1,0 @@
-#include "debugtext.h"
-#include <sstream>
-
-using namespace std;
-
