@@ -9,9 +9,9 @@ of SFML, so you'll need to have quite new packages to be able
 to compile this.
 
 Depends on:
-	libsfml-dev >= 2.0
-	libglew-dev >= ?
-	libglm-dev >= ?
-	gcc >= 4.7 (or any C++11 compatible compiler)
+	* libsfml-dev >= 2.0
+	* libglew-dev >= ?
+	* libglm-dev >= ?
+	* gcc >= 4.7 (or any C++11 compatible compiler)
 
 ![Screenshot](https://bitbucket.org/ThomasRinsma/opengl-game-test/raw/tip/screenshot.png)
