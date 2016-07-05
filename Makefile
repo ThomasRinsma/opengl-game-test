@@ -34,7 +34,6 @@ build/screenelement/%.o: src/screenelement/%.cc src/screenelement/%.h
 	$(CXX) -c $(CPPFLAGS) $< -o $@
 
 clean:
-	rm build/*.o build/*/*.o build/*/*/*.o
 	rm -r build
-
+	rm openglgame
 

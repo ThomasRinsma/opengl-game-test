@@ -1,5 +1,5 @@
 # OpenGL Engine Test
-This is just a pet project of mine. The goal is some sort of
+This is (was) a pet project of mine. The goal is some sort of
 all-in-one first-person fancy-lighting 3D engine. Although
 it's more of a learning project.
 
@@ -15,4 +15,4 @@ Depends on:
   * libglm-dev >= ?
   * gcc >= 4.7 (or any C++11 compatible compiler)
 
-![Screenshot](https://bitbucket.org/ThomasRinsma/opengl-game-test/raw/tip/screenshot.png)
+![Screenshot](https://raw.githubusercontent.com/ThomasRinsma/opengl-game-test/master/screenshot.png)
